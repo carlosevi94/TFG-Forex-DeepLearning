@@ -1,0 +1,13 @@
+{
+	"kafka":{
+		"brokers": "172.20.0.3:9092",
+		"topic":"forex_eurusd"
+	},
+	"mysql":{
+		"host": "172.17.0.2",
+		"database": "forex_live",
+		"user": "root",
+		"password": "root"
+	}
+	
+}
