@@ -1,0 +1,46 @@
+El módulo de monitorizaci'on se encarga de la visualizaci'on y representaci'on de los datos generados por el sistema, permitiendo al usuario interpretarlos a través de una interfaz de usuario web.
+Los valores generados por el sistema son las predicciones de las divisas hechas por las redes neuronales. Por cada divisa el sistema proporciona dos predicciones, cada una generada por una red neuronal diferente.
+
+Lo primero que muestra la interfaz es el valor actual de las divisas y su cambio respecto al valor anterior, mostrándose de color verde, rojo o blanco, dependiendo de si el valor es mayor, menor o igual al valor anterior, respectivamente. Todo ello permite al usuario de forma rápida y sencilla conocer la situación actual de las divisas. En la figura \ref{dash1} se puede observar un ejemplo de la misma.
+
+\figura{1}{img/disenio_sistema/dash1.png}{Valores actuales de las divisas}{dash1}{}
+
+A continuación, se encuentra la gráfica principal, en la cual se muestran las predicciones de los próximos cuarenta y cinco minutos, el valor actual de la divisa y los últimos treinta minutos del histórico de valores, tal y como se puede observar en la figura \ref{dash2}.
+Mediante un menú desplegable podemos seleccionar la divisa que queremos visualizar y, a través de las pestañas se puede alternar entre las dos redes neuronales.
+
+\figura{1}{img/disenio_sistema/dash2.png}{Representaci'on de los resultados}{dash2}{}
+
+Finalmente, el módulo presenta una gráfica con el histórico completo de la divisa seleccionada. En la figura \ref{dash3} se puede observar un ejemplo con el histórico del BTC/USD.
+\figura{1}{img/disenio_sistema/dash3.png}{Hist'orico del BTC/USD}{dash3}{}
+
+En esta gráfica podemos elegir mediante el menú desplegable de la izquierda el tipo el gráfico que queremos representar y, mediante el menú desplegable de la derecha podemos agregar indicadores al gráfico. En la figura \ref{dash4} se puede observar un ejemplo con el histórico del BTC/USD junto a los indicadores MA y EMA.
+
+\figura{1}{img/disenio_sistema/dash4.png}{Hist'orico del BTC/USD con indicadores}{dash4}{}
+
+Los indicadores de los que dispone el sistema son:
+\begin{itemize}
+\item Acumulación distribución
+\item Bandas de Bollinger
+\item Media móvil
+\item Media móvil exponencial
+\item Índice de canales de productos básicos
+\item Tasa de cambio
+\item Puntos pivote
+\item Oscilador estocástico
+\item Momentum
+\end{itemize}
+
+\subsection{Tecnologías utilizadas}
+Para la visualización y representación de los datos se ha escogido el framework Dash.
+
+\subsubsection{Dash}
+Dash es un framework de Python destinado a la creaci'on de aplicaciones web de código abierto, desarrollado por Plotly.
+Dash está implementado sobre Flask, Plotly.js y React.js, especializándose  en la creación de aplicaciones reactivas de visualizaci'on de datos con interfaces de usuario altamente personalizables en Python, abstrayendo todas las tecnolog'ias y protocolos necesarios para construir una aplicaci'on interactiva basada en la web.
+El c'odigo de la aplicaci'on Dash es declarativo y reactivo, lo que facilita la creaci'on de aplicaciones complejas que contienen muchos elementos interactivos, siendo cada elemento est'etico de la aplicaci'on completamente personalizable (tamaño, color, posici'on, fuente, ...)
+Las aplicaciones de Dash son desplegadas mediante Flask y se comunican mediante JSON sobre HTTP. 
+La interfaz de Dash presenta componentes utilizando React.js, la biblioteca de interfaz de usuario de Javascript escrita y mantenida por Facebook.
+Los componentes de Dash son clases de Python que codifican los valores y propiedades de los componentes de React.js, siendo éstos serializados en JSON, aunque también existen clases Python para todos los componentes HTML y sus propiedades, por lo que mediante c'odigo Python se pueden declarar y manipular todos los elementos de una interfaz y sus interacciones entre ellos.
+
+
+
+

@@ -1,0 +1,415 @@
+% !TEX root = ../proyect.tex
+
+\chapter{Pruebas}\label{cap8}
+
+El sistema ha sido sometido a diferentes pruebas para valorar aspectos fundamentales como el rendimiento, la fiabilidad y la tolerancia a fallos.
+
+Todas las pruebas cuentan con el m'ismo formato: Una \textbf{descripci'on inicial}, una explicaci'on de las \textbf{caracter'isticas} y condiciones iniciales y el \textbf{resultado} de la prueba.
+
+
+\section{Spark y Kafka}\label{sec:pruebasparkkafka}
+
+Se ha realizado una prueba de stress para ver la capacidad de Apache Kafka a tolerar una gran carga de trabajo. La prueba que se ha realizado consiste en crear un script que genera productores de datos que envían datos generados aleatoriamente.
+
+\subsubsection*{Caracter'isticas de la prueba}
+
+\begin{itemize}
+\item Cada productor de datos genera 20 cadenas de texto cada 10 segundos.
+
+\item El script comienza con un productor y cada 10 segundos duplica el numero de productores activos.
+
+\item Se han utilizado dos equipos. El primero ejecuta a una instancia de Kafka y de Spark procesando los datos, mientras que el segundo ejecuta el script que genera los productores.
+
+\item La forma de evaluar esta prueba considera como fallo que el sistema se cuelgue, se apague o tarde m'as de 20 segundos en procesar los datos y 'exito en cualquier otro caso. Para ello se ha configurado Spark de manera que procese todos los datos que reciba de Kafka en tiempo real.
+
+\end{itemize}
+
+
+\subsubsection*{Resultado de la prueba}
+
+No se ha podido determinar un punto de stress de Kafka, dado que cuando había 128 productores activos el equipo que generaba los datos se bloqueó, mientras que el equipo que ejecutaba a Kafka y Spark segu'ia funcionando.
+
+El punto de mayor trabajo se asume que ha sido el momento donde hab'ia activos 64 productores. Como cada productor generaba 10 cadenas de datos, hace un total de 640 datos nuevos en un periodo de 10 segundos. Este rendimiento es muy superior al exigido, por ello no se realizar'an m'as pruebas de este sistema.
+
+
+
+\section{Estudio y selecci'on de hiperpar'ametros de redes neuronales}\label{sec:pruebahiperparametros}
+
+Cuando se habla de hiperpar'ametros en redes neuronales se hace referencia al n'umero de capas que tiene que tener la red, el tipo de dichas capas y el n'umero de neuronas.
+
+Esta prueba tiene como objetivo conocer la arquitectura que mejor se adapta para nuestro problema. Será ejecutada en un servidor de AWS dotado con mucha potencia de computación y posibilidad de lanzamientos paralelos, para reducir el tiempo de ejecución de la misma.
+
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item Se va a buscar el n'umero de capas LSTM 'optimo para la red recurrente, probando arquitecturas de 2 a 4 capas.
+\item Se va a buscar el n'umero de neuronas 'optimo para cada capa de la arquitectura, probando entre 16, 32, 64, 128, 256 y 512 neuronas. 
+\item Se ha utilizado la herramienta GridSearch de Scikit-Learn para probar todas las combinaciones explicadas. Esta herramienta realiza una prueba con todas las posibles arquitecturas que puede tomar la red con los par'ametros indicados en los dos puntos anteriores, ejecutando así 775 pruebas diferentes.
+\item Se utilizar'a el dataset de febrero de 2018 para estas pruebas.
+\item Para evaluar cada prueba se ha utilizado la métrica MSE.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+La ejecuci'on de esta prueba se ha realizado en un ordenador con un procesador gráfico con alta capacidad de cómputo, con el que se ha podido paralelizar la ejecución. 
+El tiempo que tarda en ejecutar cada combinaci'on es mayor a medida que se avanza, por ello, las 'ultimas pruebas retrasaron la ejecuci'on. 'Esto es debido a que las redes con mayor número de capas y neuronas se han ejecutado las últimas. 
+
+\cuadro{|c|c|c|}{Soluciones a la prueba de selección de hiperparámetros}{p_hyp1}{
+\hline Capas & Neuronas & MSE
+\\ \hline 2 & [16,16] & 0.000141
+\\ \hline \textbf{2} & \textbf{[128,128]} & \textbf{0.00000041}
+\\ \hline 2 & [256,256] & 0.000064
+\\ \hline 3 & [64,64,64] & 0.000021
+\\ \hline 3 & [128,16,128] & 0.00003242
+\\ \hline 4 & [32,32,32,32] & 0.00026842
+\\ \hline 4 & [64,32,32,64] & 0.00000623
+\\ \hline 4 & [64,128,256,512] & 0.000033654
+\\ \hline 4 & [512,256,128,64] & 0.000011523
+\\ \hline 4 & [512,512,512,512] & 0.000361
+
+
+\\}
+
+En el cuadro \ref{p_hyp1} se pueden ver algunos ejemplos de arquitecturas que GridSearch ha probado. Esta muestra se ha escogido en base a las arquitecturas más interesantes. 
+
+Como se puede observar a simple vista, el error es siempre muy bajo, 'esto es debido a que los datos con los que entrena la red se encuentran muy agrupados. En ciertos momentos del día el valor del par puede que no se haya movido, o que haya fluctuado un orden de 0.0001 sobre s'i mismo. 
+
+\clearpage
+
+Con lo mencionado anteriormente, se pretende explicar que un error medio cuadrático bajo no garantiza precisión en las predicciones. Un método más fiable es el de reescalar los datos en otra magnitud, usando un factor multiplicador alto o usando técnicas de enconding, como LabelEncoder, lo que mostraría una aproximación más realista sobre los errores cometidos. El inconveniente de utilizar estos métodos es que se necesita una capacidad de c'omputo muy superior a la que se ha utilizado en la prueba. 
+
+
+
+Como se puede ver en el cuadro \ref{p_hyp1}, la segunda fila está destacada sobre el resto. 'Esto es debido a que la configuración mostrada fue la que obtuvo el error m'as bajo en esta prueba. 
+
+El tiempo de ejecución de la prueba fue de 15 horas aproximadamente. Como la prueba fue ejecutada en un servidor de AWS, que tenía mayores recursos que los equipos que teníamos disponible, era posible la paralelización de la prueba. Al poderse realizar una ejecución de las pruebas en GPU, el tiempo de ejecución se veía reducido, permitiendo así la posibilidad de ejecutar un número de pruebas tan alto.   
+
+Como conclusi'on, la red con mejor resultado está compuesta por dos capas LSTM, cada una con 128 neuronas. Se implementó esta red para el modelo en producción, pero tiempo despu'es se ha descubierto un desempeño mejor si la primera capa la componen 180 neuronas. 
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Red Recurrente - EUR/USD - Puesta en producción}\label{sec:pruebarecbaja_1}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el EUR/USD.
+\item El sistema acaba de ponerse en producción, lo que conlleva que acaba de realizar un entrenamiento con los últimos datos disponibles.
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/EUR_USD_RNN_T0.png}{Resultado de las predicciones de la red recurrente tras ponerse en producción con el par EUR/USD}{baja_rec}{}
+
+En el gráfico de la figura \ref{baja_rec} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red recurrente en el momento de lanzarse en producción en sus primeras predicciones no consigue adaptarse a la tendencia real del par.
+
+También se puede observar que falta un valor, debido a que al ponerse en producción todos los módulos del proyecto puede existir un pequeño retraso a la hora de ejecutar las  predicciones. Este error solo puede ocurrir en este momento, debido a que el reloj que controla cuando tiene que re-entrenar la red tiene en cuenta la posibilidad de que ésto ocurra y lo corrige. Este error puede aparecer en otras pruebas similares. 
+
+La diferencia entre el resultado real no coincide en los primeros 15 minutos, mientras que a medida que pasa el tiempo la predicción empieza a suavizarse. El sistema debería adaptarse mejor al principio, no obstante, el sistema funcionará mejor cuanto más tiempo lleve funcionando.
+
+En el cuadro  \ref{errores1} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{baja_rec}, donde existen simultáneamente una predicción y un valor real.
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadr'atico asociado a las predicciones de la puesta en producción del par EUR/USD}{errores1}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  3.4 * 10^{-9}  $ & $  4.46 * 10^{-9}  $ & $  4.2 * 10^{-9}  $ & $  2.2 * 10^{-8}  $ & $  8.9 * 10^{-9}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  2.016 * 10^{-9}  $ & $  2.016 * 10^{-9}  $ & $  1.28 * 10^{-9}  $ & $  5.71 * 10^{-10}  $ & $  2.32 * 10^{-10}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  1 * 10^{-10}  $ & $  3.6 * 10^{-11}  $ & $  5.8 * 10^{-10}  $ & $  8.74 * 10^{-9}  $ & $  3.72 * 10^{-10} $
+\\}
+
+\clearpage
+
+\section{Red Recurrente - EUR/USD - 24 horas en producci'on}\label{sec:pruebarecbaja}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el EUR/USD.
+\item El sistema lleva en producción 24 horas, por lo que se ha podido reentrenar con los datos que el mismo  ha obtenido. 
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/EUR_USD_RNN_T24.png}{Resultado de las predicciones de la red recurrente tras 24 horas  en producci'on con el par EUR/USD}{p5}{}
+
+En el gráfico de la figura \ref{p5} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red recurrente, tras 24 horas en producción, se adapta muy bien en el primer tramo de predicciones, perdiendo confianza en las predicciones más lejanas en el tiempo. 
+
+Ha estado recibiendo datos nuevos con los que ha reentrenado este modelo para ajustar los pesos a los nuevos datos.
+
+
+En el cuadro  \ref{errores2} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{p5}, donde existen simultáneamente una predicción y un valor real.
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadr'atico asociado a las predicciones tras 24 horas en producción del par EUR/USD}{errores2}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  4.9 * 10^{-32}  $ & $  9.94 * 10^{-10}  $ & $  1.19* 10^{-9}  $ & $  2.5 * 10^{-9}  $ & $ 2.5 * 10^{-9}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  1.6 * 10^{-9}  $ & $  9 * 10^{-10}  $ & $  1.6 * 10^{-9}  $ & $  1.6 * 10^{-9}  $ & $  9 * 10^{-10}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  1.6 * 10^{-9}  $ & $  4.22 * 10^{-9}  $ & $  2.89 * 10^{-8}  $ & $  6.76 * 10^{-8}  $ & $  6.69 * 10^{-8} $
+\\}
+
+\clearpage
+
+
+
+\section{Red Recurrente - BTC/USD - Puesta en producción}\label{sec:pruebarecbaja_2}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el BTC/USD.
+\item El sistema acaba de ponerse en producción, lo que conlleva que acaba de realizar un entrenamiento con los últimos datos disponibles.
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/BTC_USD_RNN_T0.png}{Resultado de las predicciones de la red recurrente tras ponerse en producción con el par BTC/USD}{baja_rec_2}{}
+
+En el gráfico de la figura \ref{baja_rec_2} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red recurrente, al ponerse en producción, en sus primeras predicciones se ajusta bastante bien al precio real. Este par es muy vol'atil, con lo que las predicciones pierden confianza a medida que avanza en el tiempo.
+
+En el cuadro  \ref{errores3} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{baja_rec_2}, donde existen simultáneamente una predicción y un valor real.
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadrático asociado a las predicciones de la puesta en producción del par BTC/USD con la red recurrente}{errores3}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  6.3001  $ & $  8.4681  $ & $  0.0081  $ & $  12.8164  $ & $  4.3681  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  9.5481  $ & $  45.1584  $ & $  43.4281  $ & $  27.9841  $ & $  27.9841  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  5.8081  $ & $  19.4481  $ & $  6.9169  $ & $  2.4964  $ & $  0.0484 $
+\\}
+
+
+
+\clearpage
+
+
+
+\section{Red Recurrente - BTC/USD - 24 horas en producci'on}\label{sec:pruebarecbaja_3}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el BTC/USD.
+\item El sistema lleva en producción 24 horas, por lo que se ha podido reentrenar con los datos que el mismo  ha obtenido.  
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/BTC_USD_RNN_T24.png}{Resultado de las predicciones de la red recurrente tras 24 horas  en producci'on con el par BTC/USD}{p6}{}
+
+En el gráfico de la figura \ref{p6} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red recurrente tras 24 horas en producción no se adapta al precio real del par. 
+
+Esta red no ha obtenido buenos resultados tras los re-entrenamientos, con lo que se necesitaría una estrategia diferente de entrenamiento.
+
+En el cuadro  \ref{errores4} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{p6}, donde existen simultáneamente una predicción y un valor real.
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadrático asociado a las predicciones después de 24 horas de la puesta en producción del par BTC/USD con la red recurrente}{errores4}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  0.00  $ & $  0.25  $ & $  1.00  $ & $  9.00  $ & $  12.25  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  16.00  $ & $  16.00  $ & $  16.00  $ & $  19.36  $ & $  24.01  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  3.24  $ & $  1.00  $ & $  0.16  $ & $  0.81  $ & $  9.00 $
+\\}
+
+\clearpage
+
+
+
+
+
+\section{Red Convolucional - EUR/USD - Puesta en producción}\label{sec:pruebarecbaja_4}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el EUR/USD.
+\item El sistema acaba de ponerse en producción, lo que conlleva que acaba de realizar un entrenamiento con los últimos datos disponibles.
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/EUR_USD_CNN_T0.png}{Resultado de las predicciones de la red convolucional tras ponerse en producción con el par EUR/USD}{convo_1}{}
+
+En el gráfico de la figura \ref{convo_1} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red convolucional, al ponerse en producción, genera unas predicciones muy suavizadas. A simple vista se puede apreciar que la red está otorgando un buen resultado, asumiendo que se trate de un periodo en el que no hubiese cambios drásticos en el precio del par. 
+
+Tras verificarlo manualmente, se comprobó que en ese periodo hubo altibajos que la red convolucional no consiguió predecir.
+
+En el cuadro  \ref{errores5} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{convo_1}, donde existen simultáneamente una predicción y un valor real.
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadr'atico asociado a las predicciones de la puesta en producción del par EUR/USD}{errores5}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  7.2 * 10^{-9}  $ & $  5.8 * 10^{-9}  $ & $  2.65 * 10^{-9}  $ & $  9.4 * 10^{-9}  $ & $ 1.9 * 10^{-9}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  1.6 * 10^{-9}  $ & $  1.29 * 10^{-9}  $ & $  5.7 * 10^{-10}  $ & $  2.06 * 10^{-9}  $ & $  5.83 * 10^{-10}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  8.82 * 10^{-10}  $ & $  7.42 * 10^{-11}  $ & $  4.41 * 10^{-10}  $ & $  1.31 * 10^{-8}  $ & $  4.43 * 10^{-10} $
+\\}
+
+\clearpage
+
+
+
+\section{Red Convolucional - EUR/USD - 24 horas en producci'on}\label{sec:pruebarecbaja_5}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el EUR/USD.
+\item El sistema lleva en producción 24 horas, por lo que se ha podido reentrenar con los datos que el mismo  ha obtenido. 
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/EUR_USD_CNN_T24.png}{Resultado de las predicciones de la red convolucional tras 24 horas  en producci'on con el par EUR/USD}{p8}{}
+
+En el gráfico de la figura \ref{p8} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red convolucional, tras 24 horas en producción, obtiene unos resultados ligeramente similares a los resultados reales. 
+
+Esta red es capaz de ajustarse mejor con nuevos datos de este par gracias al re-entrenamiento.
+
+
+En el cuadro  \ref{errores6} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{p8}, donde existen simultáneamente una predicción y un valor real.
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadr'atico asociado a las predicciones tras 24 horas en producción del par EUR/USD}{errores6}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  4.93 * 10^{-32}  $ & $  9.94 * 10^{-10}  $ & $  1.22 * 10^{-8}  $ & $  2.5 * 10^{-9}  $ & $ 1 * 10^{-10}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  1 * 10^{-10}  $ & $  1.6 * 10^{-9}  $ & $  3.6 * 10^{-9}  $ & $  1 * 10^{-8}  $ & $  1.21 * 10^{-8}  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  3.28 * 10^{-8}  $ & $  1.52 * 10^{-10}  $ & $  1.71 * 10^{-8}  $ & $  3.98 * 10^{-8}  $ & $  7.2 * 10^{-8} $
+\\}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+\section{Red Convolucional - BTC/USD - Puesta en producción}\label{sec:pruebarecbaja_6}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el BTC/USD.
+\item El sistema acaba de ponerse en producción, lo que conlleva que acaba de realizar un entrenamiento con los últimos datos disponibles.
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/BTC_USD_CNN_T0.png}{Resultado de las predicciones de la red convolucional tras ponerse en producción con el par BTC/USD}{convo_2}{}
+
+En el gráfico de la figura \ref{convo_2} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red convolucional, al ponerse en producción, en sus primeras predicciones no consigue adaptarse a la tendencia real del par. 
+
+
+
+Esta prueba concluye que la red convolucional no aporta mucho valor con un par de alta volatilidad como es el BTC.
+
+En el cuadro  \ref{errores7} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{convo_2}, donde existen simultáneamente una predicción y un valor real.
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadrático asociado a las predicciones de la puesta en producción del par BTC/USD con la red convolucional}{errores7}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  6.3001  $ & $  8.4681  $ & $  0.0081  $ & $  2.4964  $ & $  0.8281  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  3.6481  $ & $  7.3984  $ & $  2.5281  $ & $  10.8241  $ & $  18.4041  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  0.1681  $ & $  0.3481  $ & $  13.1769  $ & $  2.4964  $ & $  4.9284 $
+\\}
+
+\clearpage
+
+\section{Red Convolucional - BTC/USD - 24 horas en producci'on}\label{sec:pruebarecbaja_7}
+
+
+\subsubsection*{Caracter'isticas de la prueba}
+\begin{itemize}
+\item El par que se utiliza en esta prueba es el BTC/USD.
+\item El sistema lleva en producción 24 horas, por lo que se ha podido reentrenar con los datos que el mismo  ha obtenido. 
+\item No se tendr'a en cuenta el resultado de la m'etrica del rendimiento del modelo, sino la precisi'on con respecto al resultado real.
+\end{itemize}
+
+\subsubsection*{Resultado de la prueba}
+\figura{1}{img/pruebas/BTC_USD_CNN_T24.png}{Resultado de las predicciones de la red convolucional tras 24 horas  en producci'on con el par BTC/USD}{p7}{}
+
+En el gráfico de la figura \ref{p7} se muestran los resultados de forma visual de esta prueba, mostrandose en azul el histórico de valores de la divisa, en naranja los valores actuales y en verde las predicciones generadas por la red neuronal. La red convolucional, tras 24 horas en producción, obtiene unos resultados ligeramente similares a los resultados reales. 
+
+Esta red es capaz de ajustarse mejor con nuevos datos de este par gracias al re-entrenamiento.
+
+En el cuadro  \ref{errores8} se muestran los errores cuadráticos para cada momento de la gráfica de la figura \ref{p7}, donde existen simultáneamente una predicción y un valor real.
+
+
+\cuadro{|c|c|c|c|c|c|}{Error cuadrático asociado a las predicciones después de 24 horas de la puesta en producción del par BTC/USD con la red convolucional}{errores8}{
+\hline \textbf{Momento} & \textbf{t0} & \textbf{t1} & \textbf{t2} & \textbf{t3} & \textbf{t4}
+\\ \hline  Error & $  0.00  $ & $  0.49  $ & $  100.00  $ & $  1.00  $ & $  1.44  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t5} & \textbf{t6} & \textbf{t7} & \textbf{t8} & \textbf{t9}
+\\ \hline  Error & $  3.24  $ & $  13.69  $ & $  31.36  $ & $  20.25  $ & $  9.00  $
+\\ \hline
+\\ \hline \textbf{Momento} & \textbf{t10} & \textbf{t11} & \textbf{t12} & \textbf{t13} & \textbf{t14}
+\\ \hline  Error   & $  7.29  $ & $  14.44  $ & $  6.76  $ & $  4.41  $ & $  0.00 $
+\\}
+
+\clearpage
+
+
+
+\section{Resultados globales}\label{sec:concl_pruebas}
+
+En este capítulo se han visto las pruebas más importantes de este proyecto, y pese a que cada prueba tiene una conclusión individual, se pretende dar una conclusión más general de ellas.
+
+Este sistema se ha revisado exhaustivamente utilizando diferentes formas de evaluar el rendimiento para garantizar su correcto funcionamiento. Como se ha podido ver en las pruebas individuales, todas las pruebas de precisión del sistema van acompañadas de un gráfico que representa los datos obtenidos. Esto es debido a que es necesario ver la similitud de la curva de valores de forma visual para poder encontrar similitudes de forma sencilla. Además, dichos gráficos tienen unos ejes con valores muy concentrados, permitiendo así ver los errores.
+
+Estos ejes funcionan agrupando los valores por una escala menor, como por ejemplo, 0.0001 en vez de 0.001. Así, si el valor real es 1.156, y la predicción de 1.155 se puede observar en la gráfica una desviación grande, mientras que en datos se observa que el cambio es mínimo.
+
+Y aunque un error de 0.001 en algunos mercados bursátiles diferentes no supone importancia alguna, en el mercado del EUR/USD este valor es gigantesco. Un error acumulado así podría suponer pérdidas económicas de gran magnitud. En el par BTC/USD el error es relativo, debido a que los valores se han escalado entre cero y 1 para que la red pueda entrenar con facilidad, por ello encontramos valores de error en los entrenamiento. Además, en este caso un error se magnifica más en los resultados debido a este escalado, dado que al reescalar podemos acumular un error de calculo.
+
+
+
+Tras todas las pruebas, se ha concluido que el sistema funciona como es debido, pero las predicciones que obtiene no consiguen una calidad suficiente como para poder confiar un activo económico únicamente a esta fuente de datos. Tras consultarlo con diferentes profesionales que se dedican a la inversión en bolsa, se ha concluido que un sistema de predicción o estrategia tiene que tener un error cuadrático medio muy pequeño, del orden del 0.00000001, para poder ser considerado fiable por los usuarios, y poder así gestionar activos bursátiles utilizando este sistema como única fuente de información. 
+
+
+\clearpage
+

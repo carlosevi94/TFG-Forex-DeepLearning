@@ -1,0 +1,74 @@
+Una vez introducidos los conceptos m'as importantes relacionados con el mercado Forex, se define el problema relacionado con la predicción de valores.
+
+\subsection{Definici\'on del problema}
+
+Como se ha expuesto anteriormente, los mercados de valores nos muestran el precio de una acción de un determinado mercado o producto. El objetivo de este proyecto es predecir ese precio en un futuro cercano, para así poder generar un beneficio con las operaciones de compra y venta.
+
+Existen dos formas de predecir un valor, siendo una de ellas la predicci'on del valor como tal, del n'umero, y siendo la otra la clasificaci'on del valor. Todo ello reduce los tipos de problemas a dos: \textbf{regresión} y \textbf{clasificación}. 
+
+Este problema se puede enfocar de diferentes formas, pudiendo así adaptar el problema a un problema de regresión o de clasifición.
+
+\subsection{Clasificaci\'on}
+Cuando el solución de un problema no trata de valores de salida numéricos y contínuos, sino de etiquetas, grupos o valores numéricos discretos, el problema y conjunto de técnicas para resolverlo se denominan de \textbf{clasificación}.
+
+Si mostramos en un gráfico la \textbf{variable objetivo} o \textit{target}, como se puede observar en la figura \ref{classification}, el algoritmo obtiene una función cuyos valores actúan como delimitadores para los diferentes grupos de datos.
+
+\figura{0.65}{img/Deep_Learning/classifation.png}{Gr'afico con variable objetivo de dos problemas de clasificaci'on}{classification}{}
+
+En el ámbito de estudio del Forex un ejemplo sencillo de clasificaci'on puede ser que un modelo realice predicciones acerca de si la compra/venta es viable o no. Se podría generar un conjunto de datos con operaciones de transacciones que se hayan realizado en el pasado. Dicho conjunto de datos tendría como variable objetivo si la operación ha sido rentable o no. 
+
+El problema en este planteamiento está en considerar cuál es la rentabilidad de una operación de forma objetiva, porque una operación puede ser considerada rentable teniendo únicamente en cuenta el beneficio ecónomico que ha generado la operación por sí misma. Una operación puede ser rentable aunque no tenga beneficio ecónomico, debido a que ha podido interactuar con otras operaciones que pudiera tener activas el inversor. Teniendo en cuenta lo anterior,  la complejidad del problema es mucho mayor porque habría que definir el modo de uso de algoritmo antes de plantearlo, habría que elegir el modo de uso durante la preparación de los datos.
+
+La forma en la que se ha planteado la solución al problema en este proyecto no requiere predecir una caracter'istica, sino m'as bien predecir otro valor o valores nuevos. Este tipo de problemas son conocidos como \textbf{problemas de regresi'on}.
+
+\subsection{Regresi\'on}
+
+La regresión está definida como un proceso para determinar relación entre variables. Este método, a diferencia de la clasificación, obtiene como resultado valores numéricos contínuos.
+
+Existen diferentes tipos de regresión, entre las que cabe destacar dos grupos principales:
+
+\begin{itemize}
+\item \textbf{Regresión lineal}. 
+	\begin{itemize}
+		\item Regresión lineal simple.
+		\item Regresión lineal compuesta.
+	\end{itemize}
+\item \textbf{Regresión no lineal}.
+	\begin{itemize}
+		\item Regresión exponencial.
+		\item Regresión logarítmica.
+		\item Regresión polinomial.
+	\end{itemize}
+\end{itemize} 
+
+Las redes neuronales utilizan los diferentes métodos de regresión en sus cálculos, pero cabe destacar el modelo matem'atico de la \textbf{regresi'on lineal}, dado que es el que se encuentra más presente a la hora de hacer cálculos complejos entre neuronas.
+
+La regresión lineal se calcula con la siguiente fórmula:
+
+\figura{0.8}{img/regresion_lineal.png}{Fórmula de la regresión lineal}{regresion}{}
+
+La variable dependiente $ Y $ es la variable a predecir mientras que la variable independiente $ X $  hace referencia al dato que conocemos. $ a $ y $ b $ son las variables que la red neuronal tiene que ajustar para poder obtener soluci'on. 
+
+Cada neurona contiene una \textbf{regresi'on lineal}, por lo que una red neuronal es un \textbf{conjunto de regresiones} que dan un resultado. 
+
+\clearpage
+
+\subsection{Aplicaci'on de la regresi'on al problema}
+
+Mediante regresi'on se puede obtener un valor o una cadena de valores. Si $ X $ es una lista de n'umeros en vez de ser un 'unico n'umero, podemos seguir utilizando la fórmula aplicando m'etodos matriciales. 
+
+En este problema se pretende predecir los \textbf{45 minutos posteriores} al momento en el que se realiza la predicci'on en base a los \textbf{180 minutos anteriores}. Por ello, nuestra variable independiente $ X $ ser'a un vector de 180 n'umeros. 
+Los c'alculos necesarios para llevar a cabo este tipo de operaciones son muy costosos si se realiza por el m'etodo tradicional, por ello se delegar'an los c'alculos al ordenador. 
+
+Se aplicará el método de la \textbf{secuencia móvil} para crear los datos que se utilizarán en los cálculos de la regresión. Este método permite crear secuencias de valores introduciendo datos nuevos consecutivos y eliminando datos antiguos. Todo ello se puede entender fácilmente en la figura \ref{secmovi}.
+
+\figura{0.8}{img/Deep_Learning/secuenciamovil.png}{Ejemplo de secuencia m'ovil}{secmovi}{}
+
+La red neuronal va a plantear tantas regresiones lineales como neuronas tenga, combin'andolas todas en un 'unico vector resultado. No sabemos en base a qu'e caracter'isticas se van a plantear dichas regresiones, e intentar comprenderlo es una labor que se encuentra en proceso de investigaci'on. A fecha en la que est'a escrito este documento, lo 'unico que se sabe es que las redes realizan diferentes regresiones de forma aleatoria. 
+
+
+
+\clearpage
+
+
+

@@ -1,0 +1,39 @@
+\figura{0.35}{img/architec/kafka_logo.jpg}{Logo de Apache Kafka}{kafka_logo}{}
+
+
+Apache Kafka es una plataforma distribuida para la manipulaci'on en tiempo de real fuentes de datos de c'odigo abierto y desarrollada por la \textbf{Apache Software Fundation} en los lenguajes \textbf{Java} y \textbf{Scala}. Sus principales caracter'isticas son la baja latencia y la escalabilidad masiva.
+
+
+Apache Kafka funciona bajo el patr'on \textbf{productor-consumidor} agrupando la informaci'on en temas, por lo que podemos ver a kafka como un gestor de cola de mensajes altamente escalable.
+
+\subsection{Broker}
+Una de las principales características de Apache Kafka es su carácter altamente escalable en una arquitectura de cluster. A los nodos de cluster se les denomina brokers, por tanto, un cluster de Apache Kafka está compuesto por brokers, cada uno con su identificador y particiones internas. 
+Las particiones le indican al broker cuantos topics puede gestionar pudiéndose configurar distintos números de particiones en los brokers, permitiendo, que nodos con mayor capacidad gestionen m'as topics o que topics con un flujo de menor de información se agrupen en nodos aprovechando su capacidad.
+
+\subsection{Topic}
+Un topic es una categoría en la que se agrupan los mensajes en Kafka. Cada topic cuenta con un número de partici'on que indica el número máximo de veces que puede ser particionado un topic o, lo que es lo mismo, el número de brokers diferentes en un cluster que pueden contener al topic, también cuenta con \textit{topic log} que registra toda la actividad generada sobre ese topic.
+
+\subsection{Productor}
+Los productores se encargan de publicar datos a los temas de su elecci'on. El productor es el responsable de elegir la partici'on a la que enviar el dato dentro del tema. Esta elecci'on se puede hacer mediante \textbf{round-robin} o con alguna funci'on de partici'on sem'antica.
+
+\subsection{Consumidor}
+Los consumidores reciben los datos de los temas a los que est'an suscritos. 'Estos se etiquetan a s'i mismos con el nombre de un grupo de consumidores y cada registro publicado sobre un tema se entrega a una instancia del consumidor dentro de cada grupo de consumidores suscritos. Las instancias de los consumidores pueden estar en procesos separados o en máquinas separadas.
+Si todas las instancias del consumidor tienen el mismo grupo de consumidores, entonces, los registros se cargar'an de manera efectiva sobre las instancias del consumidor.
+Si todas las instancias del consumidor tienen grupos de consumidores diferentes, entonces, cada registro se transmitir'a a todos los procesos del consumidor.
+
+\subsection{Zookeeper}
+Cuando se ejecuta una instancia o cluster de Apache Kafka, 'este necesita de un servicio de Apache Zookeeper para su gestión interna. Este sistema proporciona a kafka un servicio centralizado para la gestión de la configuración, registro de cambios y servicios de descubrimiento, entre otros. 
+
+Zookeeper se comunica con todos los integrantes del ecosistema de Apache Kafka (brokers, consumidores y productores), compartiendo metadatos, tales como direcciones, estados, carga de trabajo y reasignaciones.
+
+\subsection{Garantías}
+En alto nivel, Kafka proporciona las siguientes garant'ias:
+\begin{itemize}
+\item Los mensajes enviados por un productor a una partici'on de un tema en particular se adjuntar'a en el orden en el que se env'ia. Es decir, si un registro R1 es enviado por el mismo productor que un registro R2 y R1 se envi'o primero, entonces R1 aparecer'a antes en el registro del tema.
+\item Una instancia de consumidor ve los datos en el orden en el que se almacenan en el tema.
+\item Para un tema replicado n veces, se toleran hasta n-1 fallos del servidor sin perder ning'un registro confirmado.
+\end{itemize}
+
+\figura{0.4}{img/tecnologias/kafka.png}{Arquitectura de Apache Kafka}{kafka}{}
+
+\clearpage

@@ -1,0 +1,135 @@
+\babel@toc {spanish}{}
+\contentsline {chapter}{\'Indice general}{IV}{section*.5}
+\contentsline {chapter}{{\'I}ndice de cuadros}{VII}{section*.7}
+\contentsline {chapter}{\'{I}ndice de figuras}{IX}{section*.9}
+\contentsline {chapter}{{\'I}ndice de c{\'o}digo}{XII}{section*.11}
+\contentsline {chapter}{\numberline {1}Introducci\'on}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Contexto}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Definici\'on de objetivos}{2}{section.1.2}
+\contentsline {section}{\numberline {1.3}Motivaci\IeC {\'o}n}{2}{section.1.3}
+\contentsline {section}{\numberline {1.4}Estructura del proyecto}{3}{section.1.4}
+\contentsline {chapter}{\numberline {2}Estudio te\'orico}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Forex}{5}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Estructura}{5}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Influencias}{5}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Horario de Forex}{6}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Indicadores financieros}{7}{subsection.2.1.4}
+\contentsline {section}{\numberline {2.2}Resoluci\'on del problema}{15}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Definici\'on del problema}{15}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Clasificaci\'on}{15}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Regresi\'on}{16}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Aplicaci'on de la regresi'on al problema}{17}{subsection.2.2.4}
+\contentsline {section}{\numberline {2.3}Big Data}{18}{section.2.3}
+\contentsline {section}{\numberline {2.4}Deep Learning}{19}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Redes neuronales}{19}{subsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.1.1}La neurona}{20}{subsubsection.2.4.1.1}
+\contentsline {subsection}{\numberline {2.4.2}Funciones de activaci\IeC {\'o}n}{21}{subsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.2.1}Funci\IeC {\'o}n lineal}{21}{subsubsection.2.4.2.1}
+\contentsline {subsubsection}{\numberline {2.4.2.2}Funci\IeC {\'o}n sigmoide}{22}{subsubsection.2.4.2.2}
+\contentsline {subsubsection}{\numberline {2.4.2.3}Funci\IeC {\'o}n tangencial hiperb\IeC {\'o}lica}{23}{subsubsection.2.4.2.3}
+\contentsline {subsubsection}{\numberline {2.4.2.4}Funci\IeC {\'o}n ReLu}{24}{subsubsection.2.4.2.4}
+\contentsline {subsubsection}{\numberline {2.4.2.5}Funci\IeC {\'o}n Leaky ReLu}{25}{subsubsection.2.4.2.5}
+\contentsline {subsubsection}{\numberline {2.4.2.6}Funci\IeC {\'o}n Softmax}{26}{subsubsection.2.4.2.6}
+\contentsline {subsection}{\numberline {2.4.3}Arquitectura de una red neuronal}{26}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}Redes Neuronales Recurrentes}{29}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}Capas de redes neuronales recurrentes}{30}{subsection.2.4.5}
+\contentsline {subsubsection}{\numberline {2.4.5.1}LSTM}{30}{subsubsection.2.4.5.1}
+\contentsline {subsubsection}{\numberline {2.4.5.2}Diferencia con la capa GRU}{33}{subsubsection.2.4.5.2}
+\contentsline {subsection}{\numberline {2.4.6}Redes neuronales convolucionales}{34}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.7}Capas de las redes neuronales de convoluci'on}{35}{subsection.2.4.7}
+\contentsline {subsubsection}{\numberline {2.4.7.1}Capa Conv1D}{35}{subsubsection.2.4.7.1}
+\contentsline {subsubsection}{\numberline {2.4.7.2}Capa MaxPooling1D}{36}{subsubsection.2.4.7.2}
+\contentsline {subsection}{\numberline {2.4.8}Capas comunes entre arquitecturas}{37}{subsection.2.4.8}
+\contentsline {subsubsection}{\numberline {2.4.8.1}Capa Dense}{37}{subsubsection.2.4.8.1}
+\contentsline {subsubsection}{\numberline {2.4.8.2}Capa Flatten}{37}{subsubsection.2.4.8.2}
+\contentsline {subsubsection}{\numberline {2.4.8.3}Capa Dropout}{38}{subsubsection.2.4.8.3}
+\contentsline {subsection}{\numberline {2.4.9}Entrenamiento de las redes neuronales}{39}{subsection.2.4.9}
+\contentsline {subsubsection}{\numberline {2.4.9.1}Descenso del gradiente}{40}{subsubsection.2.4.9.1}
+\contentsline {subsubsection}{\numberline {2.4.9.2}Retropropagaci'on}{42}{subsubsection.2.4.9.2}
+\contentsline {chapter}{\numberline {3}Dise\IeC {\~n}o del sistema}{44}{chapter.3}
+\contentsline {section}{\numberline {3.1}Tecnolog'ias troncales}{46}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Python}{46}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Docker}{46}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Productores de datos}{47}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Extracci\IeC {\'o}n del dato}{47}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Env\IeC {\'\i }o de la informaci\IeC {\'o}n}{47}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Repetici\IeC {\'o}n}{47}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Tecnolog\IeC {\'\i }as utilizadas}{47}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Procesado y almacenamiento}{49}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Recepci\IeC {\'o}n}{49}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Tratamiento}{49}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Almacenamiento}{49}{subsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.3.1}Estructura de la base de datos}{50}{subsubsection.3.3.3.1}
+\contentsline {subsection}{\numberline {3.3.4}Tecnolog\IeC {\'\i }as utilizadas}{50}{subsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.4.1}MySQL}{50}{subsubsection.3.3.4.1}
+\contentsline {subsubsection}{\numberline {3.3.4.2}Docker}{50}{subsubsection.3.3.4.2}
+\contentsline {section}{\numberline {3.4}Red neuronal}{51}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Consideraciones previas}{51}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Red Neuronal Recurrente}{53}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Red Neuronal Convolucional}{55}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Tecnolog\IeC {\'\i }as utilizadas}{57}{subsection.3.4.4}
+\contentsline {section}{\numberline {3.5}Monitorizaci'on}{58}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Tecnolog\IeC {\'\i }as utilizadas}{59}{subsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.1.1}Dash}{59}{subsubsection.3.5.1.1}
+\contentsline {chapter}{\numberline {4}Arquitectura del sistema}{61}{chapter.4}
+\contentsline {section}{\numberline {4.1}Apache Spark}{62}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Fundamentos de Spark}{63}{subsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.1.1}Elementos}{63}{subsubsection.4.1.1.1}
+\contentsline {subsubsection}{\numberline {4.1.1.2}Caracter'isticas}{64}{subsubsection.4.1.1.2}
+\contentsline {subsection}{\numberline {4.1.2}C'omo funciona Spark}{65}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Modulos de Spark}{67}{subsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.3.1}Spark SQL}{67}{subsubsection.4.1.3.1}
+\contentsline {subsubsection}{\numberline {4.1.3.2}DataFrame}{67}{subsubsection.4.1.3.2}
+\contentsline {subsubsection}{\numberline {4.1.3.3}Spark Structured Streaming}{68}{subsubsection.4.1.3.3}
+\contentsline {section}{\numberline {4.2}TensorFlow}{69}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Grafos}{69}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Tensor}{70}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Keras}{70}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Apache Kafka}{71}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Broker}{71}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Topic}{71}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Productor}{71}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Consumidor}{71}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.5}Zookeeper}{72}{subsection.4.3.5}
+\contentsline {subsection}{\numberline {4.3.6}Garant\IeC {\'\i }as}{72}{subsection.4.3.6}
+\contentsline {chapter}{\numberline {5}An'alisis del sistema}{74}{chapter.5}
+\contentsline {section}{\numberline {5.1}Data-Driven Application}{74}{section.5.1}
+\contentsline {section}{\numberline {5.2}Procesos del sistema}{75}{section.5.2}
+\contentsline {section}{\numberline {5.3}Cat'alogo de requisitos}{76}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Requisitos generales}{76}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Requisitos de informaci'on}{77}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Requisitos funcionales}{79}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}Requisitos no funcionales}{81}{subsection.5.3.4}
+\contentsline {section}{\numberline {5.4}Casos de usos}{82}{section.5.4}
+\contentsline {section}{\numberline {5.5}Matriz de trazabilidad}{85}{section.5.5}
+\contentsline {chapter}{\numberline {6}An'alisis temporal y costes de desarrollo}{87}{chapter.6}
+\contentsline {section}{\numberline {6.1}Desglose de tareas}{87}{section.6.1}
+\contentsline {section}{\numberline {6.2}An'alisis temporal}{90}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Diagrama de Gantt}{92}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Costes de desarrollo}{95}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Recursos de hardware}{95}{subsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.1.1}Amortizaci'on}{96}{subsubsection.6.3.1.1}
+\contentsline {subsection}{\numberline {6.3.2}Recursos de personal}{97}{subsection.6.3.2}
+\contentsline {subsection}{\numberline {6.3.3}Coste total}{97}{subsection.6.3.3}
+\contentsline {chapter}{\numberline {7}Manual de usuario}{99}{chapter.7}
+\contentsline {section}{\numberline {7.1}Preparaci'on del entorno}{99}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Requisitos m'inimos}{99}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Entorno}{99}{subsection.7.1.2}
+\contentsline {section}{\numberline {7.2}Instalaci'on e implantaci'on}{100}{section.7.2}
+\contentsline {chapter}{\numberline {8}Pruebas}{104}{chapter.8}
+\contentsline {section}{\numberline {8.1}Spark y Kafka}{104}{section.8.1}
+\contentsline {section}{\numberline {8.2}Estudio y selecci'on de hiperpar'ametros de redes neuronales}{105}{section.8.2}
+\contentsline {section}{\numberline {8.3}Red Recurrente - EUR/USD - Puesta en producci\IeC {\'o}n}{107}{section.8.3}
+\contentsline {section}{\numberline {8.4}Red Recurrente - EUR/USD - 24 horas en producci'on}{108}{section.8.4}
+\contentsline {section}{\numberline {8.5}Red Recurrente - BTC/USD - Puesta en producci\IeC {\'o}n}{109}{section.8.5}
+\contentsline {section}{\numberline {8.6}Red Recurrente - BTC/USD - 24 horas en producci'on}{110}{section.8.6}
+\contentsline {section}{\numberline {8.7}Red Convolucional - EUR/USD - Puesta en producci\IeC {\'o}n}{111}{section.8.7}
+\contentsline {section}{\numberline {8.8}Red Convolucional - EUR/USD - 24 horas en producci'on}{112}{section.8.8}
+\contentsline {section}{\numberline {8.9}Red Convolucional - BTC/USD - Puesta en producci\IeC {\'o}n}{113}{section.8.9}
+\contentsline {section}{\numberline {8.10}Red Convolucional - BTC/USD - 24 horas en producci'on}{114}{section.8.10}
+\contentsline {section}{\numberline {8.11}Resultados globales}{115}{section.8.11}
+\contentsline {chapter}{\numberline {9}Conclusiones}{117}{chapter.9}
+\contentsline {chapter}{\numberline {10}Desarrollos futuros}{119}{chapter.10}
+\contentsline {chapter}{Glosario de t'erminos}{121}{chapter*.12}
+\contentsline {chapter}{Referencias}{125}{chapter*.13}
+\contentsfinish 

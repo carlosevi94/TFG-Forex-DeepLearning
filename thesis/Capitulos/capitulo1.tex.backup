@@ -1,0 +1,75 @@
+% !TEX root = ../proyect.tex
+
+\chapter{Formato}\label{cap1}
+\section{Introducci\'on}\label{sec:intro}
+
+La memoria del Trabajo fin de Grado se entrega utilizando la aplicaci\'on de la escuela para 
+Trabajos fin de Carrera, sita en 
+\url{https://tfc.eii.us.es/TfG/}. Debe entregarse en formato \textsc{pdf} y podr\'a utilizarse
+cualquier aplicaci\'on inform\'atica para generar la misma, siempre que el resultado
+final verifique los requisitos
+que se exponen en este documento.
+
+
+\section{Formato general}\label{sec:general}
+
+Salvo excepciones justificadas, el \textsc{pdf} 
+a entregar debe tener sus p\'aginas del tama{\~n}o
+estandarizado m\'as com\'un en Europa: \textsc{din a4}. Con el objetivo de facilitar 
+su lectura en dispositivos electr\'onicos, se considerará que
+se imprime a una s\'ola cara (ver \ref{sec:impresion} para los casos en que la memoria deba ser impresa).
+
+
+\section{Cuerpo y tipos de letra}\label{sec:letra}
+
+Se recomienda utilizar, dada su simplicidad, claridad y legibilidad, los tipos de letra
+Arial (preferiblemente en caja alta) o Helv\'etica, en un tamaño para el cuerpo del texto de 11 pt,
+con un interlineado sencillo o de 1,5.
+
+Los t{\'\i}tulos de cap{\'\i}tulos, secciones y subsecciones, as{\'\i} como las notas al pie de texto\footnote{Por favor, no abusad de las notas a pie de texto}
+y las cabeceras o pies de cuadros, figuras y trozos de c\'odigo quedan a libertad del redactor de la memoria.
+Sin embargo, es buena idea que los t{\'\i}tulos tengan un tamaño igual o superior a 11pt. y los pies y cabeceras
+sean de tama{\~n}o igual o inferior a 11pt. Se ruega encarecidamente que, en lo posible, se evite el \underline{subrayado}.
+Este puede sustituirse por el uso de \textbf{negritas} o \textit{cursivas} o por el cambio de formato del tipo de letra 
+({\large tamaño}, {\color{blue}{color}},\dots)
+
+ 
+
+\section{Márgenes y párrafos}\label{sec:margenes}
+
+Es necesario configurar la página seleccionando los márgenes siguientes:
+\begin{itemize}
+ \item Márgenes superior e inferior: 2,5 cm. 
+ \item Márgenes laterales (izquierdo y derecho): 3 cm.
+\end{itemize}
+
+En el caso de no usar cabeceras, las páginas deber\'an ir numeradas en el centro del pie.
+Si se usan cabeceras, no se utilizarán estas en las p\'aginas que comienzan capítulo, las cuales
+se numerar\'an en el centro del pie. Las restantes p\'aginas pueden ir numeradas en el pie o en la cabecera,
+pero deber\'an mantener coherencia de formato a lo largo de todo el cap{\'\i}tulo.
+
+Las p\'aginas previas al cuerpo de la memoria del Trabajo fin de Grado (agradecimientos, resumen, {\'\i}ndices,\dots) 
+pueden no numerarse o
+numerarse independientemente de la misma, en cuyo caso se numerar\'an con n\'umeros romanos. 
+Se recuerda que los n\'umeros romanos
+se escriben con letras may\'usculas (la numeraci\'on i,ii,iii,iv\dots es propia del idioma ingl\'es 
+y no es admisible en espa{\~n}ol, ni siquiera para enumeraciones)
+
+Los p\'arrafos comenzar\'an con sangrado. El espacio entre los mismos no debe ser excesivo.
+
+\section{Lengua}\label{sec:lengua}
+
+La Normativa académica de los Trabajos fin de Grado indica:
+
+\emph{Como norma general, el TfG deberá estar escrito y ser expuesto oralmente en castellano.
+Podrá también estar escrito y ser expuesto en inglés, previa solicitud.}
+
+En cualquier caso, la memoria debe respetar los usos y costumbres del idioma en que sea escrita.
+Debe prestarse especial atenci\'on al guionado de las palabras, debido a que muchas aplicaciones inform\'aticas
+usan el propio del ingl\'es y no el del castellano.
+
+En cuanto a la portada, se debe utilizar la portada oficial de la ETSII. Un ejemplo de la misma puede encontrarse al 
+principio (como portada) de este documento.
+
+
+ 

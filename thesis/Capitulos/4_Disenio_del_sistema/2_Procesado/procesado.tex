@@ -1,0 +1,67 @@
+El módulo de procesamiento y almacenamiento de datos se ocupa de recoger la informaci'on generada por el resto de módulos, tratarla, almacenarla y enviarla a los m'odulos que la necesiten.
+
+Las tareas que desempeña este módulo son:
+\begin{itemize}
+\item Recepción.
+\item Tratamiento.
+\item Almacenamiento.
+\end{itemize}
+
+\subsection{Recepción}
+El módulo recibe directamente la información en bruto de los productores. Para que no se produzca una saturación entre mensajes y puedan perderse se necesita un gestor de colas de mensajes. Este gestor recibe los mensajes de los productores y los almacena temporalmente, agrupándolos por topics previamente configurados, hasta que son demandados, momento en el cual el gestor envía los mensajes hasta los demandantes.
+
+Este proceso se realiza en Apache Kafka.
+
+\subsection{Tratamiento}
+Una vez obtenida la información es necesario tratarla para poder alimentar la red neuronal con ella. La información de cada divisa se encuentran en grupos de quince minutos, y pasa un proceso de procesado que consta de los siguientes pasos:
+\begin{enumerate}
+\item \textbf{Obtención del dato}. Se elimina toda la información no necesaria, como posibles letras, guiones o espacios, y se almacena en los diferentes campos de la fila del dataset. 
+\item \textbf{Casteo a número real}. Los datos numéricos que nos llegan cambian de tipo para poder realizar operaciones matemáticas de coma flotante.
+\item \textbf{Casteo de fechas}. Los datos en forma de fecha que llegan al sistema se castean a un tipo Datetime, que consta de fecha y hora, para poder utilizarlo fácilmente a la hora de hacer b'usquedas.
+\item \textbf{Ordenado de dataframe}. Como medida de seguridad, se ordena el dataset de forma creciente tomando como criterio la fecha.
+\item \textbf{Retorno logarítmico}. Se calcula el retorno logarítmico entre los valores que han llegado, para facilitarle los c'alculos al módulo de la red neuronal.
+\item \textbf{Almacenamiento}. Como paso final, se almacenan los datos en la base de datos.
+
+\end{enumerate}
+
+Este proceso se realiza en Apache Spark.
+
+
+
+\subsection{Almacenamiento}
+Con la información ya agrupada y tratada se procede a almacenarla en un sistema de almacenamiento a largo plazo donde el resto de módulos puedan consultarlas. 
+
+Este proceso se realiza en MySQL
+
+\subsubsection{Estructura de la base de datos}
+Las tablas de la base de datos se separan en tres grupos: predicciones, tiempo real e histórico.
+
+Las tablas de predicciones almacenan los resultados generados por las redes neuronales. Hay cuatro tablas de este tipo, una por cada par red/divisa.
+
+Las tablas de tiempo real almacenan los datos actuales hasta un m'aximo de quince en el pasado. Por tanto, si el sistema se encuentra en el instante t10 esta tabla contará con los valores del momento actual y los 9 instantes pasados, pero al llegar al instante t16 la tabla vuelca sus datos en las tablas de histórico, conservando 'unicamente el valor del instante actual. Existe una tabla de este tipo por divisa
+
+En las tablas de histórico se guardan los datos pasados de las divisas. Existe una tabla por divisa.
+
+
+
+\subsection{Tecnologías utilizadas}
+Por cada tarea a cumplir se han desplegado tres sistemas que cumplen las exigencias necesarias. Estos sistemas son:
+\begin{itemize}
+\item Apache Kafka
+\item Apache Spark
+\item Base de datos MySQL
+\item Docker
+\end{itemize}
+
+Los componentes Apache Spark y Apache Kafka se explicarán en más detalle en el capítulo \ref{cap5}.
+
+\subsubsection{MySQL}
+Para el almacenamiento a largo plazo de los datos se ha optado por una base de datos MySQL.
+
+MySQL es un sistema de gestión de bases de datos relacional, desarrollado por Oracle Corporation bajo una licencia dual pública general/comercial.
+MySQL está desarrollado en C y C++ y destaca por su gran adaptación a diferentes entornos, permitiendo su integración con los lenguajes de programación más utilizados como Java y Python.
+
+\subsubsection{Docker}
+Se ha utilizado Docker para virtualizar tanto el Apache Kafka como la base de datos MySQL. El hecho de virtualizar Apache Kafka permite desplegar instancias del mísmo a demanda con relativa facilidad.
+
+\clearpage

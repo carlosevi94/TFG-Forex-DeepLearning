@@ -1,0 +1,162 @@
+%% symbols.sty
+%%
+%% Crated and mantained by Juan Antonio Navarro, ma108907@mail.udlap.mx
+%% http:\\www.udlap.mx\~ma108907\latex
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{symbols}[2002/12/11 Personal macros for common math symbols]
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+
+% Font Declarations
+\DeclareTextFontCommand{\normalrm}{\normalfont\rmfamily}
+\DeclareTextFontCommand{\normalbf}{\normalfont\bfseries}
+\DeclareTextFontCommand{\normalit}{\normalfont\itshape}
+\DeclareTextFontCommand{\normalsf}{\normalfont\sffamily}
+\DeclareTextFontCommand{\normaltt}{\normalfont\ttfamily}
+
+% Tex Names
+\newcommand{\UdlaTeX}{{{\sc U\kern-.09em dla}\kern-.08em\TeX}}
+\providecommand{\BibTeX}{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\newcommand{\FOUR}{\ensuremath{\mathcal{F\kern-0.08emOUR}}}  % Logic FOUR
+
+% -----------------------------------------------------------------
+% Math Symbols
+% -----------------------------------------------------------------
+
+\newcommand{\lcomp}{\tilde}
+
+% ordinary symbols
+\newcommand{\RR}{\mathbb{R}}       % Real Numbers
+\newcommand{\QQ}{\mathbb{Q}}       % Rational Numbers
+\newcommand{\NN}{\mathbb{N}}       % Natural Numbers
+\newcommand{\ZZ}{\mathbb{Z}}       % Integer Numbers
+\newcommand{\CC}{\mathbb{C}}       % Complex Numbers
+\newcommand{\BB}{\mathbb{B}}       % Boolean Numbers
+\newcommand{\lxnot}{{\sim}}        % Explicit Negation
+\newcommand{\lbox}{\square}        % Modal Box
+\newcommand{\ldiamond}{\lozenge}   % Modal Diamond
+\newcommand{\sig}{\mathcal{L}}     % Signature
+\newcommand{\Lit}{\normalit{Lit}}  % Literals
+
+% binary operators
+\newcommand{\bigland}{\bigwedge}
+\newcommand{\biglor}{\bigvee}
+
+\newcommand{\lif}{\mathbin{\leftarrow}}       % Implied by
+\newcommand{\lpif}{\mathbin{\normaltt{:-}}}   % Gelfond's Logic Programming Implication
+\newcommand{\liff}{\mathbin{\leftrightarrow}} % If and only if
+\newcommand{\lthen}{\mathbin{\rightarrow}}    % Implies
+\newcommand{\lxor}{\mathbin{\oplus}}          % Exclusive Or
+\newcommand{\lcongruence}{\mathbin{\dagger}}  % ``congruence operator''
+
+% relation symbols
+\newcommand{\st}{\mid}            % such that: \set{ x \st x \in W }
+\newcommand{\tq}{\st}             % "tal que", alias for "such that"
+\newcommand{\prove}{\vdash}       % proves relation
+\newcommand{\cprove}{\Vdash}      % consistent and proves relation
+\newcommand{\defas}{\mathrel{:=}} % "define as" relation
+\newcommand{\rewritessymbol}{\Rightarrow}
+\newcommand{\rewritesto}{\quad\mathrel{\rewritessymbol}\quad}
+
+% named operators
+\DeclareMathOperator{\suc}{succ}               % Successor of a number
+\DeclareMathOperator{\Int}{Int}                % Interior of a set
+\DeclareMathOperator{\Img}{Im}                 % Image of a function
+\DeclareMathOperator{\lpnot}{\normalit{not\/}} % Gelfond's default negation
+\DeclareMathOperator{\Cn}{Cn}                  % Consequence closure
+\DeclareMathOperator{\ACn}{ACn}                % Atomic Consequence closure
+\DeclareMathOperator{\Th}{Th}                  % Set of theorems of a logic
+
+% names of computer systems
+\providecommand{\systemname}[1]{\textsc{#1}}
+\providecommand{\Vampire}{\systemname{Vampire}}
+\providecommand{\SatELite}{\systemname{SatELite}}
+\providecommand{\MiniSat}{\systemname{MiniSat}}
+\providecommand{\Darwin}{\systemname{Darwin}}
+\providecommand{\Chaff}{\systemname{Chaff}}
+\providecommand{\zChaff}{\systemname{zChaff}}
+\providecommand{\relsat}{\systemname{rel\_sat}}
+\providecommand{\siege}{\systemname{siege}}
+\providecommand{\marcheq}{\systemname{march\_eq}}
+\providecommand{\Grasp}{\systemname{Grasp}}
+\providecommand{\Satz}{\systemname{Satz}}
+\providecommand{\BerkMin}{\systemname{BerkMin}}
+\providecommand{\Novelty}{\systemname{Novelty}}
+\providecommand{\Noveltyp}{\systemname{Novelty}$^+$}
+\providecommand{\AdaptNovelty}{\systemname{Adaptive Novelty}$^+$}
+\providecommand{\WalkSat}{\systemname{WalkSat}}
+
+
+% -----------------------------------------------------------------
+% Math Constructions
+% -----------------------------------------------------------------
+\newcommand{\set}[1]{\left\lbrace#1\right\rbrace}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\setcomp}[1]{\widetilde{#1}}
+
+% logics
+\newcommand{\logic}[1]{\normalrm{#1}}
+\newcommand{\Gi}[1][i]{\ensuremath{\logic{G}_{#1}}}
+\newcommand{\class}[1]{\ensuremath{\mathsf{#1}}}
+
+\newcommand{\equivin}[1]{\equiv_\logic{#1}}
+\newcommand{\provein}[1]{\prove_\logic{#1}}
+\newcommand{\cprovein}[1]{\cprove_\logic{#1}}
+\newcommand{\notprovein}[1]{\not\prove_\logic{#1}}
+\newcommand{\consextin}[1]{\xrightarrow{\,\logic{#1}\,}}
+\newcommand{\Cnin}[1]{\Cn_\logic{#1}}
+\newcommand{\Cnina}[1]{\ACn_\logic{#1}}
+
+% semantics
+\newcommand{\semanticname}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\WFS}{\semanticname{WFS}}
+\newcommand{\WFSp}{\ensuremath{\semanticname{WFS}^{+}}}
+\newcommand{\AS}{\semanticname{AS}}
+\newcommand{\SEM}{\semanticname{SEM}}
+
+% natural deduction
+\newcommand{\rulename}[1]{\normalsf{#1}}
+\newcommand{\provewith}[1]{\prove_\rulename{#1}}
+\newcommand{\trule}[4]{\tfrac{#1\quad#2}{#3}\,\scriptstyle\rulename{#4}}
+
+% this macro is only valid loading ``bussproofs'' package and inside a
+% proof environment
+\newcommand{\UseRule}[2]{\RightLabel{\rulename{#1}}\BinaryInfC{#2}}
+
+% environments
+% some packages redefine the {quote} environment. Here we use de basic
+% definition of quote given in article.cls.
+\newenvironment{basicquote}
+  {\list{}{\rightmargin\leftmargin}\item\relax}
+  {\endlist}
+
+\newenvironment{lpblock}[1][l]
+  {\begin{basicquote}$\begin{array}{#1}}
+  {\end{array}$\end{basicquote}}
+
+\newenvironment{ttblock}[1][l]
+  {\begin{basicquote}\normalfont\ttfamily\begin{tabular}{#1}}
+  {\end{tabular}\end{basicquote}}
+
+% special commands
+\newcommand{\makeblindtitle}{\begin{center}\Large\textbf{\@title}\end{center}}
+
+% not so ugly hack to get arrows in pseudocode aligned
+\newlength{\uni@fixwidth}
+\newlength{\uni@truewidth}
+\newcommand{\setfixwidth}[1]{\settowidth{\uni@fixwidth}{\mbox{#1}}} %\the\uni@fixwidth}
+\newcommand{\typefixwidth}[2][\uni@fixwidth]{%
+  \settowidth{\uni@truewidth}{\mbox{#2}}%
+  \mbox{#2}\hspace*{-\uni@truewidth}\hspace*{#1}%
+}
+\newcommand{\fixtype}[2]{\setfixwidth{#1}\typefixwidth{#2}}
+\newcommand{\typeback}[1]{%
+  \settowidth{\uni@truewidth}{\mbox{#1}}\hspace*{-\uni@truewidth}\mbox{#1}%
+}
+
+\endinput
+
+% end of symbols.sty file

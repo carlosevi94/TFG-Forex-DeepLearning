@@ -1,0 +1,30 @@
+\chapter{Arquitectura del sistema}\label{cap5}
+
+
+\figura{1}{img/tecnologias/Componentes.png}{Diagrama de arquitectura del proyecto}{architectura1}{}
+
+Como se puede observar en la figura \ref{architectura1}, el sistema desarrollado en este proyecto se asienta sobre un sistema Linux, el cual nos permite la ejecución de los contenedores proporcionados por Docker, que han sido cruciales para la implementación de los \textbf{productores}, la base de datos \textbf{MySQL} y Apache \textbf{Kafka}.
+
+Sin embargo, elementos como Apache Spark y Tensorflow se asientan directamente sobre Linux. Ésto es debido a que ambos componentes necesitan el número máximo de recursos posibles, y aunque Docker no consume un número elevado de recursos, para el correcto funcionamiento de estos componentes hay que disponer de todos los recursos disponibles.
+
+Esta arquitectura es totalmente modular y se ha diseñado con el propósito de que todos sus componentes puedan ser separados en diferentes máquinas, e incluso en cluster, para poder suministrar los recursos que se necesiten en tiempo de ejecución. Está inspirada en el modelo de microservicios, aunque no se cumplen estrictamente todos los requisitos.
+
+En este capítulo se explicarán con detalle los componentes más importantes del sistema: Apache \textbf{Spark}, Apache \textbf{Kafka}, y \textbf{Tensorflow}.
+
+
+\clearpage
+
+\section{Apache Spark}\label{sec:spark}
+\input{Capitulos/5_Tecnologias/3_Spark/spark}
+
+
+
+\section{TensorFlow}\label{sec:tensorflow}
+\input{Capitulos/5_Tecnologias/4_Tensorflow/tensorflow}
+
+
+
+
+\section{Apache Kafka}\label{sec:kafka}
+\input{Capitulos/5_Tecnologias/2_Kafka/kafka}
+

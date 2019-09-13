@@ -1,0 +1,17 @@
+\chapter{Desarrollos futuros}\label{conclusiones}
+
+Como se ha expuesto en las conclusiones, el nivel de precisión de las predicciones es demasiado bajo como para poder confiar plenamente en él, por lo que no puede utilizarse únicamente este modelo predictivo para realizar inversiones en Bolsa. Durante la investigación de este proyecto, hemos descubierto que existen múltiples proyectos relacionados con el mercado de valores que podrían integrarse con nuestro proyecto, en los que cabe destacar:
+
+\begin{itemize}
+
+\item Un modelo de Deep learning que obtenga información de noticias relacionadas con los valores, aplicando técnicas de \textbf{Procesamiento de Lenguaje Natural} o \textbf{PLN}. Utilizando este método se puede ver si una noticia es positiva, negativa o neutral, y, en función de ello, se podría corregir una predicción en tiempo real.
+
+\item El desarrollo de un \textbf{metamodelo} que realice predicciones de una secuencia de valores futuros pero de forma individual. En este proyecto se ha desarrollado un modelo que predice quince minutos a futuro, es decir, quince valores diferentes, pero se calculan todos a la vez mediante la salida secuencial de la red LSTM. El metamodelo consistíria en quince redes neuronales diferentes que predicen cada uno de esos valores. Puede parecer algo extraño de comprender, dado que a primera vista no parece tener sentido que una red que recibe los datos realice predicciones sobre un valor que no es su consecuente inmediato, pero en la práctica es posible. Este metamodelo requeriría una gran capacidad de cómputo para que pudiera ser ejecutado en tiempo real.
+
+\item En este proyecto se ha investigado el mercado financiero del Forex con intervalos de tiempo o ticks a nivel de minuto, pero también se podría investigar en \textbf{otros mercados financieros} como puede ser el S\&P500, IBEX35, DOWJONES o DAX, para inversiones a medio y largo plazo. Las inversiones a corto plazo solo son viables en mercados de divisas. 
+
+
+\item Un \textbf{agente automático} para invertir de forma autónoma en base a las predicciones obtenidas. Ya existen numerosos agentes automáticos en internet, incluso en github se pueden encontrar algunos muy potentes y famosos, pero todos ellos requieren para su funcionamiento una estrategia. Esta estrategia la introduce el usuario en forma de fórmula matemática. Con una ligera modificación en el código base se podría conseguir un agente que realice las operaciones directamente de la salida de la red neuronal.
+
+\end{itemize}
+

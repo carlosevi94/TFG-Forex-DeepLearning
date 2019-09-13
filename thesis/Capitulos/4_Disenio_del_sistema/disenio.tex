@@ -1,0 +1,80 @@
+% !TEX root = ../proyect.tex
+
+\chapter{Diseño del sistema}\label{cap4}
+
+El objetivo principal del sistema es proveer un modelo de aprendizaje profundo que genere predicciones sobre el mercado Forex. Antes de entrar en cuestiones de diseño, tenemos que hablar acerca del flujo lógico por el que debe pasar la información.
+
+\figura{1}{img/disenio_sistema/disenio2.png}{Diagrama de diseño de flujo de la informaci'on}{disenio2}{}
+
+En la figura \ref{disenio2} se ilustra del diseño el sistema y el flujo de la información a través del mismo.
+\begin{itemize}
+\item La información es generada por los productores, uno por divisa, la cual es enviada al gestor de cola de mensajes. 
+\item El gestor almacena temporalmente todos los mensajes recibidos por los productores hasta que son requeridos. 
+\item La información viaja al módulo de procesamiento, donde se realizan las transformaciones necesarias sobre los datos. 
+\item Una vez se tienen los datos tratados se almacenan en una base de datos donde se ponen a disposición de la redes neuronales. 
+\item La redes toman los datos para su entrenamiento y generan las predicciones. Se genera una predicción para los siguientes cuarenta y cinco minutos por red y divisa. 
+\item Las predicciones se almacenan en la base de datos donde una interfaz de usuario web puede acceder a ellas y pueden ser representadas.
+\end{itemize}
+
+
+\pagebreak
+
+
+Una vez visto el flujo del sistema, se ha agrupado las tareas del sistema en cuatro grupos, estos son: 
+\begin{itemize}
+\item \textbf{Obtención}: Se necesitan datos históricos de las divisas para poder entrenar el modelo.
+\item \textbf{Tratamiento}: La información obtenida necesita ser tratada antes de que el modelo pueda aprender de ella.
+\item \textbf{Almacenamiento}: Como cualquier sistema de información se necesita un sistema de almacenamiento permanente.
+\item \textbf{Construcción del modelo}: El desarrollo y entrenamiento del modelo.
+\item \textbf{Visualización}: Los datos generados por el modelo se deben poder representar correctamente para su monitorización e interpretación.
+\end{itemize}
+
+
+Para resolver todos estos problemas se ha diseñado una arquitectura modular en la que cada módulo resuelve una de las problemáticas vistas anteriormente. Se ha optado por esta arquitectura ya que el desacoplamiento de los componentes permiten, por una parte, un diseño, implementación y testeo sencillos y por, otra parte, permite aumentar el número de instancias en ejecución de cada módulo en caso de necesidad, usando tecnología de contenedores. Los módulos que componen el sistema son:
+\begin{itemize}
+\item Productores de datos
+\item Procesado y almacenamiento
+\item Red neuronal
+\item Monitorización
+\end{itemize}
+
+Todos ellos serán explicados en este capítulo.
+
+
+\pagebreak
+
+\section{Tecnolog'ias troncales}
+Existen algunas tecnologías comunes a todo el desarrollo, las cuales se encuentran en menor o mayor medida en todo el sistema, las cuales son las tecnologías troncales.
+
+\subsection{Python}
+Python es un lenguaje de programación interpretado multiparadigma y multiplataforma de tipado dinámico.
+
+Python junto con R son los lenguajes predominantes en el campo del Machine Learning y el Deep Learning. En el caso de Python, su éxito se debe a varios factores, como son su sintaxis sencilla, la cual favorece un código legible y un desarrollo ágil, facilidad para adaptar librerías de lenguajes de más bajo nivel, como son C, C++ o CUDA, los cuales tienen un desempeño mejor pero no es viable implementar la totalidad de los modelos con ello y por una gran variedad de librerias y frameworks open soruce. También hay que tener en cuenta el apoyo de grandes empresas como Google, con su framework TensorFlow, siendo uno de los frameworks más utilizados para Deep Learning.
+
+Se ha elegido este lenguaje tanto por las razones previamente presentadas como porque, al ser un lenguaje multiparadigma usado en campos tan variados como el desarrollo web, scripting, machine learning, ciberseguridad, matemáticas, fisica, etc., nos permite implementar la totalidad del sistema con él, permitiendo una integración más sencilla de los componentes.
+
+
+\subsection{Docker}
+Docker es un proyecto para la automatización y el despliegue de aplicaciones dentro de contenedores de software que proporciona una capa extra de abstracci'on y virtualizaci'on de aplicaciones en m'ultiples sistemas operativos. Gracias a docker no es necesario virtualizar sistemas operativos completos, como ocurre con las m'aquinas virtuales, sino que se pueden virtualizar únicamente los componentes que sean necesarios.
+
+Varios módulos del sistema se han virtualizado con docker, lo que permite un despliegue sencillo en cualquier servicio de hosting con soporte de contenedores, como es Amazon Web Services.
+
+\figura{1}{img/disenio_sistema/docker_vs_vm.png}{Docker VS VM}{dockervsvm}{}
+\pagebreak
+
+\section{Productores de datos}\label{sec:productores}
+\input{Capitulos/4_Disenio_del_sistema/1_Productores/productores}
+
+
+\section{Procesado y almacenamiento}\label{sec:procesado}
+\input{Capitulos/4_Disenio_del_sistema/2_Procesado/procesado}
+
+
+\section{Red neuronal}\label{sec:red}
+\input{Capitulos/4_Disenio_del_sistema/3_Red/red}
+
+
+\section{Monitorizaci'on}\label{sec:monitorizacion}
+\input{Capitulos/4_Disenio_del_sistema/4_Monitorizacion/monitorizacion}
+\pagebreak
+

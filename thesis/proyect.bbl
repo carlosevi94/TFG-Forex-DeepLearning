@@ -1,0 +1,104 @@
+\begin{thebibliography}{16}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[01]{introduccion1}
+01.
+\newblock
+  \emph{\href{https://blog.caixabank.es/blogcaixabank/2017/04/la-historia-de-la-bolsa-como-empezo-todo.html}{https://blog.caixabank.es/blogcaixabank/2017/04/la-historia-de-la-bolsa-como-empezo-todo.html}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[02]{introduccion2}
+02.
+\newblock
+  \emph{\href{https://itnext.io/2017s-deep-learning-papers-on-investing-7489e8f59487}{https://itnext.io/2017s-deep-learning-papers-on-investing-7489e8f59487}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[03]{motivacion}
+03.
+\newblock
+  \emph{\href{https://spark.apache.org/powered-by.html}{https://spark.apache.org/powered-by.html}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[04]{forex1}
+04.
+\newblock
+  \emph{\href{https://www.oracle.com/es/big-data/guide/what-is-big-data.html}{https://www.oracle.com/es/big-data/guide/what-is-big-data.html}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[05]{bigdata1}
+05.
+\newblock
+  \emph{\href{https://www.oracle.com/es/big-data/guide/what-is-big-data.html}{https://www.oracle.com/es/big-data/guide/what-is-big-data.html}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[06]{bigdata2}
+06.
+\newblock
+  \emph{\href{https://www.deltastock.com/spain/instruments/forex-list.asp}{https://www.deltastock.com/spain/instruments/forex-list.asp}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[07]{deep1}
+07.
+\newblock \emph{\href{https://en.wikipedia.org/wiki/Artificial\textunderscore
+  neural\textunderscore
+  network}{https://en.wikipedia.org/wiki/Artificial\textunderscore
+  neural\textunderscore network}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[08]{deep2}
+08.
+\newblock \emph{\href{https://es.wikipedia.org/wiki/Serie\textunderscore
+  temporal}{https://es.wikipedia.org/wiki/Serie\textunderscore temporal}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[09]{deep3}
+09.
+\newblock
+  \emph{\href{http://www.redes-neuronales.com.es/tutorial-redes-neuronales/el-perceptron-multicapa.htm}{http://www.redes-neuronales.com.es/tutorial-redes-neuronales/el-perceptron-multicapa.htm}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[10]{deep4}
+10.
+\newblock
+  \emph{\href{https://es.wikipedia.org/wiki/Convoluci\%C3\%B3n}{https://es.wikipedia.org/wiki/Convoluci\%C3\%B3n}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[11]{spark1}
+11.
+\newblock
+  \emph{\href{https://spark.apache.org/docs/latest/index.html}{https://spark.apache.org/docs/latest/index.html}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[12]{spark2}
+12.
+\newblock
+  \emph{\href{https://spark.apache.org/docs/latest/sql-programming-guide.html}{https://spark.apache.org/docs/latest/sql-programming-guide.html}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[13]{spark3}
+13.
+\newblock
+  \emph{\href{https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html}{https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html}}.
+\newblock Fecha de consulta: 10 de Marzo de 2019.
+
+\bibitem[14]{tensorflow}
+14.
+\newblock
+  \emph{\href{https://www.tensorflow.org/}{https://www.tensorflow.org/}}.
+\newblock Fecha de consulta: 11 de Marzo de 2019.
+
+\bibitem[15]{kafka}
+15.
+\newblock
+  \emph{\href{https://kafka.apache.org/documentation/}{https://kafka.apache.org/documentation/}}.
+\newblock Fecha de consulta: 18 de Marzo de 2019.
+
+\bibitem[16]{dash}
+16.
+\newblock \emph{\href{https://dash.plot.ly}{https://dash.plot.ly}}.
+\newblock Fecha de consulta: 18 de Marzo de 2019.
+
+\end{thebibliography}

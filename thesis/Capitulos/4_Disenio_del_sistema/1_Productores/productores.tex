@@ -1,0 +1,53 @@
+El m'odulo de producci'on de datos es el encargado de recolectar la informaci'on necesaria para el funcionamiento del sistema.
+
+En este caso, los datos necesarios son los valores del \textbf{EUR/USD} y los valores del \textbf{BTC/USD}.
+En el mercado existen diversas herramientas para obtener la información, pero éstas han sido descartadas, bien por ser herramientas de pago o debido a que la calidad y precisión del dato no es la suficiente. Finalmente, después de sopesar las opciones disponibles, se ha decidido obtener la información de la página \url{https://es.investing.com/} mediante \textbf{web scraping}. 
+
+\subsection{Extracción del dato}
+Para conseguir la información de las divisas desde la fuente de datos necesitamos primero descargar el fichero HTML resultante de realizar una petición HTTP a las URLs: 
+\begin{itemize}
+\item EUR/USD - \url{https://es.investing.com/currencies/eur-usd}
+\item BTC/USD - \url{https://es.investing.com/crypto/bitcoin/btc-usd}
+\end{itemize}
+
+
+Una vez descargados los ficheros es necesario un estudio de los mismos, para detectar así que elementos HTML contienen la información deseada. En este caso, el valor de la divisa se encuentra dentro de un elemento span con identificador \textit{last\textunderscore last}. Debido a que la estructura de los ficheros es idéntica ha sido posible generalizar la extracción de información para cualquier divisa de la página web, por lo que el número de divisas con las que opera el sistema es altamente escalable.
+
+\subsection{Envío de la información}
+Una vez se ha obtenido el valor de la divisa éste necesita ser enviado al módulo siguiente. Para gestionar todos los mensajes generados por los productores de datos se necesita un gestor de cola de mensajes, el cual actúa de intermediario entre los productores de datos y el resto del sistema, asegurando que los mensajes enviados llegan a los componentes que los necesiten. 
+Actualmente el flujo de información generado por los productores es ínfimo pero una vez se amplíe el número de divisas y el número de fuentes de información se puede presentar una situación en la que se produzcan problemas de congestión y perdida de mensajes.
+
+\subsection{Repetición}
+Para obtener un flujo continuo de información se necesita que los dos pasos explicados anteriormente se repitan en el tiempo a intervalos regulares. Debido a la velocidad de las operaciones del mercado Forex se ha configurado la extracción de información cada minuto.
+
+\subsection{Tecnologías utilizadas}
+Para implementar las distintas partes de este módulo se ha hecho uso de las siguientes tecnologías
+\begin{itemize}
+\item BeautifulSoup
+\item Requests
+\item Confluent-kafka
+\item Schedule
+\item Docker
+\end{itemize}
+\pagebreak
+\subsubsection*{BeautifulSoup}
+Beautifulsoup es una librería de Python para el análisis y extracción de datos en ficheros HTML.
+Ésta crea una estructura en árbol que puede ser utilizada para la extracción de información de ficheros HTML.
+
+\codigofuente{Python}{B'usqueda de elementos span}{codigo/soup.py}
+
+\subsubsection*{Requests}
+Requests es una librería Python que permite realizar peticiones HTTP,  pensada para ser usada por humanos, por lo que presenta una sintaxis sencilla y legible. La librería soporta desde los métodos HTTP básicos, como POST o GET, hasta gestión de cookies, SSL, proxy y streaming.
+
+Esta librería ha sido utilizada para descargar los ficheros HTML que después serán procesados por beautifulsoup.
+
+\subsubsection*{Confluent-kafka}
+Confluent-kafka es la librería que nos provee de los métodos necesarios para conectarnos al componente Apache kafka del siguiente módulo. Esta librería en necesaria, ya que registra al scraper como un producer de kafka y permite que la información enviada para ellos se gestione y se distribuya adecuadamente.
+
+\subsubsection*{Schedule}
+Schedule es una librería Python para la programación de tareas periodicas, permitiendo ejecutar funciones en periodos personalizables.
+
+\subsubsection*{Docker}
+Se ha creado una imagen de docker genérica que implementa las tareas necesarias para la extracción de los datos. Para inicializar la imagen solo es necesario proporcionar el nombre de la divisa que se quiere obtener. 
+\clearpage
+

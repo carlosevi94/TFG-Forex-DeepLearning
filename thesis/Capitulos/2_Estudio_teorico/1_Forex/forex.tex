@@ -1,0 +1,233 @@
+El mercado Forex (abreviatura de Foreign Exchange) es un mercado mundial y descentralizado donde se opera con todas las divisas del mundo.
+Las operaciones en este mercado siempre involucran un par de divisas, la primera llamada par y la segunda llamada contraparte, de esta forma se expresa el valor de la primera divisa en base a la segunda. Ej: En el EUR/USD se expresa el valor del euro en dólares. 
+ 
+Forex es el mercado más grande y l'iquido del mundo con un volumen diario aproximado de cinco billones de dólares, aunque la mayor parte de las operaciones se concentran en el \textbf{D'olar}, el \textbf{Euro} y el \textbf{Yen}.
+
+\subsection{Estructura}
+El mercado Forex es una combinaci'on de los mercados \textbf{Spot}, \textbf{Forward} y \textbf{Futuros}.
+
+El mercado Spot es el que ocupa el mayor volumen en Forex, ya que maneja los precios de las divisas y los intercambios inmediatos. 
+
+Tanto el mercado Forward como el mercado de futuros lidian con las transacciones que tendr'an lugar en una fecha determinada, entre uno u ocho meses en el futuro. El mercado Forward se utiliza para llevar a cabo transacciones personalizadas, mientras que el mercado de Futuros trata con contratos estándar.
+
+
+
+\subsection{Influencias}
+El valor de una divisa está influenciado por m'ultiples factores sociales, econ'omicos, estacionales, la propia actividad del mercado, etc., siendo las pol'iticas en los bancos centrales las mayores ajustadoras del suministro de capital, lo que implica que las decisiones sobre las pol'iticas monetarias sean un factor primordial de influencia en el valor de las divisas.
+
+La Reserva Federal, el Banco Central Europeo, el Banco de Inglaterra y el Banco de Jap'on son los organismos con mayor influencia en el mercado.
+
+Los gr'aficos con los que se analiza el mercado Forex representa el constante cambio de oferta y demanda de los pares de divisas. La filosof'ia del balance de los precios es clave para entender c'omo funciona el Trading en este mercado, ya que todos los eventos económicos del mundo son relevantes en este mercado, pero s'olo tiene influencia en la oferta y la demanda del activo de forma directa. \cite{forex1}
+
+
+\subsection{Horario de Forex}
+
+A diferencia de otros mercados, como el mercado de acciones, el mercado de divisas está abierto veinticuatro horas al d'ia, durante cinco d'ias a la semana. En el cuadro \ref{horario} se puede ver el horario de apertura y cierre.
+
+\cuadro{|c|c|}{Horario Forex}{horario}{\textbf{Apertura} & \textbf{Cierre} \\ \hline Domingo a las 23:00 & Viernes a las 22:00 \\}
+
+
+Aunque se puede operar durante las 24 horas del d'ia eso no implica que se produzcan cambios en los tipos de cambio de las divisas ya que 'estos est'an afectados por los mercados de los países de origen de la divisa en cuesti'on. Por ejemplo, el cambio EUR/USD viene afectado por la bolsa de Nueva York y por las bolsas de las capitales europeas que s'i cierran durante el d'ia, por lo que en dichos momentos la variaci'on en el tipo de cambio es m'inima o incluso nula.  
+Adem'as de los horarios de apertura de las distintas bolsas, la actividad del Forex también se ve afectada por los d'ias festivos; pudiendo catalogarse éstos en globales y locales. Siendo los primeros festivos que afectan a todo el mundo o una gran parte de 'el, provocando que la actividad del mercado de divisas sea m'inima.  
+En cambio, los festivos locales solo afectan a países individuales o a un grupo pequeño de ellos provocando que solo se vea afectada la actividad sobre la moneda de dicho pa'is o países. En el cuadro \ref{festivos} se muestran algunos de los festivos m'as relevantes.
+
+\cuadro{|c|c|}{Festivos}{festivos}{\textbf{Festivos globales} & \textbf{Festivos locales} \\ \hline Año nuevo & 4 de julio en los EEUU \\ \hline 24 de diciembre & Año nuevo chino \\ \hline 31 de diciembre & 14 de julio en Francia \\ }
+
+
+El conocer c'omo y cu'ando opera este mercado es crucial a la hora de crear un modelo acertado.  
+Si nuestro modelo conoce los horarios de actividad de una divisa, por ejemplo, el EUR/USD, puede ser capaz de predecir que el valor cuando abra la bolsa de Nueva York ser'a muy parecido al valor con el que cerr'o el d'ia anterior, ya que durante el tiempo que est'e cerrada la actividad es m'inima. 
+
+\clearpage
+
+\subsection{Indicadores financieros}
+En el análisis financiero los indicadores son coeficientes o razones que proporcionan unidades contables y financieras de medida y comparación, a través de los cuales la relación por división entre sí de dos datos financieros directos, permite analizar el estado actual o pasado de una organización, en función de niveles óptimos definidos para ella.
+
+Los indicadores financieros cuantifican numerosos aspectos y forman una parte integral del análisis de los estados financieros del mercado.
+
+A continuación se procede a explicar algunos de los indicadores más representativos.
+
+\subsubsection*{Acumulación/Distribución}
+
+La acumulación/distribución o AD mide la cantidad de dinero que entra y sale de un activo en un periodo.
+
+Una de las grandes utilidades que presenta este indicador es el tema de las divergencias. 
+Si el precio del mercado está en una dirección y el indicador está en la dirección contraria suele ser un aviso  de que se puede producir un cambio de tendencia del mercado.
+
+De esta divergencia se puede extraer dos tipos de señales, de compra y de venta.
+
+La señal de compra aparecerá con una divergencia positiva, es decir, cuando el precio del mercado cae pero el AD está subiendo. En este caso existen muchas posibilidades de que el precio se gire próximamente al alza.
+
+Una señal de venta por divergencia bajista surgiría cuando el precio del mercado sube pero el AD está cayendo. En este caso existen muchas posibilidades de que el precio se gire próximamente a la baja.
+
+Básicamente, si el precio va subiendo el AD irá tornándose cada vez más positivo y si es al contrario, el mismo irá a negativo, pero ello también dependerá del importe del volumen.
+
+\begin{gather*}
+\label{eqn:AD}
+MFM = \frac{(close - low) - (high - close)}{high - low} \\
+MFV = MFM * volume \\
+AD_n = AD_{n-1} + MFV\\
+\end{gather*}
+
+\figura{0.6}{img/forex/AD.png}{Acumulación/Distribución}{AD}{}
+
+\pagebreak
+
+\subsubsection*{Media móvil}
+
+La media móvil muestra el valor medio de un activo durante un periodo de tiempo.
+
+Como cualquier indicador, el periodo seleccionado es un elemento crítico. Cuanto más corto sea el periodo, el indicador será más sensible a cambios de precio, pero también será menos consistente. Por el contrario, si escogemos periodos largos el indicador será menos sensible a los cambios en el precio, pero a la vez más consistente.
+
+La media móvil es un indicador de tendencia que genera una interpretación más clara de la acción del precio que otros indicadores y facilita el reconocimiento de la tendencia. Hay varias formas en las que este indicador puede ser utilizado para determinar la tendencia:
+\begin{itemize}
+\item Pendiente: Cuando la pendiente de la media es positiva la tendencia es alcista, cuando la pendiente es negativa la tendencia es bajista y cuando es necesaria se considera sin tendencia.
+\item Posición de la media respecto al precio: Si el precio se encuentra por encima de la media se considera una tendencia alcista, mientras que si el precio se encuentra por debajo de la media se considera una tendencia bajista.
+\end{itemize}
+
+Se calcula como la suma de los valores de cierre en cada periodo, divido por el número de periodos.
+\begin{gather*}
+\label{eqn:MA}
+SMA = \frac{\sum_{i=0}^{n}close_{i}}{n}\\
+\end{gather*}
+
+
+\subsubsection*{Media móvil exponencial}
+La media móvil exponencial, al igual que la media móvil, muestra el valor medio de un activo durante un periodo de tiempo, pero a diferencia de ésta, pondera con mayor importancia a los datos más recientes. En la práctica todo ello se traduce a una reacción más rápida ante los cambios de precio que pueden llevar a falsas señales. 
+Al igual que media móvil, la media móvil exponencial puede ser utilizada como indicador de la tendencia y se le pueden aplicar los mismos criterios.
+
+\begin{gather*}
+\label{eqn:MAE}
+EMA_n = \alpha * value + (1 - \alpha) * EMA_{n-1} \\
+\end{gather*}
+
+\figura{0.6}{img/forex/SMA_VS_EMA.png}{SMA vs EMA}{SMA_VS_EMA}{}
+
+\pagebreak
+
+\subsubsection*{Bandas de Bollinger}
+Las bandas de Bollinger son dos curvas que envuelven al gráfico las cuales miden la volatilidad del precio del activo. Si los precios sobrepasan la banda por arriba indica que el mercado está sobrecomprado y si sobrepasan por debajo indica que está sobrevendido.
+
+
+Si los precios se encuentran por encima de la media y cercanos a la banda superior están relativamente altos, lo que significa que pueda haber sobrecompra. Si están por debajo de la media y cercanos a la banda inferior están relativamente bajos, lo que significa que pueda haber sobreventa.
+
+Si las bandas se estrechan sobre los precios éstas indican que el valor es muy poco volátil y, al contrario, si las bandas se ensanchan indican que el valor es volátil. Todo lo anterior proporciona una ayuda muy importante al inversor que opera con opciones.
+
+Se suelen producir movimientos importantes y rápidos en los precios después de periodos en los que se han estrechado las bandas.
+
+Los movimientos de precios que se originan en una de las bandas suelen tener como objetivo la banda opuesta, lo que facilita el hecho de determinar estos objetivos de precios. Muchos de los precios extremos (máximos o mínimos) de los movimientos tienen lugar en la banda o sus cercanías.
+
+\begin{itemize}
+\item Cuando los precios superan la banda superior es un síntoma de fortaleza del valor, si por el contrario se sitúan por debajo de la banda inferior es una señal de debilidad. Cuando los precios se sitúan fuera de cualquiera de las bandas es asumible la continuación del movimiento. Su utilización conjunta con otros indicadores ayuda a determinar con alta probabilidad los techos y suelos de los mercados.
+
+\item Cuando las bandas se mantienen cercanas, son síntoma de un periodo de baja volatilidad en el precio de la acción. Cuando se mantienen lejos una de otra, están indicando un periodo de alta volatilidad. Cuando tienen sólo una ligera pendiente y permanecen aproximadamente paralelas durante un tiempo suficientemente largo, se encontrará que el precio de la acción oscila arriba y abajo entre las bandas, como en un canal. Cuando esta conducta se repite regularmente junto a un mercado en consolidación, el inversor puede, con cierta confianza, utilizar un toque (o casi) a la banda superior o a la inferior como una señal de que el precio de la acción se está acercando al límite de su rango de negociación, y por ello es probable un cambio en la tendencia del precio. 
+
+\end{itemize}
+
+
+Las bandas se calculan mediante una media móvil desplazándola hacia arriba y hacia abajo un número de desviaciones estándar (normalmente dos).
+
+\figura{0.7}{img/forex/bollinger.jpg}{Bandas de Bollinger}{Bollinger}{}
+
+\pagebreak
+
+\subsubsection*{Índice de canales de productos básicos}
+El índice de canales de productos básicos o CCI, por sus siglas en inglés, mide la fuerza detras de un cambio de precios. El CCI compara el precio actual con una medida anterior pudiendo decidirse así en términos relativos la fuerza o debilidad del mercado. Éste es un indicador versátil que puede ser utilizado tanto para identificar la tendencia como para detectar la sobrecompra y la sobreventa.
+
+En general, indicará mayor tendencia alcista cuanto mayor sea el valor y viceversa. La mayoría de valores que puede tomar el indicador se encuentran entre -100 y 100, entendiéndose que un valor fuera de ese rango indica un comportamiento inusual del precio y se puede esperar que el movimiento en la dirección señalada continúe.
+
+Detectar sobrecompra o sobreventa con CCI puede ser bastante inexacto debido a que CCI, en teoría, no tiene límite superior ni inferior, ya que la interpretación de situación es una interpretación subjetiva. Se debe tener en cuenta que esta detección es diferente según la situación del mercado y las características del activo. Así, en situaciones de tendencia fuerte podría ser necesario un rango de valores límite más amplio, como, por ejemplo, -200 y 200, siendo éste un nivel mucho más complicado de alcanzar e indicaría una situación de mercado en tendencia. Este rango también debe adaptarse a la  volatilidad del activo, ya que a más volatilidad mayor necesidad de un rango más amplio.
+
+\begin{gather*}
+\label{eqn:CCI}
+p_t = \frac{high + low + close}{3}\\
+CCI = \frac{p_t – MA}{0,015 * MD(p_t)}\\
+\end{gather*}
+
+\figura{1}{img/forex/CCI.png}{CCI}{CCI}{}
+
+\pagebreak
+
+
+\subsubsection*{Puntos pivote}
+Los puntos pivote se usan para delimitar los niveles en los que el precio tiene una alta probabilidad de rebotar.
+Para obtenerlos se calcula el punto base y a partir de él se calculan los puntos de soporte y de resistencia.
+
+Dichos niveles de soporte se pueden utilizar para obtener ganancias o para iniciar operaciones. Operadores menos activos pueden usar análisis técnicos de grandes figuras para ayudar a establecer un mercado diagonal y después utilizar los puntos pivote, los soportes y las resistencias para ayudar a ingresar y manejar una operación. Finalmente, los mercados con rangos más amplios tienden a proporcionar números más significativos que aquellos con rangos más estrechos.
+\begin{gather*}
+\label{eqn:PP}
+PP = \frac{high + low + close}{3} \\
+S_1 = 2 * PP - high \\
+R_1 = 2 * PP - low \\
+S_2 = PP - (high - low) \\
+R_2 = PP + (high -low) \\
+\end{gather*}
+
+\figura{0.7}{img/forex/puntos_pivote.jpg}{Puntos pivote}{PIVOTE}{}
+
+\pagebreak
+
+\subsubsection*{Tasa de cambio}
+La tasa de cambio o ROC mide el porcentaje de cambio entre el precio actual y el precio un número determinado de periodos atrás en el tiempo.
+
+El hecho de que sea un oscilador indica que su valor fluctúa por encima y debajo de cero. Y el hecho de que sea un indicador de momento expresa que cuando éste se encuentra por encima de cero en el momento actual existe presión compradora y viceversa.
+
+Este indicador puede ser utilizado para determinar momentos de compra y venta. Cuando el ROC supera la línea cero de abajo a arriba, pasa de valor negativo a positivo, siendo ésta  una señal de compra y cuando supera la línea de arriba a abajo, pasa de valor positivo a negativo, siendo ésta  una señal de venta.
+
+\begin{gather*}
+\label{eqn:ROC}
+ROC_n = \frac{(close_n – close_{n-t}) * 100}{close_{n-t}}\\
+\end{gather*}
+
+\figura{0.8}{img/forex/roc.jpg}{ROC}{ROC}{}
+
+\pagebreak
+
+
+
+
+\subsubsection*{Oscilador estocástico}
+El oscilador estocástico muestra el lugar del cierre en relación al rango máximo-mínimo a lo largo de un conjunto de periodos. 
+
+Dentro del gráfico del indicador se presentan dos zonas muy relevantes, generalmente denominadas zona de sobrecompra y zona de sobreventa.
+
+Para trabajar con esta variable se traza una línea horizontal en el 50\%, a la que comúnmente se le llama “zona neutral”. Además, se dibujan dos líneas adicionales y paralelas a la primera; una en el 80\% y otra en el 20\%. Ésto hace que la zona de sobrecompra se ubique en la parte superior del gráfico, dentro del intervalo 100\% y 80\%. y la zona de sobreventa se encuentre en la parte inferior de éste, específicamente en el intervalo 0\% a 20\%
+\begin{gather*}
+\label{eqn:OE}
+K = 100 * \frac{close – low}{high – low} \\ 
+\end{gather*}
+
+\figura{0.6}{img/forex/estocastico.png}{Oscilador estocástico}{estocastico}{}
+
+\pagebreak
+
+
+\subsubsection*{Momentum}
+El momentum indica la tendencia de los precios.
+
+Mientras la tendencia sea alcista, tanto el momentum como el ROC se mantienen positivos, mientras que en una tendencia bajista se mostrarán negativos. Una vez que ocurre un traspaso al alza del nivel 0 en el gráfico del momentum, puede interpretarse como una señal de compra, mientras que si el traspaso ocurre a la baja se puede interpretar como una señal de venta. Los niveles máximos y mínimos que puedan alcanzar, tanto el momentum como el ROC, muestran cómo de fuerte es la tendencia predominante en ese momento.
+
+En general existen dos formas principales de interpretar éste. La primera consiste en utilizar el momentum como un indicador de tendencia.
+Una vez que el indicador llega hasta abajo y toca fondo  comienza a subir nuevamente, siendo ésta una clara señal de compra, sin embargo, si por el contrario el indicador sube, toca el techo y comienza a bajar, la señal es de venta. Además, cada vez que el momentum alcance niveles altos o bajos extremos en comparación con sus valores históricos, se debe asumir que habrá continuación de la tendencia, lo que significa que al estar en niveles altos el momentum empieza a caer es probable que los precios del activo analizado continúen al alza. Lo mismo ocurre en el caso contrario, cuando este indicador se encuentra en niveles  bajos con un mercado en tendencia bajista y de repente comienza a subir. Al igual que con cualquier otro oscilador, el momentum puede llegar a brindar señales falsas en un mercado con tendencia clara, por lo que se recomienda más su uso en mercados laterales.
+
+La segunda forma de interpretar este indicador es utilizar  el momentum como un indicador adelantado, basándose en la presunción de que los techos en el mercado se pueden identificar por rápidos incrementos en los precios, mientras que los suelos se identifican fácilmente por caídas rápidas en los precios. No obstante, aunque ésto es lo habitual en realidad, se puede decir que resulta una generalización bastante simple.
+
+Durante los máximos del mercado, se puede observar como el indicador subirá de manera casi vertical hasta caer, creando de esta forma una divergencia con los precios que aún suben o se mueven con tendencia lateral, creándose una divergencia bajista. Por el contrario, en los mínimos del mercado, el momemtum cae con fuerza hasta que revierte su movimiento antes que lo hagan los precios, con lo que se crea una divergencia alcista.
+
+Las divergencias alcistas y bajistas pueden ser utilizadas de este modo como señales para entrar al mercado, tal como se muestra en el siguiente gráfico, en el cual se pudo haber abierto una posición bajista una vez identificada la divergencia.
+
+Se calcula como el valor actual dividido por el valor un número determinado de periodos atrás en el tiempo, multiplicado por 100.
+\begin{gather*}
+\label{eqn:MOM}
+momentum_n = \frac{close_n}{close_{n-t}} * 100 \\
+\end{gather*}
+
+\figura{0.5}{img/forex/momentum.jpg}{Momentum}{momentum}{}
+
+\pagebreak
+
+
+
+
+
+
+

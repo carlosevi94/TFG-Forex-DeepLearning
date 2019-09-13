@@ -1,0 +1,67 @@
+Antes de poder utilizar el sistema, hay que tener en cuenta unas consideraciones previas.
+
+\subsection{Requisitos m'inimos}
+
+\begin{itemize}
+\item CPU: CPU con 4 núcleos o superior.
+\item RAM: 8 GB o superior
+\item SO: Ubuntu 14.04 o superior
+\item Software: El sistema debe tener instalado Python en su versi'on 3.5 o superior, junto a la herramienta Pip3.
+\end{itemize}
+
+\subsection{Entorno}
+
+En la carpeta \emph{tools} del c'odigo del proyecto se encuentra un archivo llamado \textit{requirements.txt}, que contiene las dependencias necesarias para ejecutar el proyecto. Para instalarlas basta con ejecutar en una consola bash de Ubuntu este comando:
+
+
+\begin{lstlisting}
+pip3 install -r requirements.txt
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Instalaci'on de requisitos}
+
+\clearpage
+
+Una vez instaladas las dependencias de Python, hay que instalar Spark. 
+
+En la carpeta \emph{tools/spark} se encuentra un documento redactando siguiendo la sintaxis Markdown en el que se encuentran una guía de instalación que hemos diseñado para que se pueda instalar Spark de forma sencilla.
+
+Además, hay que instalar Docker y Docker Compose. Para ello, es necesario abrir una consola bash y lanzar los siguientes comandos :
+
+\begin{lstlisting}
+sudo apt-get update
+sudo apt install docker.io
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Instalaci'on de docker}
+
+Una vez instalado, se inicializa el servicio con el comando:
+
+\begin{lstlisting}
+sudo systemctl start docker
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Inicializaci'on de docker}
+
+Posteriormente, hay que ejecutar estos comandos para instalar Docker Compose:
+
+\begin{lstlisting}
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Instalaci'on de docker-compose}
+
+
+La instalaci'on se verifica lanzando este comando:
+\begin{lstlisting}
+docker-compose --version
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Verificaci'on de la instalaci'on}
+
+Si todo ha ido bien, devolver'a por pantalla el siguiente mensaje:
+\begin{center}
+\textit{docker-compose version 1.23.1, build b02f1306}
+\end{center}
+
+
+
+
+
+

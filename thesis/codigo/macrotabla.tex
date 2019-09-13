@@ -1,0 +1,18 @@
+%COMANDO PARA INSERTAR UN CUADRO UTILIZANDO EL FORMATO:
+%1---> especificar numero de columnas y su alineacion ejm: 
+	% |r||c|c| r=right, c=center,l=left
+%2---> especificar el caption o titulo de la figura
+%3---> label para hacer referencia a la tabla insertada
+%4---> contenido de tabla separando columnas con & y filas con \\
+\newcommand{\cuadro}[4]{
+		\begin{table}[htb]
+			\centering
+				\begin{tabular}{#1}
+					\hline
+						#4
+					\hline
+				\end{tabular}
+			\caption{#2}
+			\label{#3}
+		\end{table}
+}

@@ -1,0 +1,27 @@
+Big Data es un 'ambito de la inform'atica dif'icil de definir correctamente. Por definici'on literal, hace referencia a sistemas que tienen una gran cantidad de datos, ya sean estructurados, semiestructurados o no estructurados. Aunque esta definici'on es muy ambigua, ¿cu'antos datos son una gran cantidad de datos?,¿hay un m'inimo? 
+
+La deficini'on m'as valida de Big Data que consideramos, es la de Oracle:  Big Data son datos que contienen una mayor variedad y que se presentan en vol'umenes crecientes y a una velocidad superior \cite{bigdata1}. Esta definici'on se conoce como la definici'on de "tres V", refiriéndose a volumen, velocidad y variedad, que son tres necesidades que deben de cubrirse de forma equilibrada.
+
+En este proyecto se ven identificadas las tres V. 
+\begin{itemize}
+\item \textbf{Volumen}: Recibimos datos de dos monedas diferentes con su valor, con una frecuencia de unos 5 segundos. Esto significa, que cada hora obtenemos 720 nuevos datos de cada moneda, 1440 entre ambas. Puede parecer poco, pero este sistema debe ser escalable por si se añaden m'as monedas. Si se añadieran los 79 pares \cite{bigdata2} que existen actualmente, tendr'iamos 56880 datos nuevos cada hora. 
+
+\item \textbf{Velocidad}: Como se ha mencionado anteriormente, las operaciones en bolsa en un mercado intradiario, tienen que ser lo m'as r'apidas posible. Si una operaci'on se realiza m'as tarde de lo necesario para ejecutarse correctamente, las consecuencias pueden desembocar en una p'erdida de dinero no deseada. Por ello, nuestro sistema debe procesar el dato lo m'as r'apido posible, dejando el m'aximo tiempo de maniobrabilidad posible para que la red saque su predicci'on y el usuario tenga todo el tiempo posible para planificar una estrategia.  
+
+\item \textbf{Variedad}: Los datos que utiliza el sistema descrito en esta memoria, no proceden de una única fuente. Esto es debido a que nuestro sistema tiene que ser independiente del resto. Si una página web que suministra datos, o una API, se cae, nuestro sistema no puede caer detr'as. Por ello, usamos diversas fuentes de datos para asegurar el correcto funcionamiento del sistema. 
+
+\end{itemize}
+
+
+
+Estos tres puntos planteados han sido clave para diseñar el sistema y las herramientas a utilizar.
+
+Recoger los datos en tiempo real se conoce como \textbf{data streaming}, y es uno de los pilares fundamentales de este proyecto. Para este proceso, hemos escogido la herramienta Apache Kafka, que act'ua como almacén de datos, y lo hace de forma distribuida. Est'a orientado para que su lanzamiento se haga en un cluster, aunque admite el modo standalone. Est'a basado en un modelo de Productor-Consumidor, un modelo muy simple y eficaz. Se explica en profundidad en la secci'on de tecnolog'ias utilizadas.
+
+Los datos almacenados en Kafka se pueden consultar y utilizar con diferentes herramientas. En este proyecto usamos Apache Spark, con su API PySpark. Nos hemos decantado por Spark, frente al resto de opciones porque Spark es la herramienta m'as rápida de todas. Spark trabaja en procesos distribuidos, con lo que, en caso de tener una carga de trabajo muy alta en un momento puntual, Spark distribuye la carga de trabajo entre todos los n'ucleos, haciendo as'i la tarea mucho m'as rápido que cualquier otra alternativa.
+
+Spark tiene varias librerías nativas para procesar datos en streaming, y una de ellas est'a ideada para el uso de Kafka, dej'andonos as'i una integraci'on entre sistemas muy r'apida y sencilla. Basta con configurar un par de par'ametros y podemos conseguir que Spark se comunique con Kafka perfectamente. Spark puede ser utilizado tanto para producir datos como para consumirlos. En el caso de este proyecto, utilizaremos a Spark exclusivamente como consumidor de datos. 
+
+\clearpage
+
+

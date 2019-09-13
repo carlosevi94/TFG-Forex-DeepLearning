@@ -1,0 +1,66 @@
+Los casos de uso que recoge la aplicaci'on se detallan a continuaci'on:
+
+\cuadro{|c|p{0.8\linewidth}|}{Caso de uso 001}{caso_de_uso_001}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{CU-001} & \textbf{Visualizaci'on de predicciones}
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a comportarse tal como se describe en el siguiente caso de uso cuando el usuario desee ver las predicciones generadas por el sistema.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\item RF-003
+\end{itemize}
+\\ \hline \textbf{Precondici'on} & El sistema ha entrenado correctamente y existen resultados en la base de datos.
+\\ \hline \textbf{Secuencia normal}  &
+\begin{enumerate}
+\item El usuario accede a la interfaz web.
+\item El sistema renderiza una gráfica con los valores de la divisa EUR/USD para la red recurrente como valores por defecto.
+\item El usuario, mediante el men'u desplegable, elije una divisa.
+\item El sistema renderiza una nueva gŕafica para la divisa seleccionada.
+\item El usuario, mediante las pestañas, cambia de tipo red.
+\item El sistema renderiza una nueva gr'afica para el tipo de red seleccionado.
+\end{enumerate}    
+\\}
+\clearpage
+
+\cuadro{|c|p{0.8\linewidth}|}{Caso de uso 002}{caso_de_uso_002}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{CU-002} & \textbf{Visualizaci'on de metadatos}
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a comportarse tal como se describe en el siguiente caso de uso cuando el usuario desee ver los metadatos.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\item RF-005
+\end{itemize}
+\\ \hline \textbf{Precondici'on} & El sistema ha entrenado correctamente y existen metadatos en la base de datos.
+\\ \hline \textbf{Secuencia normal}  &
+\begin{enumerate}
+\item El usuario accede a la interfaz web.
+\item El sistema renderiza una tabla con los metadatos de la divisa EUR/USD para la red recurrente como valores por defecto.
+\item El usuario, mediante el men'u desplegable, elije una divisa.
+\item El sistema renderiza una nueva tabla para la divisa seleccionada.
+\item El usuario, mediante las pestañas, cambia de tipo red.
+\item El sistema renderiza una nueva tabla para el tipo de red seleccionado.
+\end{enumerate}    
+\\}
+\clearpage
+
+
+\cuadro{|c|p{0.8\linewidth}|}{Caso de uso 003}{caso_de_uso_003}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{CU-003} & \textbf{Interacci'on con la gr'afica}
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a comportarse tal como se describe en el siguiente caso de uso cuando el usuario desee interactuar con la gr'afica de resultados.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\item RF-005
+\item RI-003
+\end{itemize}
+\\ \hline \textbf{Precondici'on} & El sistema ha entrenado correctamente y existen resultados en la base de datos.
+\\ \hline \textbf{Secuencia normal}  &
+\begin{enumerate}
+\item El usuario accede a la interfaz web.
+\item El sistema renderiza una tabla con los metadatos de la divisa EUR/USD para la red recurrente como valores por defecto.
+\item El usuario accede a la interfaz web.
+\item El sistema renderiza una tabla con los metadatos de la divisa EUR/USD para la red recurrente como valores por defecto.
+\item El usuario, mediante el menú en la esquina superior derecha de la gráfica, aumenta el zoom de la m'isma.
+\item El usuario, mediante el menú en la esquina superior derecha de la gráfica, disminuye el zoom de la misma.
+\end{enumerate}    
+\\}
+\clearpage

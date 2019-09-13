@@ -1,0 +1,191 @@
+
+\figura{0.5}{img/disenio_sistema/spark_logo.png}{Logo de Apache Spark}{spark_logo}{}
+
+Apache Spark es un sistema de computaci'on en cl'uster orientado a la velocidad y de prop'osito general escrito en \textbf{Scala}. Proporciona una API de alto nivel en \textbf{Java}, \textbf{Scala}, \textbf{Python} y \textbf{R} y un motor optimizado que admite grafos de ejecuci'on generales. Incluye un amplio conjunto de herramientas de alto nivel que incluyen \textbf{Spark SQL} para consultas SQL y procesamiento de datos estructurado, \textbf{MLlib} para aprendizaje autom'atico, \textbf{GraphX} para procesamiento de gr'aficos y \textbf{Spark Streaming}.\cite{spark1}
+
+Las características principales de Spark son: 
+\begin{itemize}
+\item \textbf{Alta velocidad}. Spark ofrece gran velocidad en el tratamiento de grandes volúmenes de datos, siendo cien veces más rápido si los datos están en memoria, y diez veces más rápido si los datos están en disco. 
+
+\item Más rápido que MapReduce. Cuando el Big Data empieza a surgir nace MapReduce, un algoritmo que permite tratar gran volumen de datos de forma rápida. Con el paso del tiempo, este algoritmo empieza a dejar de ser eficiente por sí solo, debido a que el volumen de datos crece muy rápido. Spark tiene implementado su propio MapReduce y es hasta cien veces más rápido que el algoritmo original.
+
+\item Dinámico, gracias al paralelismo que ofrece spark y a sus ochenta operadores de alto nivel disponibles.
+
+\item \textbf{Computación directamente en memoria}. El incremento de velocidad es posible gracias al procesamiento in-memory que está implementado.
+
+\item Reusabilidad. Spark permite lanzar querys ad-hoc para procesamiento en streaming, y además está preparado para batch-processing, lo que permite que se pueda reutilizar código fácilmente.
+
+\item \textbf{Tolerancia a fallos}. El core de Spark ofrece una característica llamada abstraction-RDD. Ésta permite que una orden enviada a cualquier worker que haya en el cluster pueda ser reenviada a otro worker sin coste alguno, en caso de que alg'un nodo falle.  
+
+\item \textbf{Integración total con Hadoop}. A diferencia de otros frameworks, Spark está totalmente integrado con Hadoop, pudiendo así controlar toda la potencia de Hadoop de forma mucho más simple y sin posibles errores. 
+
+\item \textbf{Procesamiento en tiempo real}. Hadoop no permite procesamiento en tiempo real, lo que es un gran problema a la hora de tratar con una gran cantidad de datos en tiempo real, debido a que Hadoop solo puede hacer operaciones con datos que ya están almacenados. Para solucionarlo, Spark sí implementa operaciones en tiempo real, que posteriormente pueden ser almacenadas en Hadoop.
+
+\item \textbf{Lazy Evaluation}. Esta es una característica muy interesante de Spark, que permite planificar muchas operaciones y transformaciones que no se ejecutan línea a línea, sino que Spark las agrupa para reutilizar procesamiento. La veremos en detalle más adelante. 
+
+\item Soporte a diferentes lenguajes, como Scala, Python, Java y R. 
+\end{itemize}
+
+
+\subsection{Fundamentos de Spark}
+
+Spark fué diseñado para trabajar en cluster, debido a características novedosas como el planificador de procesos. No obstante, está adaptado para poder funcionar en una sola máquina sin perder eficiencia.
+
+Además, Spark cuenta con una serie de elementos y características que son cruciales para entender su funcionamiento.
+
+\subsubsection{Elementos}
+
+Los elementos que componen a Spark son:
+
+\begin{itemize}
+
+
+\item \textbf{Jobs}. Su traducción directa al castellano  es trabajo, y hace referencia a cualquier operación que tenga que hacer. Unos ejemplos pueden ser leer una entrada de datos de HDFS, o hacer una agrupación de datos.
+
+\item \textbf{Stages}. Los jobs están divididos en Stages, los cuales están clasificados en dos tipos: Map y Reduce. Estos stages se calculan en base a los límites computacionales de cada máquina, para que todas las operaciones se puedan realizar sin perder datos. Suelen crearse muchos stages para un job.
+
+\item \textbf{Task}. Cada Stage, está dividida en Task. Existe una task por cada partition de datos, y se ejecutan en cada partición de datos de un mismo executor.
+
+\item \textbf{Partition}. Es una separación lógica de los datos. Fuera del ámbito de Spark, una Partition es lo mismo que un Chunk o un Split de datos.
+
+\item \textbf{Executor}. Es el proceso del sistema que se encarga de ejecutar las tareas. En una misma máquina puede haber varios executors.
+
+\item \textbf{Driver}. Es el proceso del sistema responsable de ejecutar el Job. Este proceso hace de cerebro en Spark, es el encargado de crear todas las Stages y Task, y enviarlas a los ejecutores que tiene Disponible. Solo hay un proceso Driver por cada sesión de Spark.
+
+\item \textbf{Master}. Es la máquina que está ejecutando el proceso driver. Como Spark puede ejecutarse en una sola máquina, esta máquina puede ser Master y Worker al mismo tiempo.
+ 
+\item \textbf{Worker}. Es una máquina que tiene procesos solamente del tipo Executor. 
+
+\end{itemize}
+
+\clearpage
+
+
+\subsubsection{Caracter'isticas}
+
+Una vez vistos los elementos de Spark, se debe hablar de las características sobre las cuales se asienta Spark. Hay que destacar dos, el \textbf{planificador} y su \textbf{modo de ejecución}, aunque también haremos mención de una característica algo menos importante, pero que siempre está presente en el desarrollo con Spark, la \textbf{sesión}.
+
+\begin{itemize}
+
+\item \textbf{Planificador de Tareas}. 
+
+Como se ha mencionado anteriormente, Spark se caracteriza por su potencia y velocidad. Esta velocidad surge de la idea de crear una especie de cola de tareas antes de la ejecución de todas ellas, con la finalidad de ver si en tiempo real se puede optimizar alguna operación. 
+
+Se crea entonces el planificador DAG, que consiste en un Grafico Acíclico Directo que se encarga de enumerar, agrupar y priorizar todas las tareas que se ejecutan en Spark.
+
+\figura{1}{img/architec/spark_dag.png}{Ejemplo de un DAG de Spark}{spark_dag}{}
+
+En la figura \ref{spark_dag} se muestra un ejemplo de cómo Spark realiza un Job. En este caso, va a hacer una operación llamada Collect, la cual necesita que se realicen varios Maps and Reduces previos. Al tener la operación planificada, puede hacer las tareas de forma paralela y continua, en vez de realizarlas todas una detrás de otra, ralentizando el proceso.
+
+
+\item \textbf{Lazy Evaluation}. 
+
+La Lazy Evaluation, o evaluación perezosa en castellano, es una estrategia de evaluación de funcionas que retrasa el cálculo de una operación hasta que su valor sea necesario por otra operación. Ésto evita repetir la evaluación en caso de ser necesaria en posteriores ocasiones. Dicha estrategia supone una enorme reducción en el tiempo de ejecución de ciertas funciones de forma exponencial, comparado con la evaluación de funciones tradicional. 
+
+\clearpage
+
+\item \textbf{Spark Session}. 
+
+El core de Spark está siempre funcionando en una máquina donde está instalado, pero no se puede acceder a él directamente. Para realizar operaciones en Spark se ha diseñado un sistema que funciona por sesiones en el cual obligatorio crear una sesion para conectarse al core de Spark. En una misma máquina pueden crearse diferentes sesiones de Spark para diferentes cometidos. 
+
+Por ejemplo, si una máquina \textit{A} crea una sesion de Spark y ejecuta un código para que realice ciertas transformaciones en los datos y, a su vez, otra máquina diferente se conecta a la sesión que ha creado la máquina \textit{A}, esta nueva máquina puede acceder a los datos ya procesados por ella. Todo ello es muy interesante a la hora de trabajar con Data Lakes. 
+
+
+\end{itemize}
+
+
+
+
+
+\subsection{C'omo funciona Spark}
+
+Una vez explicados los elementos y características fundamentales de Spark, se pasa a exponer cómo funciona. El funcionamiento interno de Spark es muy complejo y extenso, por lo que veremos su funcionamiento en alto nivel.
+
+
+Como se ha observado anteriormente, en los elementos, Spark separa sus objetivos en unidades más pequeñas para poder repartirlas por los workers y poder ejecutar tareas de forma paralela.
+
+Su funcionamiento está basado en dos tipos de operaciones principales: \textbf{acciones} y \textbf{transformaciones}. 
+
+Una \textbf{transformación} es una operación en la cual se realizan c'alculos y modificaciones sobre los datos originales. Por ejemplo, crear una nueva columna, realizar una suma de los valores de varias columnas, modificar una columna que contiene strings, etc. Estas transformaciones no se hacen directamente gracias a la Lazy Evaluation y éstas se pueden dividr en otros dos grupos, siendo éstos:
+
+\begin{itemize}
+\item \textbf{Narrow transformation}. Son aquellas en las que los datos que se necesitan tratar están en la misma partition y no es necesario realizar una mezcla de dichos datos para obtenerlos todos. Por ejemplo, las funciones filter() o map().
+
+
+\item \textbf{Wide transformation}. Son aquellas que, por el contrario, los datos que necesitan tratar están en partitions diferentes por la lógica de la aplicación. Es necesario mezclar dichas partitions para agrupar los datos necesarios. Por ejemplo, groupByKey() o reduceByKey().
+
+
+
+
+\end{itemize}
+
+\figura{0.65}{img/architec/spark_transfor.png}{Tipos de transformaciones en Spark}{spark_transfor}{}
+
+\clearpage
+
+
+
+Una \textbf{acción} hace referencia a las acciones propiamente dichas que se pueden realizar con un Dataset, como, por ejemplo, mostrar algo por pantalla, o guardar los datos en disco.
+
+
+Spark en su planificación recoge todas las transformaciones que se realizan entre acciones y prepara como las va a ejecutar. Aunque la ejecución del DAG es paralela, sus transformaciones se aplican siempre de forma ordenada, para no interferir en el resultado final. 
+
+
+Cuando Spark tiene un DAG preparado para su ejecución, consulta los recursos que tiene disponibles, los cuales se encuentran en los diferentes workers que tiene asociados. Pese a que Spark permite que cada worker tenga una configuración hardware diferente, se recomienda que todos tengan los mismos recursos. Cuando nos referimos a recursos, principalmente nos referimos al número de núcleos y a la memoria RAM disponible.
+
+
+Las ejecuciones se realizan por partition, en la que están los datos con los que estamos tratando. El usuario puede definir el número de partition que quiere o la clave para almacenar los datos, pero no el contenido de cada partition. Cuando Spark tiene que ejecutar transformaciones de tipo Wide, se genera la memoria de tipo \textbf{Shuffle}. En la figura \ref{spark_workflow} se puede observar un ejemplo de flujo en el que en cada una de las stages se ejecutan operaciones de diferentes tipos, tratándose los datos de forma individual para después moverse entre particiones para dar un resultado.
+
+
+
+
+\figura{0.85}{img/architec/spark_worklow.png}{Operaciones en Spark}{spark_workflow}{}
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\subsection{Modulos de Spark}
+
+Apache Spark está dividido en diferentes módulos que separan la funcionalidad base de la funcionalidad extra.
+Toda la funcionalidad base está en el m'odulo \textbf{Core}. Está totalmente escrita en Scala y en ella se realizan todos los procesos que planifica Spark.
+
+\figura{0.75}{img/architec/spark_stack_2.png}{M'odulos de Spark}{spark_stack}{}
+
+
+Como se puede ver en la figura \ref{spark_stack}, el resto de m'odulos están divididos en \textbf{Spark SQL}, para consultas y transformaciones de datos; \textbf{Spark Streaming}, para el procesamiento de datos en tiempo real; \textbf{Spark MLlib}, una librería con algoritmos de aprendizaje automático; y \textbf{GraphX}, para manejar grafos. Además de los mencionados, de cada uno de estos cuatro módulos dependen diferentes librer'ias más espec'ificas. 
+
+A continuación, se describirán los paquetes utilizados en este proyecto.
+
+
+\subsubsection{Spark SQL}
+Spark SQL es un m'odulo de Spark para el procesamiento de datos estructurados. A diferencia de la API b'asica de \textbf{Spark RDD}, las interfaces proporcionadas por Spark SQL proporcionan a Spark m'as informaci'on sobre la estructura de los datos y el c'alculo que se realiza. Internamente, Spark SQL utiliza esta informaci'on adicional para realizar optimizaciones adicionales. Existen varias formas de interactuar con Spark SQL, incluyendo SQL y la \textbf{API Dataset}. Al calcular un resultado, se utiliza el mismo motor de ejecuci'on, independientemente de la API que se est'e utilizando para expresar el c'alculo. Esta unificaci'on significa que los desarrolladores pueden cambiar f'acilmente entre diferentes API en funci'on de lo que proporcionan, la forma m'as natural de expresar una transformaci'on determinada.
+
+Un uso de Spark SQL es ejecutar consultas SQL, aunque tambi'en se puede utilizar para leer datos de una instalaci'on existente de \textbf{Hive}.
+Al ejecutar SQL desde otro lenguaje de programaci'on, los resultados se mostrar'an como un \textbf{DataSet/DataFrame}, y, además, puede interactuar con la interfaz SQL utilizando la l'inea de comandos o sobre\textbf{ JDBC/ODBC}.
+
+
+
+\subsubsection{DataFrame}
+Un DataFrame es un conjunto de datos organizado en columnas con nombre. Conceptualmente es equivalente a una tabla en una base de datos relacional o un marco de datos en R/Python, pero con mejores optimizaciones. Los DataFrames se pueden construir a partir de una amplia gama de fuentes, tales como: archivos de datos estructurados, tablas en Hive, bases de datos externas o RDD existentes. El paquete DataFrame pertenece al módulo de Spark SQL. La API de DataFrame est'a disponible en Scala, Java, Python y R.\cite{spark2}
+
+\subsubsection{Spark Structured Streaming}
+Spark Structured Streaming es un motor de procesamiento de flujos escalable y tolerante a fallos construido en el motor Spark SQL, que procesa datos estructurados por un esquema. Esta librería pertenece al módulo Spark Streaming. 
+
+Spark Structured Streaming lo controla el motor Spark SQL, el cual se encargar'a de ejecutarlo de forma incremental y contínua, y actualizar'a el resultado final a medida que contin'uen llegando los datos de transmisi'on. 
+
+Esta librería integra el paquete DataFrame, por lo que se pueden expresar agregaciones de transmisi'on, ventanas de eventos, combinaciones de flujo por lote, etc.
+
+Finalmente, el sistema ofrece garant'ias de tolerancia a fallos de una sola vez de extremo a extremo a través de puntos de control y registros de escritura anticipada. En resumen, Structured Streaming ofrece un procesamiento r'apido, escalable, tolerante a fallos y de extremo a extremo sin que el usuario tenga que razonar acerca de la transmisi'on.\cite{spark3}
+
+
+
+\clearpage

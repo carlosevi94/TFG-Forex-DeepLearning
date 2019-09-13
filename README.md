@@ -1,4 +1,4 @@
-## Repositorio de código para el Trabajo de Fin de Grado "Estudio del mercado de divisas mediante algoritmos Deep Learning"
+## Trabajo de Fin de Grado "Estudio del mercado de divisas mediante algoritmos Deep Learning"
 
 Proyecto realizado por:
 

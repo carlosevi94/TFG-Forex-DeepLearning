@@ -1,0 +1,138 @@
+Una vez que tenemos el entorno preparado, podemos empezar la instalaci'on e implantaci'on del sistema. 
+
+Para arrancar el sistema hay que seguir las siguientes instrucciones:
+
+\begin{enumerate}
+
+\item \textbf{Iniciar Kafka y Zookeeper}.\\
+Apache Kafka necesita de una herramienta adicional de Apache para funcionar correctamente, Apache Zookeeper. Esta herramienta no aporta funcionalidad a este proyecto debido a que su funci'on es configurar diferentes productos Big Data de apache en un mismo sistema. En nuestro sistema Kafka est'a separado en un Docker, pero es igualmente necesario utilizarlo para que Kafka conozca los recursos que el sistema tiene disponible.
+
+Para lanzarlo, basta con ejecutar en una consola bash.
+
+\begin{lstlisting}
+cd /tools/kafka
+docker-compose up -d
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Lanzamiento de Kafka}
+
+\item \textbf{Crear topics en Kafka}.\\
+Una vez inicializado Kafka, hay que lanzar unos comandos para crear los topics en los que se van a almacenar los datos. 
+
+
+VAR es una variable que se ha de sustituir por la IP que tenga asociada el contenedor de kafka. Esta IP se puede obtener lanzando el comando \textit{docker inspect kafka \textunderscore cont}. 
+
+\begin{lstlisting}
+docker-compose exec kafka kafka-topics --create --topic usd_eur --partitions 1 --replication-factor 1 --if-not-exists --zookeeper VAR:2181
+docker-compose exec kafka kafka-topics --create --topic btc_usd --partitions 1 --replication-factor 1 --if-not-exists --zookeeper VAR:2181
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Creaci'on de topics}
+
+
+\item \textbf{Productores de datos}.\\
+Para lanzar los productores de datos es necesario abrir dos consolas bash.
+
+En la primera, se tienen que ejecutar los siguientes comandos:
+\begin{lstlisting}
+cd producer
+python3 producer_BTC_USD.py 
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Lanzamiento de scraper BTC/USD}
+
+En la segunda, se tienen que ejecutar los siguientes comandos:
+\begin{lstlisting}
+cd producer
+python3 producer_EUR_USD.py
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Lanzamiento de scraper EUR/USD}
+
+
+\item \textbf{Iniciar MySQL}.\\
+Se ha incluido una imagen de Docker que contiene una base de datos MySQL con un script que crea la base de datos y las tablas necesarias.
+
+Para iniciarlo, hay que abrir una consola bash y ejecutar los siguientes comandos.  
+
+\begin{lstlisting}
+cd tools/front_end/
+docker build -t "mysql_dash_tfg" .
+docker run -d --rm --name mysql_dash_cont mysql_dash_tfg     
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Lanzamiento de la base de datos}
+
+\item \textbf{Archivos de configuraci'on}.\\
+Una vez lanzados todos los sistemas, hay que modificar sus archivos de configuraci'on. A partir de este paso, cada script de los que se van a lanzar tiene un archivo de configuraci'on asociado en formato json. Hay que modificar las IPs de todos los sistemas, que se pueden consultar ejecutando en una consola \textit{docker inspect} sobre los contenedores de Docker. 
+
+
+
+\item \textbf{Consumidores de datos}.\\
+Los consumidores de datos se han diseñado para que se puedan lanzar de forma sencilla para el usuario. Necesitamos abrir dos consolas bash, en la primera se ejecutarán estos comandos:
+
+\begin{lstlisting}
+cd spark_scripts
+python3 spark_consumer.py config_usd   
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Lanzamiento del consumer EUR/USD}
+
+Y en la segunda consola, se ejecutarán los siguientes:
+
+\begin{lstlisting}
+cd spark_scripts
+python3 spark_consumer.py config_btc   
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Lanzamiento del consumer BTC/USD}
+
+\item \textbf{Redes neuronales}.\\
+Las redes est'an preparadas para que se lancen con un solo comando y se dejen funcionando.
+
+Se necesitan 4 consolas bash, en cada una hay que ejecutar los siguientes comandos.
+
+\begin{enumerate}
+
+\item Red Neuronal Recurrente con la moneda EUR/USD
+\begin{lstlisting}
+cd neural_network
+python3 rnn.py --currency=EURUSD --inizalize
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Inicializaci'on de la red recurrente EUR/USD}
+
+\item Red Neuronal Convolucional con la moneda EUR/USD
+\begin{lstlisting}
+cd neural_network
+python3 cnn.py --currency=EURUSD --inizalize
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Inicializaci'on de la red convolucional EUR/USD}
+
+\item Red Neuronal Recurrente con la moneda BTC/USD
+\begin{lstlisting}
+cd neural_network
+python3 rnn.py --currency=BTCUSD --inizalize
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Inicializaci'on de la red recurrente BTC/USD}
+
+\item Red Neuronal Convolucional con la moneda BTC/USD
+\begin{lstlisting}
+cd neural_network
+python3 cnn.py --currency=BTCUSD --inizalize
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Inicializaci'on de la red convolucional BTC/USD}
+
+\end{enumerate}
+
+
+\item \textbf{Aplicaci'on front-end}.\\
+Finalmente hay que lanzar el front-end que se ha desarrollado para visualizar los datos.
+
+Hay que abrir una consola bash y ejecutar:
+\begin{lstlisting}
+cd front_end/webapp
+python3 app.py
+\end{lstlisting}
+\addcontentsline{lol}{lstlisting}{\protect\numberline{\thelstlisting}Lanzamiento de Dash}
+
+
+
+
+
+\end{enumerate}
+
+
+Si se han seguido estos pasos correctamente, el sistema estar'a funcionando correctamente. Para comprobarlo, entramos en \href{https://localhost:8050}{\emph{https://localhost:8050}} y veremos la web como se ve en la figura \ref{dash1}.

@@ -1,0 +1,80 @@
+% !TEX encoding = UTF-8 Unicode
+\documentclass[hidelinks]{pclass}
+\usepackage[utf8]{inputenc} % para linux y mac 
+\setcounter{secnumdepth}{6}
+%\usepackage[latin1]{inputenc} % para windows
+  
+
+%DIFERENTES TIPOS DE LETRA
+%\usepackage{palatino}
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage[table,xcdraw]{xcolor} 
+\usepackage{eurosym}
+\usepackage{multirow}
+\usepackage{cite}
+\usepackage{dirtytalk}
+\usepackage{amsmath}	
+
+
+\begin{document}
+\tipo{Grado}   % Grado o M\'aster
+\titulopro{Estudio del mercado de divisas mediante algoritmos Deep Learning}
+\tutor{Jorge García Gutierrez}
+\departamento{Lenguajes y Sistemas Informáticos}
+%\autores{Nombre 1}{Nombre 2}  % Dos autores
+\autores{Carlos Sevilla Barceló}{Fermín Fernández Borrego}   % Un autor
+\dia{06/2019}
+\titulacion{Grado en Ingeniería Informática - Ingeniería del Software}
+
+\hacerportada
+
+	\input{tocdef}
+\frontmatter
+        
+    \input{resumen}
+    \input{abstract}
+    \input{agradecimientos}	
+
+	\tableofcontents % Índice de contenidos
+ 	\listoftables % Índice de cuadros
+ 	\listoffigures % Índice de figuras
+ 	\lstlistoflistings %Índice de códigos
+
+ \mainmatter  
+    
+     \input{Capitulos/1_Introduccion/introduccion}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/2_Estudio_teorico/estudio}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/4_Disenio_del_sistema/disenio}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/5_Tecnologias/tecnologias}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/3_Analisis_del_sistema/analisis}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/6_Planificacion/planificacion}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/7_Manual/manual}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/8_Pruebas/pruebas}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/conclusiones}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/desarrollo_futuro}
+     \newpage\null\thispagestyle{empty}\newpage
+     \input{Capitulos/glosario}
+     \newpage\null\thispagestyle{empty}\newpage
+     
+
+
+\backmatter
+
+% \input{Capitulos/apendices}
+%\bibliographystyle{sousa5}
+
+\bibliographystyle{pfcbibstyle}
+
+\bibliography{pfcbib}
+
+\end{document}

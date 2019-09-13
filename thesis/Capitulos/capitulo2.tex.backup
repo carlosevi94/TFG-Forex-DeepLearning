@@ -1,0 +1,79 @@
+% !TEX root = ../proyect.tex
+
+\chapter{Partes y plantillas}
+
+\section{Partes}\label{sec:partes}
+
+Todas las tesis deberán constar de las siguientes partes 
+\begin{itemize}
+ \item Portada (seg\'un formato oficial). No debe incluir n\'umero de p\'agina. Debe incluir:
+ \begin{itemize}
+ \item Sello de la universidad de Sevilla a dos tintas
+ \item ESCUELA T\'ECNICA SUPERIOR DE INGENIER\'IA INFORM\'ATICA
+ \item Trabajo fin de Grado
+ \item \emph{Denominaci\'on del Grado}
+ \item Realizado por: \emph{Nombre y apellidos del estudiante}
+ \item Dirigido por: \emph{Nombre y apellidos del tutor o tutores}
+ \item Departamento \emph{Nombre del departamento en el que se lee el TfG}
+ \item Sevilla, \emph{Mes y año de la convocatoria de entrega}
+ \end{itemize}
+ \item Resumen en castellano (m\'aximo una hoja)
+ \item Abstract (resumen en ingl\'es, obligatorio para el caso de las memorias escritas en ingl\'es, opcional
+ para las escritas en castellano)
+ \item Agradecimientos (opcional)
+ \item \'Indice general (contenido de la tesis, con menci\'on de las partes en que está dividida)
+ \item \'Indice de figuras (opcional)
+ \item \'Indice de cuadros (mal llamados en general, tablas) (opcional)
+ \item \'Indice de c\'odigo o algoritmos (opcional). Estas partes no se numeran o se numeran con n\'umeros romanos.
+ \item Cuerpo de la memoria, dividida en cap{\'\i}tulos.
+ \item Bibliograf{\'\i}a: se deben documentar las fuentes bibliográficas utilizadas en un formato de citación estándar. \footnote{JuanMa sugiere APA 2009, pero a m{\'\i} no me acaba de convencer: es americana y de Psicolog{\'\i}a. Si quer\'eis incluyo unas normas m{\'\i}nimbas usando un formato en castellano}
+ \item  Índice alfabético o glosario (Lista ordenada de los conceptos, los nombres propios, etc.; 
+ que aparecen en la memoria, con las indicaciones necesarias para su localización)(opcional)
+ \item Ap'endices: Si la memoria contiene alg\'un art{\'\i}culo de investigaci\'on o similar, este se incluir\'a en los Ap\'endices. Es necesario incluir en la página anterior una hoja con la citación bibliográfica. En esta citación, el título del artículo se debe enlazar con la página web de la revista en la que aparecen el resumen o abstract y el acceso al texto completo. Los ap\'endices pueden llevar su propia numeraci\'on independiente.
+ \end{itemize}
+
+
+\section{Impresión}\label{sec:impresion} 
+La entrega del memoria y en su caso, el dep\'osito en biblioteca, se hacen en formato electr\'onico. Debido a ello, la memoria se presentará \emph{a una cara}. Si se requiriera
+por alg\'un motivo la impresi\'on de la misma, se recomienda vivamente preparar la memoria adecuadamente para su impresi\'on. Algunas sugerencias:
+\begin{itemize}
+ \item Dejar una p\'agina en blanco cuando sea necesario para que los cap{\'\i}tulos comiencen siempre en p\'agina impar (derecha)
+ \item Ajustar los m\'argentes para que el exterior sea ligeramente m\'as grande que el interior.
+\end{itemize}
+
+\section{Plantillas}\label{sec:plantillas} 
+
+
+Se encuentra disponible una plantilla LaTex en \url{https://tfc.eii.us.es/TfG/AQUI/DIRECCION-DE-LA-PLANTILLA}. \footnote{Sería una buena idea preparar plantillas en OpenOffice y Word}
+
+Nota: Las plantillas se proporcionan como ejemplo, las condiciones obligatorias son las que constan en este procedimiento.
+
+\chapter{Ejemplos}\label{cap2} 
+					
+\section{Manejo de la bibliograf{\'\i}a}
+Ejemplos de referencia a la bibliograf{\'\i}ia citando un libro~\cite{desousa} y un art{\'\i}culo~\cite{guiatitlesec}. Se recuerda que son campos obligatorios
+en todos los {\'\i}tems de la bibliograf{\'\i}a: autor(es), t{\'\i}tulo del libro o art{\'\i}culo, editorial (en su caso, tambi\'en revista) y a{\~n}o de publicaci\'on.
+En el caso de p\'aginas web, es obligatoria la fecha de la \'ultima consulta. En general, la bibliograf{\'\i}a debe ayudar al lector a encontrar f\'acilmente los {\'\i}tema citados.
+
+\section{C\'odigo}
+
+\codigofuente{TeX}{Macro para insertar un cuadro}{codigo/macrotabla}
+
+\section{Im\'agenes}
+
+Este es un ejemplo de inclusi\'on de figura en el texto. V\'ease la figura~\ref{fig:knuth}. figuras y cuadros se colocar\'an preferentemente tras el p\'arraso en el que
+son llamados por primera vez. Si no cupieran, se colocar\'an (en orden de preferencia):
+\begin{itemize}
+ \item Al final de la p\'agina en que se llaman
+ \item Al principio de la siguiente p\'agina
+ \item Al final del cap{\'\i}tulo
+\end{itemize}
+siempre respetando el orden de aparici\'on en el texto.
+
+\figura{0.5}{img/knuth}{Im\'agen de Knuth}{fig:knuth}{}
+
+\section{Cuadros (mal llamados Tablas)}
+
+Este es un ejemplo de inclusi\'on de cuadro en el texto. V\'ease el cuadro~\ref{tab:prueba}
+
+\cuadro{|r||c|c|}{Cuadro de prueba}{tab:prueba}{elemento & elemento & elemento \\ elemento & elemento & elemento \\}

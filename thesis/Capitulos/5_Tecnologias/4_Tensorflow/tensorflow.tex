@@ -1,0 +1,44 @@
+\figura{0.5}{img/architec/tensorflow_logo.png}{Logo de Tensorflow}{tf_logo}{}
+
+
+TensorFlow es una librer'ia de c'odigo abierto desarrollada por Google para el desarrollo de redes neuronales en el campo del aprendizaje profundo.
+
+La idea en la que se basa TensorFlow es la del flujo de informaci'on por un grafo en el que los nodos representan operaciones y las aristas son los datos que viaja entre los nodos, a esto 'ultimo lo llamamos tensor.
+
+\subsection{Grafos}
+Un grafo de TensorFlow se puede definir como un conjunto de operaciones interconectadas entre las que fluye informaci'on que se puede representar como un grafo. Un grafo está formado por dos partes:
+
+\figura{0.5}{img/tecnologias/grafo}{Esquema de una operación representada como un grafo}{grafo_tensorflow}{}
+
+
+\begin{itemize}
+\item \textbf{Operaciones}: Representadas por nodos son operaciones matem'aticas que reciben y producen tensores.
+\item \textbf{Tensores}: Son las aristas del grafo. Representan la informaci'on que fluye por el grafo entre funciones.
+\end{itemize}
+
+
+Por ejemplo, una multiplicaci'on de escalares se representar'ia como un nodo con dos aristas de entrada y una arista de salida.
+Una de las ventajas m'as importantes de esta forma de ejecuci'on de operaciones es identificar aquellas que se pueden ejecutar simultáneamente.
+En la figura \ref{grafo_tensorflow} podemos ver una representación de dos operaciones como grafos.
+
+
+\subsection{Tensor}
+El tensor es el objeto principal de TensorFlow. Un tensor es un conjunto de valores ordenados en un array n-dimensional. Un tensor se caracteriza por el número de dimensiones o rank y el tamaño de cada dimensi'on o shape.
+
+Un programa en TensorFlow primero construye el grafo con tensores detallando los cálculos a realizar y posteriormente ejecuta el grafo para extraer los resultados deseados. La figura \ref{tensor_ejemplo} ilustra el concepto de tensor.
+
+\figura{0.5}{img/architec/tensor_tensorflow.png}{Ejemplo de tensor}{tensor_ejemplo}{}
+
+\subsection{Keras}
+Tensorflow ha publicado recientemente su versión 2.0, la cual incluye multitud de cambios destacables, tanto en t'erminos de rendimiento como de funcionalidad.
+
+Una de las mejoras más importantes ha sido la de la integración total de la librer'ia \textbf{Keras} en su núcleo. Esta librería, escrita por Francois Chollet, facilita mucho las labores de desarrollo de las redes neuronales, debido a que incluyen capas completas de las redes totalmente funcionales. Además, el uso de estas capas es muy sencillo para el desarrollador, ya que basta con importar la capa que deseas utilizar y pasarle por parámetro las características que necesitas en la misma.
+
+
+Esta librería abstrae al usuario del uso de Grafos y Tensores, debido a que todas las capas ya tienen implementada la lógica propia de capa, junto a los tensores necesarios. Además, todas las capas están optimizadas para obtener el máximo rendimiento en ejecución.
+
+Ésto permite que el desarrollo de la red neuronal del presente proyecto sea una labor más ágil, pudiendo probar diferentes arquitecturas posibles en un tiempo reducido.
+
+
+
+\clearpage

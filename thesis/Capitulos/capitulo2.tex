@@ -1,0 +1,120 @@
+% !TEX root = ../proyect.tex
+
+\chapter{Partes y plantillas}
+
+\section{Partes}\label{sec:partes}
+
+Todas las memorias de Trabajo fin de Grado deberán constar de las siguientes partes 
+\begin{itemize}
+ \item Portada (seg\'un formato oficial). No debe incluir n\'umero de p\'agina. Debe incluir:
+ \begin{itemize}
+ \item Sello de la universidad de Sevilla a dos tintas
+ \item ESCUELA T\'ECNICA SUPERIOR DE INGENIER\'IA INFORM\'ATICA
+ \item Trabajo fin de Grado
+ \item \emph{Denominaci\'on del Grado}
+ \item Realizado por: \emph{Nombre y apellidos del estudiante}
+ \item Dirigido por: \emph{Nombre y apellidos del tutor o tutores}
+ \item Departamento \emph{Nombre del departamento en el que se lee el TfG}
+ \item Sevilla, \emph{Mes y año de la convocatoria de entrega}
+ \end{itemize}
+  \item Preliminares: las p\'aginas no se numeran o se numeran con n\'umeros romanos.
+ \begin{itemize} 
+\item Resumen en castellano (m\'aximo una hoja)
+ \item Abstract (resumen en ingl\'es, obligatorio para el caso de las memorias escritas en ingl\'es, opcional
+ para las escritas en castellano)
+ \item Agradecimientos (opcional)
+ \item \'Indice general (contenido de la memoria, con menci\'on de las partes en que está dividida)
+ \item \'Indice de figuras (opcional)
+ \item \'Indice de cuadros (mal llamados en general, tablas) (opcional)
+ \item \'Indice de c\'odigo o algoritmos (opcional). 
+ \end{itemize}
+ \item Cuerpo de la memoria, dividida en cap{\'\i}tulos. El contenido de la memoria ha de incluir 
+los elementos característicos de un proyecto de ingeniería o de un estudio o trabajo en el ámbito de una investigación, 
+los cuales, en el sentido más amplio, son:
+ \begin{itemize}
+ \item Definición de objetivos.
+\item Análisis de antecedentes y aportación realizada.
+\item Análisis temporal y de costes de desarrollo.
+\item Análisis de requisitos, diseño e implementación.
+\item Manual de usuario, en su caso.
+\item Pruebas.
+\item Comparación con otras alternativas.
+\item Conclusiones y desarrollos futuros
+ \end{itemize}
+Estos puntos podrán ser ajustados y modificados en función de la naturaleza del proyecto realizado.
+ \item Bibliograf{\'\i}a: se deben documentar las fuentes bibliográficas utilizadas en el formato APA 2009.
+ \item  Índice alfabético o glosario (Lista ordenada de los conceptos, los nombres propios, etc.; 
+ que aparecen en la memoria, con las indicaciones necesarias para su localización)(opcional)
+ \item Ap'endices: Si la memoria contiene alg\'un art{\'\i}culo de investigaci\'on o similar, 
+ este se incluir\'a en los Ap\'endices. 
+ Es necesario, en ese caso, incluir en la página anterior una hoja con la citación bibliográfica. 
+ En esta citación, el título del artículo se debe enlazar con la página web de la revista 
+ en la que aparecen el resumen o abstract y el acceso al texto completo. 
+ \end{itemize}
+ La numeraci\'on de las p\'aginas de la bibliograf{\'\i}a y del glosario debe continuar la del cuerpo de la memoria.
+ Los ap\'endices pueden llevar su propia numeraci\'on independiente o usar la general del cuerpo de la memoria.
+
+
+\section{Impresión}\label{sec:impresion} 
+La entrega del memoria y en su caso, el dep\'osito en biblioteca, se hacen en formato electr\'onico. Debido a ello, la memoria se presentará \emph{a una cara}. Si se requiriera
+por alg\'un motivo la impresi\'on de la misma, se recomienda vivamente preparar la memoria adecuadamente para su impresi\'on. Algunas sugerencias:
+\begin{itemize}
+ \item Dejar una p\'agina en blanco cuando sea necesario para que los cap{\'\i}tulos comiencen siempre en p\'agina impar (derecha)
+ \item Ajustar los m\'argentes para que el exterior sea ligeramente m\'as grande que el interior.
+ \item Ajustar las cabeceras y pies de p\'agina (en su caso). Por ejemplo, si el n\'umero de p\'agina ocurriese en un lateral
+ de la cabecera o pie, este debe ser siempre el exterior (derecho para las p\'aginas impares, izquierdo para las pares)
+\end{itemize}
+
+\section{Plantillas}\label{sec:plantillas} 
+
+Se encuentra disponible una plantilla LaTex en la secci\'on de documentos de la plataforma
+de la aplicaci\'on de TfG de la ETSII 
+\url{https://tfc.eii.us.es/TfG/}. Esa plantilla ha sido utilizada para preparar este documento.
+Se espera en breve disponer de plantillas de ejemplo para las aplicaciones OpenOffice Writer y Office Word.
+
+Nota: Las plantillas se proporcionan como ejemplo, las condiciones obligatorias son las que constan en este procedimiento.
+
+\chapter{Ejemplos}\label{cap2} 
+					
+\section{Manejo de la bibliograf{\'\i}a}
+En esta secci\'on mostramos brevemente ejemplos de referencia a la bibliograf{\'\i}a 
+citando un libro~\cite{desousa}, un art{\'\i}culo~\cite{guiatitlesec} 
+y una p\'agina web~\cite{informatica}. 
+
+Se recuerda que son campos obligatorios
+en todos los {\'\i}tems de la bibliograf{\'\i}a: 
+autor(es), t{\'\i}tulo del libro o art{\'\i}culo 
+% editorial (en su caso, tambi\'en revista) 
+y a{\~n}o de publicaci\'on.
+En el caso de p\'aginas web, 
+es obligatoria la fecha de la \'ultima consulta. 
+En general, la bibliograf{\'\i}a debe ayudar al lector a encontrar f\'acilmente los {\'\i}tems citados.
+
+\section{C\'odigo}
+
+En general se debe evitar incluir c\'odigo o seudoc\'odigo en la memoria. Si fuese preciso, se destacar\'a de forma
+que sea f\'acilmente identificable y se indexar\'an los trozos de c\'odigo incluidos. Un ejemplo puede verse
+a continuaci\'on.
+
+\codigofuente{TeX}{Código de ejemplo en LaTeX}{codigo/macrotabla}
+
+\section{Im\'agenes}
+
+Este es un ejemplo de inclusi\'on de figura en el texto (v\'ease la figura~\ref{fig:ada}). 
+
+\figura{0.5}{img/AdaLovelace}{Ada Lovelace}{fig:ada}{}
+
+Figuras y cuadros se colocar\'an preferentemente tras el p\'arrafo en el que
+son llamados por primera vez. Si no cupieran, se colocar\'an (en orden de preferencia):
+\begin{itemize}
+ \item Al final de la p\'agina en que se llaman
+ \item Al principio de la siguiente p\'agina
+ \item Al final del cap{\'\i}tulo
+\end{itemize}
+siempre respetando el orden de aparici\'on en el texto.
+
+\section{Cuadros (mal llamados Tablas)}
+
+Este es un ejemplo de inclusi\'on de cuadro en el texto. V\'ease el cuadro~\ref{tab:prueba}
+
+\cuadro{|r||c|c|}{Cuadro de prueba}{tab:prueba}{elemento & elemento & elemento \\ elemento & elemento & elemento \\}

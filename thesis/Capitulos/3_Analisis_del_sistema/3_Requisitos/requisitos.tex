@@ -1,0 +1,143 @@
+En esta secci'on detallamos los requisitos a cumplir por el sistema.
+
+\subsection{Requisitos generales}
+\cuadro{|c|p{0.8\textwidth}|}{Requisito general 001}{requisitos_general_001}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{OBJ-001} & \textbf{Entrenamiento de una red convolucional }
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a entrenar una red neuronal convolucional.    
+\\ \hline \textbf{Subobjetivos} & 
+\begin{itemize}
+\item \textbf{OBJ-004} Entrenamiento con los datos EUR/USD: El sistema debe entrenar una red neuronal convolucional con los datos del EUR/USD.
+\item \textbf{OBJ-005} Entrenamiento con los datos BTC/USD: El sistema debe entrenar una red neuronal convolucional con los datos del BTC/USD.
+\end{itemize}
+\\}
+\cuadro{|c|p{0.8\textwidth}|}{Requisito general 002}{requisitos_general_002}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{OBJ-002} & \textbf{Entrenamiento de una red recurrente}
+\\ \hline \textbf{Descripci'on} & El sistema debe entrenar una red neuronal recurrente. 
+\\ \hline \textbf{Subobjetivos} & 
+\begin{itemize}
+\item \textbf{OBJ-006} Entrenamiento con los datos EUR/USD: El sistema debe entrenar una red neuronal recurrente con los datos del EUR/USD.
+\item \textbf{OBJ-007} Entrenamiento con los datos BTC/USD: El sistema debe entrenar una red neuronal recurrente con los datos del EUR/USD.
+\end{itemize} 
+\\}
+\cuadro{|c|p{0.8\textwidth}|}{Requisito general 003}{requisitos_general_003}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{OBJ-003} & \textbf{Visualización de resultados} 
+\\ \textbf{Descripci'on}  & El sistema deberá mostrar los resultados de cada red. 
+\\}
+\clearpage
+
+\subsection{Requisitos de informaci'on}
+\cuadro{|c|p{0.8\linewidth}|}{Requisito de informaci'on 001}{requisito_informacion_001}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RI-001} & \textbf{Divisas} 
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a almacenar los datos de las divisas.     
+\\ \hline \textbf{Datos específicos} & 
+\begin{itemize}
+\item Fecha
+\item Valor
+\item Divisa
+\end{itemize} 
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-001
+\item OBJ-002
+\item OBJ-003
+\end{itemize}
+\\}
+\cuadro{|c|p{0.8\linewidth}|}{Requisito de informaci'on 002}{requisito_informacion_002}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RI-002} & \textbf{Resultados} 
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a almacenar los resultados de las redes neuronales    .
+\\ \hline \textbf{Datos específicos} & 
+\begin{itemize}
+\item Fecha
+\item Valor
+\item Divisa
+\item Tipo de red
+\end{itemize} 
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\end{itemize}
+\\}
+\cuadro{|c|p{0.8\linewidth}|}{Requisito de informaci'on 003}{requisito_informacion_003}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RI-003} & \textbf{Metadatos} 
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a almacenar los par'ametros de entrenamiento de las redes.   
+\\ \hline \textbf{Datos específicos} & 
+\begin{itemize}
+\item Batch
+\item Delta
+\item Métrica de error
+\item Valor de error
+\end{itemize} 
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\end{itemize}    
+\\}
+
+\clearpage
+
+\subsection{Requisitos funcionales}
+\cuadro{|c|p{0.8\linewidth}|}{Requisito funcional 001}{requisito_funcional_001}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RF-001} & \textbf{Obtención de información} 
+\\ \hline \textbf{Descripci'on}  & El sistema deberá obtener el valor actual del EUR/USD y el BTC/USD por minuto.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-001
+\item OBJ-002
+\item OBJ-003
+\item RI-001
+\end{itemize}    
+\\}
+
+\cuadro{|c|p{0.8\linewidth}|}{Requisito funcional 002}{requisito_funcional_002}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RF-002} & \textbf{Envío de informaci'on} 
+\\ \hline \textbf{Descripci'on} & El sistema deber'a tratar los datos obtenidos y almacenarlos.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-001
+\item OBJ-002
+\item RI-001
+\end{itemize}    
+\\}
+
+\cuadro{|c|p{0.8\linewidth}|}{Requisito funcional 003}{requisito_funcional_003}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RF-003} & \textbf{Visualizaci'on del hist'orico}
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a mostrar el hist'orico de cada divisa.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\item RI-001
+\end{itemize}    
+\\}
+
+\cuadro{|c|p{0.8\linewidth}|}{Requisito funcional 004}{requisito_funcional_004}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RF-004} & \textbf{Interacci'on con las gr'aficas }
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a permitir interactuar con las gr'aficas.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\item RI-001
+\item RI-002
+\end{itemize}    
+\\}
+
+\cuadro{|c|p{0.8\linewidth}|}{Requisito funcional 005}{requisito_funcional_005}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RF-005} & \textbf{Visualizaci'on de metadatos} 
+\\ \hline \textbf{Descripci'on}  & El sistema deber'a mostrar los metadatos relativos a la red.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\item RI-003
+\end{itemize}    
+\\}
+\clearpage
+
+\subsection{Requisitos no funcionales}
+\cuadro{|c|p{0.8\linewidth}|}{Requisito no funcional 001}{requisito_no_funcional_005}{
+\rowcolor[HTML]{CBCEFB} \hline \textbf{RNF-001} & \textbf{Compatibilidad} 
+\\ \hline \textbf{Descripci'on}  & El sistema deberá ser compatible con los principales navegadores.
+\\ \hline \textbf{Dependencias} & 
+\begin{itemize}
+\item OBJ-003
+\end{itemize}    
+\\}
+\clearpage

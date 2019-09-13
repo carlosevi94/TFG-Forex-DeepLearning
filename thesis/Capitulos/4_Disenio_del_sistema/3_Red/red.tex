@@ -1,0 +1,175 @@
+Las redes neuronales son el pilar fundamental del presente proyecto, ya que son el sistema encargado de predecir nuevos movimientos burs'atiles, en base a un hist'orico conocido. 
+
+En este proyecto se van a desarrollar dos arquitecturas diferentes de redes neuronales, siguiendo una de ellas la arquitectura \textbf{recurrente} y la otra la arquitectura \textbf{convolucional}.
+
+
+
+\subsection{Consideraciones previas}
+
+Antes de explicar la arquitectura de las redes neuronales, debemos entender dos conceptos fundamentales. 
+
+Predecir movimientos burs'atiles es un problema de regresi'on aplicado a series temporales. En dichas series suelen confundirse los conceptos de pasado, presente y futuro. Cuando se habla de \textbf{presente} no se est'a hablando del presente actual, ni del momento en el que se lee este p'arrafo sino al \textbf{momento temporal de referencia}, que por convenci'on se le llama \textbf{t0}.
+Expresado de otro modo, cada vez que vamos a realizar una operaci'on sobre una serie temporal se debe tomar un momento de referencia y una vez se selecciona debemos imaginar el contexto del problema como si el tiempo se parase. Es decir, si se dice que se van a realizar operaciones durante un momento temporal, el tiempo que se tarda en realizar esas operaciones \textbf{no se tiene en cuenta}.
+
+
+
+
+\subsubsection*{Vector de entrada}
+El vector de entrada de la red tiene una longitud temporal de \textbf{tres horas}, o lo que es lo mismo \textbf{ciento ochenta minutos}. Este vector contiene informaci'on del valor de la moneda 3 horas antes a t0.
+
+Para ejemplificarlo, consideramos t0 el d'ia de hoy las 18:00. Una vez elegido t0, se crea una secuencia con todos los valores de la moneda desde t-180 hasta t-1, es decir, todos los valores de la moneda por minuto desde las 15:00 hasta las 17:59.
+Dicho ejemplo se presenta en la figura \ref{vectorentrada}.
+
+\figura{1}{img/disenio_sistema/vector_entrada.png}{Ejemplo del vector de entrada con un momento temporal concreto}{vectorentrada}{}
+
+Esta secuencia se convierte en un vector, y as'i creamos \textbf{vector de entrada}. 
+
+
+\subsubsection*{Vector resultado}
+El vector resultado de la red contiene la informaci'on de la predicci'on que ha hecho la red neuronal. Este vector tiene una longitud temporal de cuarenta y cinco \textbf{minutos}.
+
+
+Siguiendo el mismo ejemplo que en el vector de entrada, este vector resultado contiene los valores de la moneda desde t0 hasta t44, lo que genera el valor de la moneda en todos los minutos desde las 18:00 hasta las 18:45. 
+Dicho ejemplo se presenta en la figura \ref{vectorsalida}.
+
+\clearpage
+
+\figura{1}{img/disenio_sistema/vector_salida.png}{Ejemplo del vector resultado con un momento temporal concreto}{vectorsalida}{}
+
+Este vector es el resultado de los c'alculos que ha realizado la red neuronal. Es importante recordar que los datos vienen ordenados, por lo que una vez obtenido el vector resultado se pueden visualizarse directamente. 
+
+
+
+\subsubsection*{Early Stopping}
+El Early Stopping es una herramienta que proporciona Tensorflow para detener el entrenamiento de la red neuronal en el caso de que 'esta deje de aprender. Esta herramienta se utiliza para evitar el sobreajuste durante el entrenamiento.
+
+\figura{0.7}{img/disenio_sistema/earlystopping.png}{Gr'afico de la precisi'on en el aprendizaje indicando la 'epoca 'optima para parar el aprendizaje}{earlystopping}{}
+
+Como se puede apreciar en la figura \ref{earlystopping}, la precisi'on empieza a bajar pasado un n'umero de epocas debido a que est'a sobreajust'andose a los valores que ya conoce. La l'inea roja representa la precisi'on de las predicciones de los datos que está utilizando para entrenar, mientras que la linea azul representa la precisi'on en las predicciones de unos datos que la red no está usando para entrenar, por lo que no conoce.  
+
+El early stopping tiene varios par'ametros de configuraci'on. Podemos destacar el \textbf{valor delta}, el cual indica el valor que debe \textbf{mejorar} la m'etrica de error para considerar que sigue aprendiendo y la \textbf{paciencia}, el cual indica el n'umero de 'epocas que permite a la red seguir entrenando sin mejorar su delta. 
+
+\clearpage
+
+\subsection{Red Neuronal Recurrente}
+
+Las redes neuronales recurrentes proporcionan muy buenos resultados en problemas de \textbf{series temporales}. Como se ha podido observar en el cap'itulo \ref{cap2}, la mejor capa que podemos utilizar en este tipo de redes es la capa \textbf{LSTM}.
+
+El algoritmo que se ha construido es el siguiente:
+
+\figura{0.3}{img/disenio_sistema/SECUENCIAL.png}{Arquitectura de red neuronal recurrente utilizada en el proyecto}{secuencial}{}
+
+En este esquema se puede observar cómo se han implementado dos capas LSTM, la primera de 180 neuronas y la segunda de 128 neuronas adem'as de una capa Dense de 45 neuronas que genera la salida de la red neuronal. Las capas LSTM tienen asociadas unas capas Dropout que no se ven en el diagrama. Este dropout elimina el 10\% de las neuronas, escogidas aleatoriamente.
+
+\subsubsection*{Funcionamiento}
+
+Para cada vector que pertenece a la lista de vectores de entrada el proceso que se le realiza es el siguiente:
+
+\begin{enumerate}
+\item El vector entrada entra por la capa de input teniendo una longitud de 180 neuronas.
+\item El vector entra en la primera capa LSTM, donde se procesa secuencialmente. El resultado de esta capa es un vector de dimensi'on 128. 
+\item El vector que ha resultado del paso 2 entra por la segunda capa LSTM, proces'andose secuencialmente. El resultado de esta capa es una lista de 128 vectores de dimensi'on 1, es decir, un vector por neurona.
+\item La capa dense recibe todos los vectores y los interconecta entre s'i con 45 neuronas que van a generar el vector resultado.
+\item Desde la capa densa sale un vector de longitud 45 el cual es el vector salida.
+\end{enumerate}
+
+
+\subsubsection*{Entrenamiento}
+
+La red neuronal recurrente entrena durante un periodo de ocho d'ias de anterioridad respecto al momento t0.
+Los datos obtenidos se transforman en secuencias de 3 horas desde las 00:00 del octavo d'ia anterior, sin contar los d'ias en los que el mercado cierra. 
+
+Se ha seleccionado el periodo de 8 días debido a que es un periodo lo suficientemente largo (se crean alrededor de 10000 secuencias) para que la red pueda encontrar patrones sin sobreajustarse. Hay que tener en cuenta que los valores oscilan en magnitudes muy pequeñas. Debido a esto hay que normalizar los datos entre 0 y 1, consiguiendo así que la red pueda realizar cálculos con números de mayor magnitud.  
+
+La red tiene un Dropout muy bajo debido a que los patrones que encuentra no son patrones muy generalizados. Por ello, al poner una tasa de Dropout mayor la red es incapaz de encontrar un patr'on m'inimamente v'alido. 
+
+La red es sometida a 150 'epocas de entrenamiento. Durante estas 150 épocas, la red va a ver los datos con el fin de encontrar patrones nuevos cada vez que los revisa, o reforzar el conocimiento que tiene sobre un patr'on. 
+La red tiene configurado un EarlyStopping de 10 épocas con un delta de 0.00001 de mejora en su m'etrica de evaluaci'on. Por norma general, el EarlyStopping salta sobre la época 110. 
+
+
+\subsubsection*{Benchmark}
+
+La red ha sido sometida a muchos benchmarks para evaluar su rendimiento, tanto en tiempo de procesamiento como en calidad de la predicci'on. 
+
+En la figura \ref{benchmarklstm} se puede observar un ejemplo de una salida t'ipica de la red usando el par EUR/USD. 
+
+\figura{1}{img/disenio_sistema/recurrent_benchmark.png}{Resultado t'ipico de la predicción de la red neuronal recurrente}{benchmarklstm}{}
+
+La l'inea azul representada en la leyenda como \textit{train}, representa los 180 valores que ha utilizado la red para predecir la l'inea verde, representada en la leyenda como \textit{prediction}. La l'inea naranja representa los valores reales que ha tomado el par en el mismo periodo que ha predicho la red. 
+
+Lo primero que se observa es que no tiene una precisi'on total, y as'i es. Como ya hemos explicado en la secci'on de fundamentos teóricos, esta red se est'a basando exclusivamente en el hist'orico del valor, sin recibir ninguna informaci'on extra, por lo que una bajada brusca que se deba a un factor externo le resulta muy difícil predecirla.
+
+No obstante, la red est'a prediciendo fácilmente la tendencia que est'a siguiendo el valor de la moneda. Adem'as, en la l'inea naranja, se est'a mostrando el valor al que se cierra el par en ese minuto. 'Esto no quiere decir, que el valor que la red ha predicho no haya ocurrido, sino que durante ese minuto ese valor ha oscilado entre varios. Suponiendo que cambia su valor cada segundo, habrá oscilado 60 veces entre dos puntos de la gr'afica. Existe una probabilidad muy alta de que el valor que la red ha predicho, aunque no haya sido el valor final, sea un valor que el par ha tomado durante ese minuto.  
+
+
+
+
+\clearpage
+
+
+
+
+\subsection{Red Neuronal Convolucional}
+
+Las redes neuronales convolucionales originalmente no est'an diseñadas para ser utilizadas en problemas de series temporales, no obstante, éstas obtienen patrones basándose en los detalles de los datos. Si extrapolamos el problema, haciéndole ver a la red que lo que recibe es un \textbf{mapa} de datos en vez de una secuencia, la red puede funcionar correctamente y predecir resultados. Este mapa tiene \textbf{la misma dimensi'on} que la secuencia, pero la red convolucional no va a darle importancia al orden en el que recibe los datos, tal y como hace la red recurrente. 
+Al necesitar que los datos est'en ordenados obligatoriamente en la predicci'on, le indicaremos a la red que trate todos los mapas que va a procesar separándolos por conjuntos independientes. De esta forma la red sabe que cada secuencia, las cuales ahora son un mapa, deben ser tratadas y procesadas de forma individual. 
+De esta manera la red va a ir aprendiendo y entendiendo la informaci'on que proporciona cada uno, adaptando sus pesos para conseguir una soluci'on para todos lo mapas que va a recibir.
+
+
+El algoritmo que se ha construido es el siguiente:
+
+\figura{0.2}{img/disenio_sistema/CONV.png}{Arquitectura de red neuronal convolucional usada en el proyecto.}{convolucional}{}
+
+En el anterior esquema se puede apreciar cómo que se han implementado dos capas Conv1D, la primera con 128 neuronas, y la segunda de 64 neuronas, encontrándose ambas concatenadas con capas MaxPooling1D. A 'esto se le añade una capa Flatten y una capa Dense de 45 neuronas, lo que genera la salida de la red neuronal.
+
+\clearpage
+
+\subsubsection*{Funcionamiento}
+
+Para cada vector que aparece en la lista de vectores de entrada, el proceso que se realiza en la red es el siguiente:
+
+\begin{enumerate}
+\item El vector entrada entra por la capa de input, teniendo una longitud de 180.
+\item El vector entra en la primera capa Conv1D, lo que hace que se reduzca  la dimensionalidad de esta capa a 64. El resultado de esta capa es un vector de dimensi'on 64. 
+\item El vector que ha resultado del paso 2 entra por la capa MaxPooling1D, reduciendo su dimensionalidad a la mitad. 
+\item Tras el paso 3, los datos vuelven a pasar por una capa Conv1D, siendo el resultado de esta capa un vector de dimensi'on 32.
+\item El vector resultante pasa por la capa MaxPooling1D, reduciendo su dimensi'on a la mitad.
+\item El vector entra en una capa Flatten, donde los datos se concatenan en una lista. 
+\item El vector resultante del paso 7 entra en una capa Dense, en la cual se van a interconectar entre s'i las neuronas de la capa Flatten con 45 neuronas, generando as'i el vector resultante.
+\item De la capa Dense sale un vector de longitud 45. Este es el vector salida.
+\end{enumerate}
+
+
+
+
+
+\subsubsection*{Entrenamiento}
+
+La red neuronal convolucional entrena durante un periodo de diez días de anterioridad respecto al momento t0.
+Estos datos se transforman en secuencias de 3 horas desde las 00:00 del d'ecimo d'ia anterior excluyendo los días en los que los mercados cierran. 
+
+Se ha escogido la cifra de 10 d'ias frente a los 8 d'ias de la red recurrente porque esta red necesita un volumen mayor de datos para aprender, pero, al igual que en la red recurrente, si el periodo es muy largo la red se sobreajustar'a basándose en los datos que conoce. 
+
+La red es sometida a 150 'epocas de entrenamiento, al igual que las redes recurrentes. Tiene configurado un EarlyStopping de 10 'epocas con un delta de 0.00001 de mejora en su m'etrica de evaluaci'on. Por norma general, el EarlyStopping salta, aproximadamente, en la 'epoca 64. 
+
+
+
+\subsubsection*{Benchmark}
+
+\figura{1}{img/disenio_sistema/convolutional_benchmark.png}{Resultado t'ipico de la prediccion de la red neuronal convolucional}{benchmarkconv}{}
+
+
+Al igual que sucede con la red recurrente, la red convolucional es sometida a muchos benchmarks para evaluar su rendimiento. 
+
+En la figura \ref{benchmarkconv} se presenta un ejemplo de una salida t'ipica de la red usando el par EUR/USD, con unos datos similares al benchmark de la red recurrente. 
+
+
+La l'inea azul representada en la leyenda como \textit{train} representa los 180 valores que ha utilizado la red para predecir la l'inea verde, representada en la leyenda como \textit{prediction}. La línea naranja representa los valores reales que ha tomado el par en el mismo periodo que ha predicho la red. 
+
+A diferencia de la red recurrente, las predicciones de esta red parecen m'as volátiles o err'aticas. Esto es debido a la magnitud de los datos, la cual es muy pequeña, aunque los datos se normalicen, resulta difícil seguir la predicci'on con una precisi'on total. Esta red tambi'en es capaz de seguir la tendencia de los valores, pero sus predicciones son menos fiables que las que proporciona la red recurrente. 
+
+\subsection{Tecnologías utilizadas}
+Para la implentación de ambas redes neuronales se ha utilizado TensorFlow que se explicará en profundidad en el capítulo \ref{cap5}.
+
+
+\clearpage

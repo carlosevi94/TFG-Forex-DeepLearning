@@ -1,0 +1,524 @@
+\subsection{Redes neuronales}
+
+Una red neuronal artificial es un sistema de computaci'on inspirado indirectamente por las redes neuronales biol'ogicas que se constituyen en el cerebro de los seres vivos. \cite{deep1}
+Actualmente, en la disciplina inform'atica de la inteligencia artificial, existe un subgrupo que estudia este tipo de arquitecturas y t'ecnicas. A este subgrupo se le conoce como Deep Learning.
+\figura{1.2}{img/Deep_Learning/deep_learning.png}{Deep Learning}{deeplearning}{}
+
+Los algoritmos de Deep Learning tienen multitud de prop'ositos. Podemos destacar el tratamiento de imagen y v'ideo, una t'ecnica muy novedosa que est'a sirviendo en aplicaciones como la conducci'on aut'onoma, la reconstrucci'on de im'agenes, el coloreado realista de im'agenes en blanco y negro, etc. 
+Son utilizados en multitud de 'areas, siendo una de ellas las series temporales. Una serie temporal o cronol'ogica es una secuencia de datos, observaciones o valores, medidos en determinados momentos y ordenados cronol'ogicamente \cite{deep2}. Lo m'as destacable de las series temporales, es que existe una dependencia entre la variaci'on de los datos y el momento temporal al que se refieren o son tomados. Esto permite el descubrimiento de posibles patrones en los datos. 
+Este proyecto enfoca el problema de la regresi'on vista como una serie temporal, donde cada valor depende totalmente del valor anterior, dando peso al momento al que se refiere.
+
+Los conceptos b'asicos de una red neuronal, que veremos en profundidad a continuaci'on son \textbf{la neurona}, \textbf{la arquitectura de la red}, y \textbf{el proceso de aprendizaje}.
+
+\clearpage
+
+\subsubsection{La neurona}
+La neurona es la unidad m'inima de procesamiento de una red neuronal. Es realmente una operaci'on matem'atica que realiza la red, tambi'en recibe el nombre de \textbf{perceptr'on simple}.
+Se puede ver su arquitectura en la figura \ref{neurona}
+
+\figura{0.5}{img/Deep_Learning/neurona.png}{Diagrama de una neurona}{neurona}{}
+
+
+
+Los elementos que la componen son, de izquierda a derecha:
+\begin{itemize}
+
+\item \textbf{Inputs}: Es la entrada de la neurona. Contiene la informaci'on que va a ser procesada. Esta informaci'on, puede estar en forma de \textbf{vector} o en forma de \textbf{tensor}. Podemos ver un ejemplo visual en la figura \ref{tensor}.
+
+\figura{0.5}{img/Deep_Learning/tensor.jpg}{Estructura de datos}{tensor}{}
+
+\item \textbf{Weights}: Cada input tiene un peso asociado que determina la importancia del dato que entra. 
+\item \textbf{Sum}: Aqu'i se realiza la regresi'on lineal, que se ha visto en la secci'on anterior, con la suma de pesos y entradas, más el bias, que hace de intersecci'on, obtenemos la funci'on de regresi'on lineal.
+\item \textbf{Funci'on de activaci'on}: Es el operador que se encarga de aplicar la no-linealidad a la salida de la neurona. Este operador es importante porque se da por supuesto en cualquier modelo predictivo, de cualquier tipo, o no existe una linealidad o no est'a implícita; por ello es necesario aplicarlo.
+
+\item \textbf{Output}: Es la salida de la neurona. Esta salida, realmente es la soluci'on a la operaci'on que realiza la neurona.
+
+\end{itemize}
+
+\clearpage
+
+\subsection{Funciones de activación}
+
+La función de activación tienen como objetivo convertir y/o  eliminar la linealidad del vector resultante de cada neurona. Gracias a éstas, se puede obtener un resultado que permita aplicar regresión o clasificación a un problema.
+
+Existen diferentes tipos de funciones de activación, pero las más importantes son las que se muestran a continuación.
+
+\subsubsection{Función lineal}
+
+La función lineal o identidad es la función más simple de todas, dado que simplemente muestra el resultado obtenido en la neurona. 
+
+\figura{0.75}{img/Deep_Learning/func_linear.png}{Función de activaci'on lineal}{lineal}{}
+
+\cuadro{|c|p{0.8\linewidth}|}{Información sobre la función de activaci'on lineal}{lineal_cua}{
+
+\hline \textbf{Ecuaci'on}  & $ f(x) = x $
+\\ \hline \textbf{Rango} & $ [-\infty,\infty] $
+\\ \hline \textbf{Caracter'isticas} & 
+ 
+\\}
+
+\clearpage
+
+\subsubsection{Función sigmoide}
+
+La función sigmoide transforma los valores obtenidos en una escala (0,1), donde los valores altos tienden de manera asintótica a 1 y los valores muy bajos tienden de manera asintótica a 0.
+
+\figura{0.75}{img/Deep_Learning/func_sigmoid.png}{Función de activaci'on sigmoide}{sigmoide_photo}{}
+
+\cuadro{|c|p{0.8\linewidth}|}{Información sobre la función de activaci'on sigmoide}{sigmoide_cua}{
+
+\hline \textbf{Ecuaci'on}  & $ f(x) = \dfrac{1}{1-e^{-x}} $
+\\ \hline \textbf{Rango} & $ [0,1] $
+\\ \hline \textbf{Caracter'isticas} & 
+\begin{itemize}
+\item No es muy eficiente en términos de rendimiento, debido a que satura el gradiente.
+\item Es la capa final en métodos de clasificación binaria.
+\item No está centrada en el cero.
+
+\end{itemize}
+ 
+\\}
+
+\clearpage
+
+\subsubsection{Función tangencial hiperbólica}
+
+La función tangente hiperbólica transforma los valores introducidos a una escala (-1,1), donde los valores altos tienden de manera asintótica a 1 y los valores muy bajos tienden de manera asintótica a -1. Es similar a la sigmoide.
+
+\figura{0.75}{img/Deep_Learning/func_tanh.png}{Función de activaci'on tangencial hiperb'olica}{tanh_photo}{}
+
+\cuadro{|c|p{0.8\linewidth}|}{Información sobre la función de activaci'on tangencial hiperb'olica}{tanh_cua}{
+
+\hline \textbf{Ecuaci'on}  & $ f(x) = \dfrac{2}{1+e^{-2x}} - 1 $
+\\ \hline \textbf{Rango} & $ [-1,1] $
+\\ \hline \textbf{Caracter'isticas} & 
+\begin{itemize}
+\item Muy similar a la sigmoide.
+\item Se utiliza para decidir entre una opción y la contraria.
+\item Obtiene buen rendimiento en redes recurrentes.
+\item No está centrada en el cero.
+
+\end{itemize}
+ 
+\\}
+
+\clearpage
+
+\subsubsection{Función ReLu}
+
+La función ReLU transforma los valores introducidos, anulando los valores negativos, mientras que los positivos no los modifica.
+
+\figura{0.75}{img/Deep_Learning/func_relu.png}{Función de activaci'on  ReLu}{relu_photo}{}
+
+\cuadro{|c|p{0.8\linewidth}|}{Información sobre la función de activaci'on ReLu}{relu_cua}{
+
+\hline \textbf{Ecuaci'on}  & $ f(x) = max(0,x) $
+\\ \hline \textbf{Rango} & $ [0,\infty] $
+\\ \hline \textbf{Caracter'isticas} & 
+\begin{itemize}
+\item Muy potente en t'erminos de rendimiento.
+\item Solo se activa si el resultado es positivo.
+\item No está acotada.
+\item Puede inutilizar muchas neuronas en caso de overfitting.
+
+\end{itemize}
+ 
+\\}
+
+\clearpage
+
+
+
+\subsubsection{Función Leaky ReLu}
+
+La función Leaky ReLU transforma los valores introducidos multiplicando los números negativos por un factor rectificante, mientras que los positivos no los modifica.
+
+\figura{0.75}{img/Deep_Learning/func_leaky.jpg}{Función de activaci'on  Leaky ReLu}{lrelu_photo}{}
+
+\cuadro{|c|p{0.8\linewidth}|}{Información sobre la función de activaci'on Leaky ReLu}{lrelu_cua}{
+
+\hline \textbf{Ecuaci'on}  & $ f(x) = max(0.1x,x) $
+\\ \hline \textbf{Rango} & $ [-\infty,\infty] $
+\\ \hline \textbf{Caracter'isticas} & 
+\begin{itemize}
+\item Muy similar a la función ReLu.
+\item Muy potente en t'erminos de rendimiento.
+\item No está acotada.
+\item Obtiene buen resultado cuando trata imágenes.
+
+
+\end{itemize}
+ 
+\\}
+
+\clearpage
+
+\subsubsection{Función Softmax}
+
+La función Softmax transforma las salidas a una representación vectorial en forma de probabilidades numéricas. El sumatorio de todas las probabilidades de las salidas es 1.
+
+No se adjunta gráfico de esta función porque es imposible de representar de forma genérica, debido a que su cálculo depende de cada problema. 
+
+
+\cuadro{|c|p{0.8\linewidth}|}{Información sobre la función de activaci'on softmax}{softmax_cua}{
+
+\hline \textbf{Ecuaci'on}  & $ f(x)j = \dfrac{e^{xj}}{\sum_{k=1}^{K} e^{xk}} $
+\\ \hline \textbf{Rango} & $ [0,1] $
+\\ \hline \textbf{Caracter'isticas} & 
+\begin{itemize}
+\item Función final en problemas de clasificación multiclase.
+\item Es muy diferenciable.
+
+
+\end{itemize}
+ 
+\\}
+
+
+
+
+
+\subsection{Arquitectura de una red neuronal}
+
+Las redes neuronales tienen muchos tipos de arquitecturas. 
+La m'as com'un, y en la que se basan las arquitecturas m'as importantes a d'ia de hoy, es el \textbf{Multi layer perceptron (MLP}) o \textbf{Perceptr'on multicapa}, el cual se puede observar en la figura \ref{perceptron_multicapa}.
+
+\figura{0.8}{img/Deep_Learning/perceptron_multicapa.png}{Arquitectura del perceptr'on multicapa}{perceptron_multicapa}{}
+
+Esta arquitectura es una mejora del \textbf{Perceptr'on Simple}, y se caracteriza porque combina muchos perceptrones simples, permitiendo as'i encontrar relaciones entre \textbf{modelos linealmente independientes}. 
+El perceptr'on multicapa consta de una capa de entrada, una capa de salida y una o m'as capas ocultas. Dichas capas se unen de forma total hacia delante, es decir, la capa entrada se une con la primera capa oculta, esta con la siguiente y la 'ultima capa oculta se une con la capa de salida. Los valores que el perceptr'on multicapa acepta son reales \cite{deep3}.
+
+\clearpage
+
+El funcionamiento de esta arquitectura es simple. Reciben un vector de datos de entrada, realiza las operaciones necesarias en la capa oculta, y obtienen el resultado por la capa de salida. Cada capa est'a compuesta de neuronas, que recordamos que son las encargadas de realizar las operaciones. 
+Explicaremos su funcionamiento con un sencillo ejemplo:
+
+\figura{0.75}{img/Deep_Learning/mlp_informado.png}{Modelo MLP con datos de ejemplo}{mlp_informado}{}
+
+Existen unos datos de entrada, que contienen los datos de una persona. Estos datos se vectorizan, pasando por la entrada de la red.
+En las capas ocultas, cada neurona va a realizar una operaci'on, la cual nosotros desconocemos, para poder encontrar relaciones entre las variables. Un ejemplo de relaciones posibles se puede ver en el cuadro \ref{operaciones}
+
+\cuadro{|c|}{Operaciones posibles en una red neuronal}{operaciones}{\textbf{Operaciones posibles} \\ \hline Edad x Tipo de vida \\ Historial m'edico x edad \\ (Historial m'edico // ocupaci'on) x tipo de vida \\}
+
+Aunque en un primer momento puedan parecer datos que no se relacionar'an, bien por ser incoherentes entre ellos o bien por la magnitud de 'estos, la red ser'a la encargada de probar m'ultiples combinaciones pudiendo encontrar alguna que establezca una relaci'on v'alida. 
+
+\clearpage
+
+Actualmente no existe mucha informaci'on acerca del porqué de las combinaciones que se realizan dentro de un algoritmo de Deep Learning. A d'ia de hoy lo poco que se sabe es que se realizan de forma aleatoria, mediante ensayo y error hasta encontrar combinaciones v'alidas. Para visualizarlo, en la figura \ref{que_ven} se puede observar el contenido de las capas ocultas usando el dataset MSNIT, que contiene imágenes de n'umeros escritos a mano. En esas capas, se realizan unos filtros para poder reconocer el contenido de las imagenes, pero para el ojo humano no carece de sentido.
+
+\figura{0.5}{img/Deep_Learning/arquitectura_w.png}{Contenido de las capas ocultas de una red neuronal con el dataset MSNIT}{que_ven}{}
+
+Una vez visto el Perceptr'on Multicapa, vamos a hablar de las arquitecturas m'as utilizadas en la actualidad: las redes neuronales recurrentes y las redes neuronales convolucionales. 
+
+\clearpage
+
+\subsection{Redes Neuronales Recurrentes}
+
+Una red neuronal recurrente tiene como caracter'istica principal la \textbf{retroalimentaci'on de las salidas de cada neurona}. Las capas recurrentes utilizan como entrada un dato nuevo y la salida de una neurona anterior. Este proceso permite que las redes mantengan una memoria entre entradas pasadas y modele los problemas en base a su memoria. A diferencia de la neurona simple, vista anteriormente, este tipo de neuronas presentan la arquitectura que se muestra en la figura \ref{recurrente1}.
+  
+\figura{0.5}{img/Deep_Learning/recurrente1.png}{Esquema b'asico de una red neuronal recurrente}{recurrente1}{}
+
+Siendo \textit{X} la entrada y \textit{S} la salida, se observa que, peculiarmente, la neurona central tiene una salida doble. Por un lado va a la salida y por otro lado va a una neurona de color amarilla. A esta neurona amarilla la llamaremos memoria, la cual se combina con los datos que vienen por X, generando as'i una salida. La memoria va almacenando datos de las entradas que han estado alimentando a la red, de tal forma que es capaz de condicionar la salida de la neurona en base a lo que ya ha visto durante el entrenamiento.
+
+Este tipo de arquitectura tiene como ventaja principal la capacidad de aprender de los datos tomando como elemento fundamental el orden en el que los recibe. Existen problemas como el procesamiento de lenguaje natural donde esto es crucial, debido a que si se est'a desarrollando un algoritmo a que genere oraciones, tiene que saber que no es lo mismo \say{Invit'e a Mar'ia y Juan a dar un paseo por el centro} que \say{Mar'ia y centro el por Juan invit'e paseo a un a dar} aunque ambas frases tengan las mismas palabras.
+\\
+\\
+No obstante, este tipo de redes neuronales son más difíciles de entrenar que un perceptrón multicapa, debido a que si tienen un número elevado de neuronas por capa, en ocasiones los pesos obtienen un valor muy bajo acercándose al cero. Esto supone un problema cuando el volumen de datos es demasiado grande y todos los valores se encuentran en rangos muy acotados, por ejemplo: $ [0.00001,0.00002 ] $.
+
+Otro caso de sobreajuste que suele ocurrir con mucha frecuencia, es cuando una red da como resultado el mísmo valor que el último valor de una secuencia. Se puede entender fácilmente en la figura \ref{overfiting_recu}:
+
+\figura{0.8}{img/Deep_Learning/overfiting_recur.png}{Ejemplo de overfitting en red neuronal recurrente}{overfiting_recu}{}
+
+\clearpage
+
+
+\subsection{Capas de redes neuronales recurrentes}
+
+Las redes neuronales recurrentes est'an formadas por capas que utilizan la arquitectura de neurona recurrente explicada anteriormente. Aunque existen varias capas, las que cabe destacar son \textbf{las capas LSTM} y \textbf{las capas GRU}. En este proyecto, utilizamos 'unicamente las \textbf{capas LSTM}.
+
+\subsubsection{LSTM}
+
+Las capas recurrentes LSTM, \textbf{Long-Short Term Memory}, son capas que \textbf{permiten la persistencia de datos} que ya ha recibido la red mediante el uso de \textbf{estados}. Dichos estados indican a la red qu'e informaci'on pueden \textbf{recordar} u \textbf{olvidar}, y c'omo influirán los datos nuevos en funci'on de los datos que ya conoce.
+La arquitectura de las neuronas de la capa LSTM se muestran en la figura \ref{lstm}:
+
+\figura{0.5}{img/Deep_Learning/LSTM.png}{Diagrama que muestra la arquitectura de una neurona LSTM}{lstm}{}
+
+Como se puede apreciar, esta neurona difiere mucho de la neurona cl'asica; ya que contiene varias entradas y varias salidas.
+
+
+
+Entradas:
+\begin{itemize}
+\item $  X_{t} $ : Dato nuevo.
+\item $ H_{t-1} $: Salida (resultado) de la neurona anterior.
+\item $ C_{t-1} $ : Estado anterior de la neurona.
+\end{itemize}
+
+Salidas:
+\begin{itemize}
+\item $ H_{t} $: Salida (resultado) de la neurona. Esta salida es doble.
+\item $ C_{t} $ : Estado nuevo de la neurona.
+\end{itemize}
+
+Señales:
+\begin{itemize}
+\item $ \sigma $: Señal sigmoide.
+\item $ tanh $: Señal tangencial.
+\end{itemize}
+
+\clearpage
+
+
+La salida Ht es doble porque  por un lado sale de la neurona para dar un resultado  y por otro lado sale a la neurona nueva, convirti'endose en la entrada Ht-1 de la neurona nueva.
+
+El proceso que se realiza en cada neurona se desarrolla en cuatro pasos, más un paso inicial.
+
+\begin{itemize}
+\item Paso 0 - Combinaci'on inicial
+Se da lugar la combinaci'on de $  X_{t} $ y $ H_{t-1} $. Esta combinaci'on puede interpretarse como una suma. A esta combinaci'on la llamaremos \textbf{ENTRADA} durante la explicaci'on.
+
+
+\item Paso 1 - Puerta de olvido.  
+\figura{0.5}{img/Deep_Learning/lstm_paso1.jpg}{Primer paso en el procesamiento de una neurona LSTM}{lstm_exp_paso1}{}
+
+En este primer paso, la red va a decidir si va a olvidar la informaci'on que ya conoce o no. 'Esto lo hace multiplicando el estado anterior $ C_{t-1} $ por la \textbf{ENTRADA}. El resultado de esa operaci'on entra por una señal sigmoide, que tiene como resultado valores entre 0 y 1. Si son cercanos a 0 significa que va a olvidar informaci'on, y si son cercanos a 1 indica que va a mantener esa informaci'on.
+
+
+
+\item Paso 2 - Puerta de entrada  
+\figura{0.5}{img/Deep_Learning/lstm_paso2.jpg}{Segundo paso en el procesamiento de una neurona LSTM}{lstm_exp_paso2}{}
+
+Para actualizar el estado de la neurona, antes hay que pasar por la puerta de entrada.  
+Primero, pasa la \textbf{ENTRADA} por una señal sigmoide. Esta decide qu'e valores van a ser actualizados. Los valores cercanos a 0 no ser'an importantes y los cercanos a 1, por el contrario, si lo ser'an. Adem'as, la \textbf{ENTRADA} pasa por una funci'on tangencial, que realiza la funci'on de normalizar los valores entre -1 y 1 para ayudar a reguralizar la red. A continuaci'on, se multiplica la salida de la señal sigmoide y la señal tangencial. Los valores que salen de la señal sigmoide deciden qu'e valores de los que salen de la señal tangencial son importantes mantener.
+
+\clearpage
+
+\item Paso 3 - Estado de la neurona  
+\figura{0.5}{img/Deep_Learning/lstm_paso3.jpg}{Tercer paso en el procesamiento de una neurona LSTM}{lstm_exp_paso3}{}
+
+Con la salida del paso 1 y el paso 2 ya tenemos informaci'on para calcular el nuevo estado de la neurona, a continuaci'on la salida del paso 1 y 2 se combina, siendo eliminados los valores cercanos a cero. Este estado nuevo ya contiene los pesos necesarios para saber qu'e informaci'on es relevante y cual no.
+
+
+
+\item Paso 4 - Puerta de salida  
+\figura{0.5}{img/Deep_Learning/lstm_paso4.jpg}{'Ultimo paso en el procesamiento de una neurona LSTM}{lstm_exp_paso4}{}
+
+Finalmente, tenemos la puerta de salida, que decide qu'e informaci'on saldr'a como soluci'on y como nueva entrada de la pr'oxima neurona.  
+Primero, el estado nuevo calculado en el paso 3, pasa por una  señal tangencial. Despu'es, la \textbf{ENTRADA} pasa por una señal sigmoide. El resultado de ambas señales se multiplican y obtenemos el vector resultado.
+
+
+El vector resultado sale de la neurona como soluci'on y como entrada de la pr'oxima neurona. El estado nuevo, se transmite a la siguiente neurona.
+\end{itemize}
+
+
+
+Esta capa hay que verla como si todas las neuronas que la componen estuvieran conectadas en serie, debido a que este proceso, se repite por cada neurona que tenga la capa, como en la figura \ref{lstm2}.
+
+
+\figura{0.5}{img/Deep_Learning/LSTM2.png}{Esquema de neuronas conectadas secuencialmente}{lstm2}{}
+
+
+
+\subsubsection{Diferencia con la capa GRU}
+
+La capa GRU, \textbf{Gated Recurrent Unit}, es un modelo más sencillo de la capa LSTM.
+La diferencia principal entre ambas es que \textbf{las capas GRU no utilizan estados}, realizan operaciones directamente con la salida de la neurona anterior.
+Las capas GRU son m'as r'apidas en t'erminos de rendimiento, llegando a encontrar una soluci'on v'alida antes que las capas LSTM, aunque su precisión es más baja.
+
+\figura{1}{img/Deep_Learning/gru_vs_lstm.png}{Comparaci'on entre neuronas recurrentes GRU y LSTM}{gru_vs_lstm}{}
+
+
+En este proyecto la precisión es un factor vital, por ello se han descartado las capas GRU para la arquitectura recurrente.
+
+\clearpage
+
+\subsection{Redes neuronales convolucionales}
+
+Las redes neuronales convolucionales son redes compuestas por m'ultiples capas de \textbf{filtros convolucionales} de una o m'as dimensiones. 
+Una \textbf{convoluci'on} es un operador matem'atico que transforma dos funciones, f y g, en una tercera funci'on que en cierto sentido representa la magnitud en la que se superponen f y una versi'on trasladada e invertida de g. \cite{deep4}
+
+En la figura \ref{convolucional} se muestra un ejemplo de arquitectura convolucional:
+\figura{0.5}{img/Deep_Learning/convolucion.png}{Arquitectura de una red neuronal Convolucional}{convolucional}{}
+
+Su arquitectura es muy similar a la arquitectura del perceptr'on multicapa. 
+Sin embargo, los datos no son tratados de forma individual, sino como un \textbf{conjunto}. Las redes convolucionales intentan encontrar patrones en base a unos "mapas" de datos.
+
+Este tipo de arquitectura ha demostrado un rendimiento muy alto en problemas de visi'on artificial. En la actualidad, se utilizan en problemas de clasificaci'on de im'agenes, recoloreado de im'agenes, alteraci'on de elementos en v'ideo, etc. No obstante, tambi'en pueden ser utilizadas con datos estructurados.
+
+
+
+\clearpage
+
+
+
+\subsection{Capas de las redes neuronales de convoluci'on}
+
+La variedad de capas convolucionales es mayor que la de las capas recurrentes, debido a que existen las mismas capas con funcionalidades diferentes para varias dimensiones de datos.
+
+\subsubsection{Capa Conv1D}
+
+La capa de convoluci'on en una dimensi'on aplica a los datos de entrada un conjunto de filtros que son objeto de aprendizaje para obtener un mapa de caracter'isticas de los datos originales.
+En la figura \ref{convolucion-1d} se puede ver un ejemplo:  
+
+\figura{1}{img/Deep_Learning/conv1d.jpg}{Ejemplo de convolución en una dimensi'on}{convolucion-1d}{}
+
+La capa ha obtenido un conjunto reducido de los datos de entrada y ha realizado una operaci'on con ellos que devuelve un 'unico dato como soluci'on.
+
+Existen tres factores fundamentales a la hora de realizar una convoluci'on:
+
+
+
+\begin{itemize}
+\item \textbf{Profundidad}: Es el n'umero de filtros que se desea usar, los distintos mapas de caracter'isticas que deseamos obtener, cada uno intentando buscar patrones diferentes.
+\item \textbf{Stride}: Indica el n'umero de datos que avanza la ventana deslizante de convoluci'on en cada c'alculo. Cuando el stride toma valor 1, el filtro se mueve de uno en uno manteniendo el tamaño constante. Sin embargo, cuando el stride toma valor 2, el filtro avanza dos posiciones, resultando en una reducci'on del volumen de salida.
+
+\item \textbf{Padding}: El uso de esta caracter'istica permite añadir datos extra para preservar el tamaño original de la entrada. De esta forma se evita descartar datos que pueden ser 'utiles en los c'alculos. Estos datos nuevos normalmente suelen tomar valor 0, valor que no influye en el resultado. 
+
+\end{itemize}
+
+\clearpage
+
+En la figura \ref{convolucion-profundidad} se puede ver un ejemplo de Stride igual a 1 (izquierda), y Stride igual 2 (derecha).
+
+\figura{0.5}{img/Deep_Learning/conv_profundidad.png}{Ejemplo de convoluci'on con Stride tomando valor 1 y 2}{convolucion-profundidad}{}
+
+
+Se puede ver un ejemplo con una animaci'on en este  
+\href{https://cdn-images-1.medium.com/max/1600/1*VVvdh-BUKFh2pwDD0kPeRA@2x.gif}{\emph{enlace}}.
+
+\subsubsection{Capa MaxPooling1D}
+
+La capa \textbf{MaxPooling} es un tipo de capa convolucional en la que se \textbf{reduce la dimensionalidad de un vector} de datos. Existen tres tipos de capas: \textbf{1D}, para una dimensi'on; \textbf{2D}, para dos dimensiones; y \textbf{3D} para tres dimensiones.
+
+Esta capa realiza la operaci'on de seleccionar el valor m'as grande de un subconjunto de valores del vector, los cuales salen de la capa como vector resultado como podemos ver en la figura \ref{maxpooling}
+
+\figura{0.5}{img/Deep_Learning/maxpooling1d.png}{Ejemplo del funcionamiento de la capa Max Pooling}{maxpooling}{}
+
+\clearpage
+
+\subsection{Capas comunes entre arquitecturas}
+
+\subsubsection{Capa Dense}
+
+La capa \textbf{Dense} es una capa que realiza una conexi'on completa entre todas las neuronas que la conforman. Realiza un producto cartesiano entre todas las neuronas para obtener resultados, probando diferentes combinaciones. 
+
+\figura{0.4}{img/Deep_Learning/dense.png}{Diagrama de la arquitectura de una capa Dense}{dense}{}
+
+Como se puede ver en la figura \ref{dense}, la capa de entrada N tiene 4 neuronas y se conecta con la capa de salida M, que tiene 4 neuronas. El resultado de esta capa es el producto cartesiano de ambas.
+
+
+\subsubsection{Capa Flatten}
+
+La capa \textbf{Flatten} es una capa de utilidad de las redes neuronales la cual se utiliza para regularizar un vector cambiando su formato. Esta capa se utiliza cuando la salida de una capa no se puede conectar a la entrada de otra.  
+En la figura \ref{flatten} se puede ver una demostraci'on.
+
+\figura{0.7}{img/Deep_Learning/flatten.png}{Ejemplo de funcionamiento de la capa Flatten}{flatten}{}
+
+
+\subsubsection{Capa Dropout}
+
+La capa \textbf{Dropout} es una capa de utilidad que elimina aleatoriamente los resultados de una neurona. Aunque puede parecer algo negativo o contraproducente, es bastante importante debido a que controla el sobreajuste de aprendizaje.
+En la figura \ref{dropout} se puede ver un ejemplo de una red con capas densas, la imagen a la izquierda, y a la derecha est'a la misma red neuronal pero con capas Dropout tras cada capa.
+
+\figura{1}{img/Deep_Learning/dropout.png}{Diagrama explicativo de la funci'on de la capa Dropout}{dropout}{}
+
+De esta forma, se le obliga a la red que elija las combinaciones que m'as generalizan en 'esta, obteniendo un resultado m'as preciso en la soluci'on.
+
+\clearpage
+
+\subsection{Entrenamiento de las redes neuronales}
+
+Cuando nos referimos a que una red est'a aprendiendo de unos valores, se est'a hablando del valor de sus weights, sus pesos. Cada neurona est'a conectada con otra mediante un enlace, el cual tiene asociado un peso que indica la relaci'on entre ambas neuronas. El valor de este peso se va alterando en funci'on de los datos que la red va recibiendo.
+Este proceso de alteraci'on del valor del peso, en busca de un valor perfecto que relacione todas las neuronas, se denomina entrenamiento. 
+
+En el 'ambito del Machine Learning, se conoce por aprendizaje supervisado a aquel problema en el que, en el momento del entrenamiento, se le da al algoritmo la soluci'on de una operaci'on, con el fin de que la red vea el error cometido de su predicci'on contra la realidad y ella misma pueda ajustarse. 
+Todos los algoritmos de Deep Learning tienen un aprendizaje supervisado.
+
+Un ejemplo para entender el proceso de forma m'as clara puede ser el siguiente: Tengo seis im'agenes. Dos de ellas son im'agenes de manzanas, otras dos son im'agenes de pl'atanos, y las dos 'ultimas son im'agenes de naranjas.
+En el momento del procesado de la informaci'on, se traslada cada imagen a una matriz que contiene en cada celda la informaci'on de un pixel. Para una imagen de 40x40 p'ixeles, tengo una matriz de 40x40x3. Estos 3 contienen la informaci'on del pixel RGB. 
+La red, al recibir este tensor, no es capaz de saber de qué se le est'a hablando. Por ello, se crea un segundo conjunto de datos que contiene el resultado de la operaci'on, pero de forma mapeada.
+Tendremos un vector de 3 posiciones, en el que todos los valores son 0 salvo el valor que hace referencia a la fruta que queremos adivinar.
+
+\begin{itemize}
+\item $ [1,0,0] $ = Manzana
+\item $ [0,1,0] $ = Pl'atano
+\item $ [0,0,1] $ = Naranja
+\end{itemize}
+
+Si es una naranja, tendr'a el vector que refiera a la naranja, en este caso es [0,0,1].
+
+La red debe de realizar las operaciones que estime necesarias para llegar a uno de esos tres vectores. 
+Por ejemplo, si recibe una imagen de una manzana tiene que dar como vector resultado el vector [1,0,0].
+
+Para entender c'omo se realiza este proceso de aprendizaje, debemos hablar de dos conceptos fundamentales: \textbf{el descenso del gradiente} y \textbf{la retropropagaci'on}.
+
+\clearpage
+
+\subsubsection{Descenso del gradiente}
+
+El descenso del gradiente, o \textbf{Gradient Descent}, es un algoritmo de entrenamiento simple en el que se busca la direcci'on del m'aximo descenso en un gradiente que representa todos los valores de una funci'on de coste.
+
+En la figura \ref{descenso_gradiente} se puede ver el descenso m'as grande en un gradiente.
+\figura{0.8}{img/Deep_Learning/gradientdescent.png}{Diagrama de descenso del gradiente}{descenso_gradiente}{}
+
+En este gradiente, el error m'inimo se representa con el color azul, y el m'as grande del color rojo. El algoritmo gradient descent busca el punto azul m'as profundo, pero, como se puede ver en la imagen, no hay un 'unico valor azul.
+
+'Esto hace referencia a los m'inimos locales y m'inimos globales. Dichos t'erminos se refieren a ocasiones en las que la red ha encontrado un punto de aprendizaje donde su error es bajo, un m'inimo local. Sin embargo, en ese punto se siguen cometiendo errores, ya que no es el estado perfecto de la red. 
+Por todo ello, hay que seguir entrenando la red para encontrar el error m'as bajo de todos, el m'inimo global.
+\figura{0.5}{img/Deep_Learning/minimums.png}{Diagrama explicativo de un m'inimo local y el m'inimo global}{minimums}{}
+
+
+\clearpage
+
+Para llegar hasta ese punto, hay que tener en consideraci'on diferentes aspectos, entre los cuales se encuentra uno fundamental, siendo éste el ratio de aprendizaje.
+El ratio de aprendizaje es el porcentaje de cambios que va a realizar en sus pesos para encontrar una soluci'on. Para encontrar este ratio no hay una ley escrita, puesto que si das un ratio muy grande es posible que el algoritmo no pueda encontrar un punto intermedio entre dos posibles soluciones, y si das un valor de ratio de aprendizaje bajo, la red tardar'a much'isimo tiempo encontrar una soluci'on.
+\figura{1}{img/Deep_Learning/learningrate2.png}{Diagrama explicativo de la diferencia entre learning rate bajo, medio y alto}{learning_grate}{}
+
+
+
+Existen diferentes tipos de Gradient Descent:
+\begin{itemize}
+\item \textbf{Batch Gradient Descent:} Se utiliza todo el conjunto de datos de entrenamiento para calcular el gradiente de la funci'on de coste. 
+\item \textbf{Mini-Batch Gradient Descent}: Se utiliza un conjunto reducido de los datos de entrenamiento de \textit{n} elementos para calcular el gradiente de la funci'on de coste. 
+\item \textbf{Stochastic Gradient Descent (SGD)}: Se utiliza un 'unico elemento del conjunto de entrenamiento para calcular el gradiente. 
+\end{itemize}
+
+
+\figura{1}{img/Deep_Learning/tipos_gradient.png}{Comparativa entre tipos de gradient descent}{tipos_grad_descent}{}
+
+
+
+\clearpage
+
+\subsubsection{Retropropagaci'on}
+
+El algoritmo de retropropagaci'on, o \textbf{Backpropagation}, calcula y ajusta el valor de los pesos de la red neuronal, en base a una función de coste.
+
+Este algoritmo se realiza en cuatro procesos:
+\begin{itemize}
+\item 1 - C'alculo de soluci'on. En primer lugar, se realiza es un c'alculo con un dato de entrada, pasando por todas las capas de la red hasta llegar a la soluci'on. Durante este proceso se almacenan los pesos.
+
+\item 2 - C'alculo de error. Una vez que tenemos un dato de salida, se valida el resultado con su soluci'on real, la cual conocemos. 'Esto genera un error mediante la función de coste definida.
+
+\item 3 - Propagaci'on hacia atr'as. El error generado en el paso 2 recorre la red neuronal en orden inverso. Este error se calcula con el gradiente explicado anteriormente, capa por capa, dando as'i un error para cada peso de cada neurona. 
+
+\item 4 - Actualizaci'on de pesos. Una vez que el error se ha propagado hasta el inicio, tenemos el error que ha cometido cada peso en cada una de las capas. A continuaci'on, se recalculan los pesos en base a los errores recibidos por la retropropagaci'on. 
+\end{itemize}
+
+En la figura \ref{backpropagation} se puede ver la orientaci'on de los pasos 1 y 3.
+\figura{0.8}{img/Deep_Learning/backprop.png}{Diagrama explicativo de Backpropagation}{backpropagation}{}
+
+La función de coste, o \textbf{loss function}, es una función en la que se define el error cometido en las predicciones de la red, en base a cuánto se han alejado de la predicción correcta. La función de coste se puede definir de diferentes formas. Una de las más
+comunes es el error cuadrático medio (MSE: Mean Squared Error), que se expresa utilizando la siguiente fórmula: 
+
+\begin{center}
+$ MSE = \sum  \dfrac{1}{2}(y_{pred} - y_{real})^{2}$
+\end{center}
+
+Siendo $ y_{pred} $  el valor obtenido en las predicciones de la red y $ y_{real} $  el valor real.
+
+Una vez definida la función de coste, este problema adquiere una nueva dimensión, convirti'endose también en un problema de optimización, cuyo objetivo es minimizar el error cometido. 
+
+La red debe encontrar cuáles son los pesos que más influyen al error y modificarlos para reducir el coste lo máximo posible. 'Esto se hace aplicando el método del descenso del gradiente.
+
+\clearpage

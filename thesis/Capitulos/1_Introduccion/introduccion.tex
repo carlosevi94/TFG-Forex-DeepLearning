@@ -1,0 +1,73 @@
+
+\chapter{Introducci\'on}\label{cap1}
+\section{Contexto}\label{sec:contexto}
+
+
+En el momento en el que se empieza a utilizar un objeto simb'olico que define el valor de todo lo que nos rodea, los seres humanos, inventan una unidad de medida para el valor de todo ello.
+
+El mercado financiero existe desde que se inventa la moneda de cambio. 
+La bolsa de valores, que nace en el siglo XVI \cite{introduccion1}, es un sistema financiero en el cual se negocian e intercambian acciones y obligaciones de distintas empresas. Más tarde, se crea un mercado en el cual se regula el valor de la moneda de cada pa'is, estableciendo as'i las equivalencias entre monedas. Este mercado, se considera el m'as importante de todos a d'ia de hoy, dado que el valor de un par de monedas tiene la capacidad de influir en una decisi'on o acción que engloba a pa'ises enteros.
+
+
+En la actualidad, tanto grandes entidades, como pueden ser los bancos, como los pequeños inversores, se dedican a obtener beneficios en funci'on del incremento/descenso de un par de valores. Este tipo de movimiento frente a movimientos burs'atiles de otro tipo, como puede ser el IBEX 35, presentan una mayor seguridad y estabilidad a la hora de invertir, debido a que los cambios a largo plazo no son muy significativos y son muy atractivos porque su cambio de valor o volatilidad se ve reflejado en el movimiento intradiario, siendo estos los movimientos m'as bruscos, como podr'ia ser una subida del 20\% respecto a su valor original, la cual se da en periodos de tiempo muy cortos. Esto es debido a que el valor de las monedas est'a muy regulado y tiende a estandarizarse lo m'as r'apido posible.
+
+Respecto a lo anteriormente mencionado, los inversores tratan de aprovechar al m'aximo un incremento o un descenso en un par de monedas, especulando con 'el para obtener el m'aximo beneficio posible. Este mercado est'a muy influenciado por las noticias econ'omicas y pol'iticas, dando as'i una cierta facilidad para poder prever un movimiento. Este tipo de inversi'on tiene un m'etodo asociado, llamado \textbf{análisis fundamental}, el cual no se basa en el valor en s'i, sino en el contexto que lo acompaña: situaci'on pol'itica, situaci'on militar, crisis financiera, etc.
+Existe otro m'etodo de inversi'on, que podr'iamos considerar opuesto al anterior, llamado \textbf{an'alisis t'ecnico}. Este an'alisis tiene en cuenta el valor actual de un activo financiero. Adem'as, tiene en cuenta el valor hist'orico de esa moneda y distintos indicadores matem'aticos, como puede ser la esperanza matem'atica de un valor.
+
+Gracias a que el análisis t'ecnico puede automatizarse, a d'ia de hoy, existe un concepto llamado \textbf{Algotrading}, que consiste en predicciones financieras en base a algoritmos. Para ello se necesita, adem'as de un fuerte conocimiento matem'atico y financiero, una fuente de datos contínua y fiable y una capacidad de c'omputo muy alta, debido a que, como hemos mencionado anteriormente, en estas operaciones hay que estar preparado para cualquier movimiento brusco.
+
+No es hasta 2017 \cite{introduccion2} cuando se empieza a utilizar las t'ecnicas de Deep Learning en el trading algor'itmico. Este tipo de algoritmo, basado en las \textbf{redes neuronales}, es capaz de buscar patrones en el hist'orico de valores de un activo burs'atil. Dichos patrones, no siempre son fuertes y robustos en los que poder confiar tu dinero, de hecho, la mayor'ia son patrones muy vol'atiles, debido a que dependen de unas condiciones muy concretas, las cuales al verse alteradas m'inimamente dejan de cumplirse. Sin embargo, estos patrones tienen una esperanza matem'atica muy s'olida.
+
+Una red neuronal necesita de un hist'orico de valores lo suficientemente grande como para poder proporcionar unas predicciones con robustez. Adem'as, para predecir valores en tiempo real, necesitan de un suministro de datos continuo y fiable, debido a que si el algoritmo toma una premisa falsa como v'alida, las predicciones resultantes carecen de valor alguno.
+Gracias a los avances en Big Data, existen herramientas que puedan recoger datos en tiempo real, procesarlos y alimentar las redes neuronales con datos nuevos. 
+ 
+Por todo lo mencionado anteriormente, el objetivo de este trabajo fin de grado es desarrollar una arquitectura software basada en un sistema Big Data que alimente con los datos en tiempo real a las dos implementaciones de modelos predictivos basados en redes neuronales. Concretamente, las arquitecturas de redes neuronales a utilizar ser'an \textbf{el modelo recurrente}, y \textbf{el modelo convolucional}.
+
+
+\section{Definici\'on de objetivos}\label{sec:definicion}
+
+El objetivo principal de este proyecto es elaborar un sistema Big Data que permita predecir los valores de un activo burs'atil, recogiendo los datos en tiempo real, procesando y alimentando la red neuronal, pudiéndose plasmar sus predicciones en un panel de control. 
+
+Para conseguir este objetivo principal se han definido los siguientes objetivos espec'ificos:
+\begin{itemize}
+\item Aprender las nociones b'asicas sobre mercados financieros para poder entender las predicciones de nuestro sistema. 
+\item Estudiar las arquitecturas y par'ametros necesarios para utilizar t'ecnicas de Deep Learning en un problema de regresi'on. 
+\item Crear sistemas que permitan obtener la informaci'on de un valor en tiempo real.
+\item Diseñar un flujo de trabajo (pipeline) que permita almacenar datos y poder procesarlos a medida que la red los necesite.
+\item Investigar sobre la funcionalidad que ofrece Spark para el procesamiento de datos en streaming. 
+\item Investigar sobre la funcionalidad que ofrece Tensorflow para la implementaci'on de las redes neuronales.
+\item Crear un manual de usuario para poder facilitar la instalaci'on e implantaci'on del sistema, as'i como el uso e interpretaci'on del mismo.
+\end{itemize}
+
+
+\section{Motivación}\label{sec:motivacion}
+
+Este proyecto, adem'as de profundizar en aspectos matem'aticos e inform'aticos, se encuentra dentro de la rama de \textbf{Data Science}. La idea general es crear un sistema Big Data aut'onomo, para poder crear un entorno inteligente con el poder de analizar el mercado financiero. 
+
+El proyecto parte de la premisa de que poder predecir los valores de la bolsa con alta precisi'on es un reto muy complejo, debido a que los valores dependen de muchos factores externos. Por ello, nos hemos propuesto como objetivo, obtener la m'axima precisi'on posible usando solo y exclusivamente indicadores matem'aticos del hist'orico de ese valor. Estamos alertados tanto por nuestro tutor, como por varios expertos, que el proyecto es ambicioso y que los resultados puede que no sean los esperados, pero todo ello nos sirve como est'imulo para avanzar.
+
+Adem'as, como motivaci'on extra, en este proyecto se va a profundizar en las redes neuronales, campo a'un en investigaci'on, en el que d'ia a d'ia hay grandes avances. Las redes neuronales suponen un avance en el campo de la inteligencia artificial, el cual se est'a implantando en nuestra sociedad en un ritmo cada vez m'as acelerado. En este proyecto vamos a investigar sobre arquitecturas de los dos tipos de redes neuronales m'as importantes en la actualidad, las cuales son: redes neuronales recurrentes y redes neuronales convolucionales. Sin embargo, no existe tanta informaci'on como cabr'ia  esperar sobre el tema a tratar, lo que supone un problema para la extracci'on de conocimientos.
+ 
+Todo este proyecto engloba unas tecnolog'ias muy revolucionarias en la actualidad, como son \textbf{Spark}, \textbf{Kafka} y \textbf{TensorFlow}. Spark y Kafka son herramientas que pertenecen al 'ambito del Big Data, y son utilizados en las compañ'ias m'as grandes del mundo, como la \textbf{NASA} y \textbf{Ebay} \cite{motivacion}. Tensorflow es un framework desarrollado y mantenido por \textbf{Google} en su proyecto \textbf{Google BrAIn}, y se utiliza en pr'acticamente todas las empresas que est'an incorporando soluciones de Deep Learning en sus productos o servicios.
+
+ 
+
+\section{Estructura del proyecto}\label{sec:estructura}
+Finalizando con este apartado el cap'itulo de introducci'on, el documento seguir'a con el \textbf{estudio te'orico} del problema, el segundo cap'itulo.
+
+El tercer cap'itulo tratará del \textbf{diseño del sistema} que se va a implementar, detallando los pilares que componen el proyecto. 
+
+En el cuarto cap'itulo se expondrá la \textbf{arquitectura y tecnologías} del sistema.
+
+El quinto cap'itulo muestra el \textbf{an'alisis del sistema} a implementar que se ha realizado, especificando los requisitos que debe cumplir.
+
+El sexto cap'itulo detalla el \textbf{an'alisis temporal} del proyecto y los \textbf{costes de desarrollo} del mismo.
+
+El s'eptimo cap'itulo contiene un \textbf{manual de usuario} que detalla la preparaci'on del entorno y la instalaci'on e implantaci'on del sistema.
+
+En el octavo cap'itulo se explican las diferentes \textbf{pruebas} que se le han realizado al sistema en su conjunto y se analizar'an sus resultados.
+
+En el noveno cap'itulo se discutirán las \textbf{conclusiones} obtenidas tras la finalizaci'on del proyecto.
+
+En el décimo y último cap'itulo se expondrán los posibles \textbf{desarrollos futuros} con los que mejorar el presente proyecto.
+

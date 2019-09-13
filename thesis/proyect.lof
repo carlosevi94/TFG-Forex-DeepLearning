@@ -1,0 +1,94 @@
+\babel@toc {spanish}{}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Acumulaci\IeC {\'o}n/Distribuci\IeC {\'o}n}}{7}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces SMA vs EMA}}{8}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Bandas de Bollinger}}{9}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces CCI}}{10}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Puntos pivote}}{11}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces ROC}}{12}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Oscilador estoc\IeC {\'a}stico}}{13}{figure.2.7}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Momentum}}{14}{figure.2.8}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Gr'afico con variable objetivo de dos problemas de clasificaci'on}}{15}{figure.2.9}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces F\IeC {\'o}rmula de la regresi\IeC {\'o}n lineal}}{16}{figure.2.10}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Ejemplo de secuencia m'ovil}}{17}{figure.2.11}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Deep Learning}}{19}{figure.2.12}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Diagrama de una neurona}}{20}{figure.2.13}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Estructura de datos}}{20}{figure.2.14}
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Funci\IeC {\'o}n de activaci'on lineal}}{21}{figure.2.15}
+\contentsline {figure}{\numberline {2.16}{\ignorespaces Funci\IeC {\'o}n de activaci'on sigmoide}}{22}{figure.2.16}
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Funci\IeC {\'o}n de activaci'on tangencial hiperb'olica}}{23}{figure.2.17}
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Funci\IeC {\'o}n de activaci'on ReLu}}{24}{figure.2.18}
+\contentsline {figure}{\numberline {2.19}{\ignorespaces Funci\IeC {\'o}n de activaci'on Leaky ReLu}}{25}{figure.2.19}
+\contentsline {figure}{\numberline {2.20}{\ignorespaces Arquitectura del perceptr'on multicapa}}{26}{figure.2.20}
+\contentsline {figure}{\numberline {2.21}{\ignorespaces Modelo MLP con datos de ejemplo}}{27}{figure.2.21}
+\contentsline {figure}{\numberline {2.22}{\ignorespaces Contenido de las capas ocultas de una red neuronal con el dataset MSNIT}}{28}{figure.2.22}
+\contentsline {figure}{\numberline {2.23}{\ignorespaces Esquema b'asico de una red neuronal recurrente}}{29}{figure.2.23}
+\contentsline {figure}{\numberline {2.24}{\ignorespaces Ejemplo de overfitting en red neuronal recurrente}}{29}{figure.2.24}
+\contentsline {figure}{\numberline {2.25}{\ignorespaces Diagrama que muestra la arquitectura de una neurona LSTM}}{30}{figure.2.25}
+\contentsline {figure}{\numberline {2.26}{\ignorespaces Primer paso en el procesamiento de una neurona LSTM}}{31}{figure.2.26}
+\contentsline {figure}{\numberline {2.27}{\ignorespaces Segundo paso en el procesamiento de una neurona LSTM}}{31}{figure.2.27}
+\contentsline {figure}{\numberline {2.28}{\ignorespaces Tercer paso en el procesamiento de una neurona LSTM}}{32}{figure.2.28}
+\contentsline {figure}{\numberline {2.29}{\ignorespaces 'Ultimo paso en el procesamiento de una neurona LSTM}}{32}{figure.2.29}
+\contentsline {figure}{\numberline {2.30}{\ignorespaces Esquema de neuronas conectadas secuencialmente}}{32}{figure.2.30}
+\contentsline {figure}{\numberline {2.31}{\ignorespaces Comparaci'on entre neuronas recurrentes GRU y LSTM}}{33}{figure.2.31}
+\contentsline {figure}{\numberline {2.32}{\ignorespaces Arquitectura de una red neuronal Convolucional}}{34}{figure.2.32}
+\contentsline {figure}{\numberline {2.33}{\ignorespaces Ejemplo de convoluci\IeC {\'o}n en una dimensi'on}}{35}{figure.2.33}
+\contentsline {figure}{\numberline {2.34}{\ignorespaces Ejemplo de convoluci'on con Stride tomando valor 1 y 2}}{36}{figure.2.34}
+\contentsline {figure}{\numberline {2.35}{\ignorespaces Ejemplo del funcionamiento de la capa Max Pooling}}{36}{figure.2.35}
+\contentsline {figure}{\numberline {2.36}{\ignorespaces Diagrama de la arquitectura de una capa Dense}}{37}{figure.2.36}
+\contentsline {figure}{\numberline {2.37}{\ignorespaces Ejemplo de funcionamiento de la capa Flatten}}{37}{figure.2.37}
+\contentsline {figure}{\numberline {2.38}{\ignorespaces Diagrama explicativo de la funci'on de la capa Dropout}}{38}{figure.2.38}
+\contentsline {figure}{\numberline {2.39}{\ignorespaces Diagrama de descenso del gradiente}}{40}{figure.2.39}
+\contentsline {figure}{\numberline {2.40}{\ignorespaces Diagrama explicativo de un m'inimo local y el m'inimo global}}{40}{figure.2.40}
+\contentsline {figure}{\numberline {2.41}{\ignorespaces Diagrama explicativo de la diferencia entre learning rate bajo, medio y alto}}{41}{figure.2.41}
+\contentsline {figure}{\numberline {2.42}{\ignorespaces Comparativa entre tipos de gradient descent}}{41}{figure.2.42}
+\contentsline {figure}{\numberline {2.43}{\ignorespaces Diagrama explicativo de Backpropagation}}{42}{figure.2.43}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de dise\IeC {\~n}o de flujo de la informaci'on}}{44}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Docker VS VM}}{46}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Ejemplo del vector de entrada con un momento temporal concreto}}{51}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Ejemplo del vector resultado con un momento temporal concreto}}{52}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Gr'afico de la precisi'on en el aprendizaje indicando la 'epoca 'optima para parar el aprendizaje}}{52}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Arquitectura de red neuronal recurrente utilizada en el proyecto}}{53}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Resultado t'ipico de la predicci\IeC {\'o}n de la red neuronal recurrente}}{54}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Arquitectura de red neuronal convolucional usada en el proyecto.}}{55}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Resultado t'ipico de la prediccion de la red neuronal convolucional}}{56}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Valores actuales de las divisas}}{58}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Representaci'on de los resultados}}{58}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Hist'orico del BTC/USD}}{58}{figure.3.12}
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Hist'orico del BTC/USD con indicadores}}{59}{figure.3.13}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de arquitectura del proyecto}}{61}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Logo de Apache Spark}}{62}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Ejemplo de un DAG de Spark}}{64}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Tipos de transformaciones en Spark}}{65}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Operaciones en Spark}}{66}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces M'odulos de Spark}}{67}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Logo de Tensorflow}}{69}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Esquema de una operaci\IeC {\'o}n representada como un grafo}}{69}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Ejemplo de tensor}}{70}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Logo de Apache Kafka}}{71}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Arquitectura de Apache Kafka}}{72}{figure.4.11}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Entrenamiento de una red neuronal}}{75}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Visualizaci'on de resultados}}{75}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Matriz de trazabilidad de casos de uso, requisitos de informaci'on y requisitos funcionales contra requisitos generales}}{85}{figure.5.3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Planificaci\IeC {\'o}n temporal I}}{90}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Planificaci\IeC {\'o}n temporal II}}{91}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Diagrama Gantt I}}{93}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Diagrama Gantt II}}{94}{figure.6.4}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Resultado de las predicciones de la red recurrente tras ponerse en producci\IeC {\'o}n con el par EUR/USD}}{107}{figure.8.1}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Resultado de las predicciones de la red recurrente tras 24 horas en producci'on con el par EUR/USD}}{108}{figure.8.2}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces Resultado de las predicciones de la red recurrente tras ponerse en producci\IeC {\'o}n con el par BTC/USD}}{109}{figure.8.3}
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Resultado de las predicciones de la red recurrente tras 24 horas en producci'on con el par BTC/USD}}{110}{figure.8.4}
+\contentsline {figure}{\numberline {8.5}{\ignorespaces Resultado de las predicciones de la red convolucional tras ponerse en producci\IeC {\'o}n con el par EUR/USD}}{111}{figure.8.5}
+\contentsline {figure}{\numberline {8.6}{\ignorespaces Resultado de las predicciones de la red convolucional tras 24 horas en producci'on con el par EUR/USD}}{112}{figure.8.6}
+\contentsline {figure}{\numberline {8.7}{\ignorespaces Resultado de las predicciones de la red convolucional tras ponerse en producci\IeC {\'o}n con el par BTC/USD}}{113}{figure.8.7}
+\contentsline {figure}{\numberline {8.8}{\ignorespaces Resultado de las predicciones de la red convolucional tras 24 horas en producci'on con el par BTC/USD}}{114}{figure.8.8}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsfinish 

@@ -1,0 +1,10 @@
+Usada en el m'odulo de producci'on de datos, beautifulsoup es una librer'ia de Python para el an'alisis y extracci'on de datos de ficheros HTML, 'esto hace que sea una herramienta muy 'util en el campo del \textbf{web scraping}.
+
+Para trabajar con beautifulsoup primero es necesario estudiar los elementos del HTML que queremos conseguir y como est'an estructurados dentro del archivo. Una vez hecho el estudio procedemos a descargar el fichero HTML mediante alguna herramienta para realizar peticiones HTTP, como la librer'ia \textbf{requests} de Python. Con el fichero descargado podemos crear lo que la librer'ia denomina \textbf{soup} que contiene el html parseado permitiendo la navegaci'on y busqueda de elementos html de manera sencilla. 
+La creaci'on de scrapers se basa en la b'usqueda de elementos html, en el siguiente extracto de c'odigo podemos ver como se crea el soup y se buscan los elementos de tipo span.
+
+\codigofuente{Python}{Busqueda de elementos span}{codigo/soup.py}
+
+La funci'on \textbf{find} devuelve todos los elementos que coincidan con los criterios de b'usqueda, en este caso los elementos span, en forma de objeto o lista de objetos si los resultados son multiples, este objeto contiene todos los atributos del elemento incluidos los hijos, por lo que podemos navegar por el fichero html de manera sencilla.
+
+\clearpage
