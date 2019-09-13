@@ -10,7 +10,7 @@ import schedule
 
 
 BROKERS = 'localhost:9092'
-TOPIC = 'forex_topic'
+TOPIC = 'forex_btc_usd'
 URL = 'https://es.investing.com/crypto/bitcoin/btc-usd'
 STOCK = 'BTC/USD'
 RESPONSE_TEMPLATE = Template('$stock - $timestamp - $value')
@@ -31,11 +31,11 @@ def delivery_callback(err, msg):
 
 
 def prepare_value():
-    value = scrapper.get_current_value(URL)
+    value = scrapper.get_current_value(URL).replace(".","").replace(",",".")
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
     res = RESPONSE_TEMPLATE.substitute(stock=STOCK, timestamp=timestamp, value=value)
     print(res)
-    # send_value(res)
+    send_value(res)
 
 
 def send_value(res, retry=0):

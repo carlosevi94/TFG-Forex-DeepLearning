@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+    db:
+        image: mariadb:10.3
+        command: mysqld --max-allowed-packet 1G --thread-handling=pool-of-threads
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            TZ: "Europe/Madrid"
+        container_name: tmmysql
+        volumes:
+            - /storage/docker-volumes/mysql-task-manager:/var/lib/mysql
+        ports:
+            - 9306:3306
+    adminer:
+        image: adminer
+        container_name: tmadminer
+        ports:
+            - 9081:8080

@@ -1,0 +1,9 @@
+{
+	"mysql":{
+		"host": "localhost",
+		"database": "forex_values",
+		"user": "root",
+		"password": "root"
+	}
+	
+}

@@ -1,0 +1,14 @@
+{
+	"mysql":{
+		"host": "localhost",
+		"port":"9306",
+		"database": "forex_values",
+		"user": "root",
+		"password": "root",
+		"eurusd_file": "../../data/EUR_USD/EURUSD_2019.csv",
+		"btcusd_file": "../../data/BTC_USD/BTCUSD_2019.csv",
+		"eurusd_url": "https://www.alphavantage.co/query?function=FX_INTRADAY&from_symbol=EUR&to_symbol=USD&interval=1min&apikey=OG1PGHUBTEQ6VZTH&datatype=csv&outputsize=full",
+		"btcusd_url": "http://www.cryptodatadownload.com/cdd/gemini_BTCUSD_2019_1min.csv"
+	}
+	
+}

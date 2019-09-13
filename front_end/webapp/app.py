@@ -6,7 +6,7 @@ import plotly.graph_objs as go
 from plotly import subplots
 
 import pandas as pd
-import random
+import datetime
 
 
 import mysql.connector as sql
@@ -77,7 +77,12 @@ def get_row(data):
                             html.P(
                                 current_row[1].round(7),  # Bid value
                                 id=currency + "value",
-                                className="three-col",
+                                className="three-col", style={'width': '5%'},
+                            ),
+                            html.P(
+                                datetime.datetime.now().strftime("%H:%M"),  # Bid date
+                                id=currency + "date",
+                                className="three-col", style={'width': '5%'},
                             ),
                             html.Div(
                                 index,
@@ -85,7 +90,7 @@ def get_row(data):
                                 + "index",  # we save index of row in hidden div
                                 style={"display": "none"},
                             ),
-                        ],
+                        ],  style={'display': 'block', 'margin': 'auto', 'text-align': 'center'}
                     )
                 ],
             ),
@@ -93,28 +98,44 @@ def get_row(data):
     )
 
 
-def get_color(a, b):
-    if a == b:
-        return "white"
-    elif a > b:
-        return "#45df7e"
+def get_color(a, b, date, color):
+    if not color.get('color'):
+        if a == b:
+            return "white"
+        elif a > b:
+            return "#45df7e"
+        else:
+            return "#da5657"
     else:
-        return "#da5657"
+        if datetime.datetime.now().strftime("%H:%M") == date:
+            return color.get('color')
+        else:
+            if a == b:
+                return "white"
+            elif a > b:
+                return "#45df7e"
+            else:
+                return "#da5657"
 
 
-def replace_row(currency_pair, index, value):
+def replace_row(currency_pair, index, value, date, color):
     index = index + 1  # index of new data row
     new_row = get_realtime(currency_pair)[0]
 
     return [
         html.P(
-            currency_pair, id=currency_pair, className="three-col"  # currency pair name
+            currency_pair, id=currency_pair, className="three-col", style={'width': '10%'} # currency pair name
         ),
         html.P(
             new_row[1].round(7),  # Bid value
             id=currency_pair + 'value',
             className="three-col",
-            style={"color": get_color(round(new_row[1], 7), value)},
+            style={"color": get_color(round(new_row[1], 7), value, date, color), 'width': '5%'},
+        ),
+        html.P(
+            datetime.datetime.now().strftime("%H:%M"),  # Bid value
+            id=currency_pair + 'date',
+            className="three-col", style={'width': '5%'},
         ),
         html.Div(
             index, id=currency_pair + "index", style={"display": "none"}
@@ -124,7 +145,7 @@ def replace_row(currency_pair, index, value):
 
 app.layout = html.Div([
     html.Div([
-        html.H2("Real-time currency exchange predictor"),
+        html.Img(src=app.get_asset_url('logo.png'), style={'width': '30%', 'display': 'block', 'margin': 'auto'})
     ], className='banner'),
     html.Div([
         html.Div(
@@ -203,7 +224,7 @@ app.layout = html.Div([
         html.Div([
             dcc.Graph(id='train'),
         ], className='twelve columns'),
-        dcc.Interval(id='update', interval=30 * 1000, n_intervals=0),
+        dcc.Interval(id='update', interval=10 * 1000, n_intervals=0),
     ], className='row eur-usd-graph-row'),
 
 ], style={'padding': '0px 10px 15px 10px',
@@ -244,7 +265,7 @@ def plot_graph(interval, currency, tab):
         data.append(realtime)
 
         # NET
-        df = pd.read_sql_query('SELECT id, value from prediction_%s_%s order by id desc LIMIT 45' % (currency, tab),
+        df = pd.read_sql_query('SELECT id, value from prediction_%s_%s order by id desc LIMIT 46' % (currency, tab),
                                db_connection)
 
         df = df.sort_values('id')
@@ -284,7 +305,7 @@ def plot_train(currency, type_plot, metric):
     db_connection = sql.connect(host='localhost', database=BD, user=USER, password=PASSWORD, port=9306)
 
     # Train
-    df = pd.read_sql_query('SELECT id, value from historic_%s order by id desc LIMIT 600' % currency, db_connection)
+    df = pd.read_sql_query('SELECT id, value from historic_%s order by id desc limit 100000' % currency, db_connection)
 
     df = df.sort_values('id')
     df = df.set_index('id')
@@ -373,8 +394,8 @@ def plot_train(currency, type_plot, metric):
 
 
 def generate_ask_bid_row_callback(pair):
-    def output_callback(n, i, value,):
-        return replace_row(pair, int(i), float(value))
+    def output_callback(n, i, value, date, color):
+        return replace_row(pair, int(i), float(value), date, color)
 
     return output_callback
 
@@ -506,6 +527,8 @@ for pair in CURRENCIES:
         [
             State(pair + "index", "children"),
             State(pair + "value", "children"),
+            State(pair + "date", "children"),
+            State(pair + "value", "style"),
         ],
     )(generate_ask_bid_row_callback(pair))
 
